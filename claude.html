@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Artist — Photography · Ceramics · Video</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Tenor+Sans&family=Space+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0b0a;
+  --surface:#141413;
+  --line:#222220;
+  --muted:#4a4845;
+  --mid:#7a7672;
+  --text:#ccc8c0;
+  --bright:#edeae2;
+  --ice:#a8bcc2;
+  --rust:#9a6e52;
+  --display:'Playfair Display',Georgia,serif;
+  --sans:'Tenor Sans',sans-serif;
+  --mono:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;cursor:none}
+
+/* grain */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");pointer-events:none;z-index:9000;opacity:.4;mix-blend-mode:overlay}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:6px;height:6px;background:var(--bright);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s,mix-blend-mode .3s;mix-blend-mode:difference}
+#cur-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(200,195,185,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .18s}
+#cur.xl{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.08);mix-blend-mode:normal}
+#cur-ring.xl{width:60px;height:60px;opacity:0}
+#cur.sm{width:4px;height:4px}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.75rem 3rem;
+  transition:transform .5s ease, opacity .5s ease;
+}
+#nav.hide{transform:translateY(-100%)}
+.nav-name{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.nav-name:hover{color:var(--bright)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--bright)}
+
+/* ── WORK COUNTER ── */
+#work-counter{
+  position:fixed;right:3rem;top:50%;transform:translateY(-50%);
+  z-index:600;display:flex;flex-direction:column;align-items:center;gap:.75rem
+}
+.counter-num{font-family:var(--mono);font-size:.55rem;letter-spacing:.15em;color:var(--muted);writing-mode:vertical-rl;text-orientation:mixed}
+.counter-dots{display:flex;flex-direction:column;gap:.5rem}
+.counter-dot{width:4px;height:4px;border-radius:50%;background:var(--muted);transition:all .4s;cursor:pointer}
+.counter-dot.active{background:var(--bright);transform:scale(1.5)}
+.counter-total{font-family:var(--mono);font-size:.5rem;color:var(--muted);writing-mode:vertical-rl}
+
+/* ── FULLSCREEN WORK SLIDES ── */
+.work-slide{
+  height:100vh;width:100vw;
+  scroll-snap-align:start;
+  position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;
+}
+
+/* placeholder backgrounds — replace with real imgs */
+.ws-1{background:linear-gradient(160deg,#161718 0%,#1e2224 40%,#131516 100%)}
+.ws-2{background:linear-gradient(200deg,#18171a 0%,#232228 50%,#141315 100%)}
+.ws-3{background:linear-gradient(140deg,#1a1714 0%,#262320 50%,#161310 100%)}
+.ws-4{background:linear-gradient(170deg,#161818 0%,#212424 50%,#121414 100%)}
+.ws-5{background:linear-gradient(120deg,#18181a 0%,#24242a 50%,#141418 100%)}
+.ws-6{background:linear-gradient(150deg,#1a1814 0%,#28251e 50%,#161410 100%)}
+.ws-7{background:linear-gradient(180deg,#161616 0%,#222222 50%,#121212 100%)}
+
+.work-slide img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:transform 8s ease;
+}
+.work-slide:hover img{transform:scale(1.04)}
+
+/* big placeholder label */
+.slide-ph{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+}
+.slide-ph-text{
+  font-family:var(--display);font-size:clamp(4rem,12vw,14rem);font-weight:400;font-style:italic;
+  color:rgba(255,255,255,.04);letter-spacing:-.02em;user-select:none;pointer-events:none
+}
+
+/* vignette */
+.work-slide::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:radial-gradient(ellipse at center,transparent 40%,rgba(11,11,10,.7) 100%);
+  pointer-events:none
+}
+
+/* bottom gradient */
+.work-slide::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:55%;z-index:1;
+  background:linear-gradient(to top,rgba(11,11,10,.95) 0%,rgba(11,11,10,.4) 50%,transparent 100%);
+  pointer-events:none
+}
+
+.work-info{
+  position:relative;z-index:2;
+  padding:0 3rem 3.5rem;
+  width:100%;
+  display:flex;justify-content:space-between;align-items:flex-end
+}
+.work-info-left{}
+.work-index{
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem
+}
+.work-index::before{content:'';display:inline-block;width:20px;height:1px;background:var(--muted)}
+.work-title-big{
+  font-family:var(--display);font-size:clamp(2.2rem,5vw,5.5rem);
+  font-weight:400;font-style:italic;
+  color:var(--bright);line-height:1;letter-spacing:-.02em;
+  margin-bottom:.75rem
+}
+.work-medium-tag{
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ice);opacity:.7
+}
+.work-info-right{
+  text-align:right;padding-bottom:.25rem
+}
+.work-desc{
+  font-family:var(--sans);font-size:.85rem;line-height:1.7;
+  color:var(--mid);max-width:280px;text-align:right
+}
+.work-year{
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.15em;
+  color:var(--muted);margin-top:.75rem
+}
+
+/* scroll hint on first slide */
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  z-index:3;display:flex;flex-direction:column;align-items:center;gap:.6rem;
+  animation:bouncehint 2.5s ease infinite;
+  opacity:1;transition:opacity .5s
+}
+.scroll-hint.gone{opacity:0;pointer-events:none}
+.sh-text{font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.sh-arrow{font-size:.8rem;color:var(--muted)}
+@keyframes bouncehint{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(5px)}}
+
+/* ── SECTION: ABOUT ── */
+#about{
+  min-height:100vh;scroll-snap-align:start;
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--bg);
+}
+.about-visual{
+  position:relative;overflow:hidden;background:var(--surface);
+  display:flex;align-items:center;justify-content:center;min-height:60vh
+}
+.about-visual-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg,#1a1816 0%,#242220 60%,#161412 100%);
+}
+.about-visual-text{
+  position:relative;z-index:1;
+  font-family:var(--display);font-size:clamp(5rem,12vw,14rem);
+  font-weight:400;font-style:italic;
+  color:rgba(255,255,255,.05);letter-spacing:-.03em;user-select:none
+}
+.about-visual-year{
+  position:absolute;bottom:2.5rem;left:2.5rem;z-index:2;
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;color:var(--muted)
+}
+.about-content{
+  padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;overflow-y:auto
+}
+.about-kicker{
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:2.5rem;
+  display:flex;align-items:center;gap:1rem
+}
+.about-kicker::before{content:'';display:block;width:20px;height:1px;background:var(--muted)}
+.about-h{
+  font-family:var(--display);font-size:clamp(2rem,3.5vw,3.5rem);
+  font-weight:400;line-height:1.15;color:var(--bright);margin-bottom:2rem
+}
+.about-h em{font-style:italic;color:var(--ice)}
+.about-p{font-size:.95rem;line-height:1.9;color:var(--mid);margin-bottom:1.25rem}
+.about-p strong{color:var(--text);font-weight:400}
+.about-quote{
+  margin:2rem 0;padding:1.5rem 0 1.5rem 1.5rem;
+  border-left:1px solid var(--rust);
+  font-family:var(--display);font-size:1.15rem;font-weight:400;font-style:italic;
+  color:var(--bright);line-height:1.6
+}
+.media-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
+.chip{
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.35rem .8rem;border:1px solid var(--line);color:var(--muted);transition:all .25s
+}
+.chip:hover{border-color:var(--ice);color:var(--ice)}
+
+/* ── SECTION: BLOG ── */
+#blog{
+  min-height:100vh;scroll-snap-align:start;
+  background:var(--surface);padding:6rem 3rem
+}
+.section-eyebrow{
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:1rem;margin-bottom:4rem
+}
+.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--muted)}
+.section-eyebrow::after{content:'';flex:1;height:1px;background:var(--line)}
+.blog-list{display:flex;flex-direction:column;gap:0}
+.blog-row{
+  display:grid;grid-template-columns:120px 1fr auto;
+  align-items:baseline;gap:2.5rem;
+  padding:2rem 0;border-bottom:1px solid var(--line);
+  cursor:pointer;transition:padding-left .3s;position:relative;overflow:hidden
+}
+.blog-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--rust);transform:scaleY(0);transform-origin:bottom;transition:transform .35s
+}
+.blog-row:hover{padding-left:1.25rem}
+.blog-row:hover::before{transform:scaleY(1)}
+.blog-date{font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;color:var(--muted)}
+.blog-title{
+  font-family:var(--display);font-size:1.3rem;font-weight:400;font-style:italic;
+  color:var(--bright);line-height:1.3;transition:color .3s
+}
+.blog-row:hover .blog-title{color:var(--ice)}
+.blog-tag{
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap
+}
+.blog-row-arrow{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  font-size:.8rem;color:var(--muted);
+  opacity:0;transition:opacity .3s,transform .3s
+}
+.blog-row:hover .blog-row-arrow{opacity:1;transform:translateY(-50%) translate(0,-3px)}
+
+/* ── SECTION: CONTACT ── */
+#contact{
+  min-height:100vh;scroll-snap-align:start;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:5rem 3rem;background:var(--bg);position:relative;overflow:hidden
+}
+.contact-bg-word{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--display);font-size:clamp(8rem,25vw,30rem);font-weight:400;font-style:italic;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.03);
+  user-select:none;pointer-events:none;white-space:nowrap;letter-spacing:-.04em
+}
+.contact-kicker{font-family:var(--mono);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
+.contact-h{
+  font-family:var(--display);font-size:clamp(3.5rem,9vw,11rem);
+  font-weight:400;font-style:italic;
+  color:var(--bright);line-height:.95;letter-spacing:-.03em;margin-bottom:3rem
+}
+.contact-h span{color:var(--ice)}
+.contact-row{
+  display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem
+}
+.c-btn{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:.9rem 2rem;border:1px solid var(--line);color:var(--text);
+  text-decoration:none;transition:all .3s;background:none
+}
+.c-btn:hover{border-color:var(--bright);color:var(--bright);background:rgba(237,234,226,.05)}
+.c-btn.fill{background:var(--bright);color:var(--bg);border-color:var(--bright)}
+.c-btn.fill:hover{background:var(--ice);border-color:var(--ice)}
+.contact-note{font-size:.85rem;line-height:1.8;color:var(--muted);max-width:400px;font-style:italic}
+
+/* ── FOOTER ── */
+footer{
+  scroll-snap-align:start;
+  padding:2rem 3rem;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;background:var(--bg)
+}
+.footer-l{font-family:var(--mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.footer-r{display:flex;gap:2rem}
+.footer-r a{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .3s}
+.footer-r a:hover{color:var(--bright)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+@media(max-width:800px){
+  #about{grid-template-columns:1fr}
+  .about-visual{display:none}
+  .about-content{padding:4rem 2rem}
+  #nav,#work-counter{padding:1.5rem 1.5rem}
+  .work-info{padding:0 1.5rem 2.5rem}
+  .blog-row{grid-template-columns:1fr;gap:.5rem}
+  .blog-date{display:none}
+  footer{flex-direction:column;gap:1rem;padding:2rem}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#slide-1" class="nav-name">Your Name</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#blog">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- WORK COUNTER -->
+<div id="work-counter">
+  <div class="counter-dots" id="counter-dots"></div>
+</div>
+
+<!-- ══════════════ WORK SLIDES ══════════════ -->
+
+<div class="work-slide ws-1" id="slide-1" data-index="1">
+  <div class="slide-ph"><div class="slide-ph-text">Light</div></div>
+  <!-- <img src="images/work-1.jpg" alt="Light at the Edge of Winter"> -->
+  <div class="work-info">
+    <div class="work-info-left">
+      <div class="work-index">01 / 07</div>
+      <div class="work-title-big">Light at the<br>Edge of Winter</div>
+      <div class="work-medium-tag">Photography · Series</div>
+    </div>
+    <div class="work-info-right">
+      <div class="work-desc">A study of northern light in the hours before dark — what remains visible when almost everything is already gone.</div>
+      <div class="work-year">2024</div>
+    </div>
+  </div>
+  <div class="scroll-hint" id="scroll-hint">
+    <div class="sh-text">Scroll for more work</div>
+    <div class="sh-arrow">↓</div>
+  </div>
+</div>
+
+<div class="work-slide ws-2" id="slide-2" data-index="2">
+  <div class="slide-ph"><div class="slide-ph-text">Vessel</div></div>
+  <!-- <img src="images/work-2.jpg" alt="Vessel Series"> -->
+  <div class="work-info">
+    <div class="work-info-left">
+      <div class="work-index">02 / 07</div>
+      <div class="work-title-big">Vessel Series<br>No. 3</div>
+      <div class="work-medium-tag">Ceramics · Objects</div>
+    </div>
+    <div class="work-info-right">
+      <div class="work-desc">Hand-built vessels that hold the memory of making — each crack and unevenness left deliberately unremedied.</div>
+      <div class="work-year">2024</div>
+    </div>
+  </div>
+</div>
+
+<div class="work-slide ws-3" id="slide-3" data-index="3">
+  <div class="slide-ph"><div class="slide-ph-text">Still</div></div>
+  <!-- <img src="images/work-3.jpg" alt="Still Moving"> -->
+  <div class="work-info">
+    <div class="work-info-left">
+      <div class="work-index">03 / 07</div>
+      <div class="work-title-big">Still /<br>Moving</div>
+      <div class="work-medium-tag">Video · Single Channel</div>
+    </div>
+    <div class="work-info-right">
+      <div class="work-desc">12 minutes of a single window. The question was whether boredom could become something else if you waited long enough.</div>
+      <div class="work-year">2023</div>
+    </div>
+  </div>
+</div>
+
+<div class="work-slide ws-4" id="slide-4" data-index="4">
+  <div class="slide-ph"><div class="slide-ph-text">Figure</div></div>
+  <!-- <img src="images/work-4.jpg" alt="Peripheral Figures"> -->
+  <div class="work-info">
+    <div class="work-info-left">
+      <div class="work-index">04 / 07</div>
+      <div class="work-title-big">Peripheral<br>Figures</div>
+      <div class="work-medium-tag">Photography · Portraits</div>
+    </div>
+    <div class="work-info-right">
+      <div class="work-desc">People caught at the edges of their own stories — not the decisive moment, but the moment just before or after.</div>
+      <div class="work-year">2023</div>
+    </div>
+  </div>
+</div>
+
+<div class="work-slide ws-5" id="slide-5" data-index="5">
+  <div class="slide-ph"><div class="slide-ph-text">Fault</div></div>
+  <!-- <img src="images/work-5.jpg" alt="Fault Lines"> -->
+  <div class="work-info">
+    <div class="work-info-left">
+      <div class="work-index">05 / 07</div>
+      <div class="work-title-big">Fault<br>Lines</div>
+      <div class="work-medium-tag">Ceramics · Sculpture</div>
+    </div>
+    <div class="work-info-right">
+      <div class="work-desc">Fired clay forms that broke in the kiln and were reassembled with copper-tinted slip — breakage as part of the work.</div>
+      <div class="work-year">2023</div>
+    </div>
+  </div>
+</div>
+
+<div class="work-slide ws-6" id="slide-6" data-index="6">
+  <div class="slide-ph"><div class="slide-ph-text">Interior</div></div>
+  <!-- <img src="images/work-6.jpg" alt="Interiors"> -->
+  <div class="work-info">
+    <div class="work-info-left">
+      <div class="work-index">06 / 07</div>
+      <div class="work-title-big">Interiors</div>
+      <div class="work-medium-tag">Photography · Architecture</div>
+    </div>
+    <div class="work-info-right">
+      <div class="work-desc">Empty rooms photographed at the same hour over several months. The light changed. Everything else stayed exactly the same.</div>
+      <div class="work-year">2022</div>
+    </div>
+  </div>
+</div>
+
+<div class="work-slide ws-7" id="slide-7" data-index="7">
+  <div class="slide-ph"><div class="slide-ph-text">Duration</div></div>
+  <!-- <img src="images/work-7.jpg" alt="Duration Study I"> -->
+  <div class="work-info">
+    <div class="work-info-left">
+      <div class="work-index">07 / 07</div>
+      <div class="work-title-big">Duration<br>Study I</div>
+      <div class="work-medium-tag">Video · Installation</div>
+    </div>
+    <div class="work-info-right">
+      <div class="work-desc">A two-channel video piece exploring the gap between looking and seeing. Originally shown in a darkened corridor.</div>
+      <div class="work-year">2022</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<section id="about">
+  <div class="about-visual">
+    <div class="about-visual-bg"></div>
+    <div class="about-visual-text">BFA</div>
+    <div class="about-visual-year">Fine Art · Photography · Ceramics · Video</div>
+  </div>
+  <div class="about-content">
+    <div class="about-kicker">About the practice</div>
+    <h2 class="about-h">Working<br>across <em>everything</em></h2>
+    <p class="about-p">I'm a visual artist with a BFA in Fine Art, working across photography, ceramics, and moving image. My practice refuses to settle into a single medium — the movement between them is part of the thinking.</p>
+    <p class="about-p">There's something I keep returning to: the way certain materials <strong>hold time differently</strong>. Clay remembers pressure. Photographs arrest light. Video unravels duration. I'm interested in what each medium cannot say, and what that silence reveals.</p>
+    <blockquote class="about-quote">"I make things in order to understand what I'm looking at."</blockquote>
+    <p class="about-p">Currently based between studio and elsewhere. Open to residencies, collaborations, and slow conversations.</p>
+    <div class="media-chips">
+      <span class="chip">Photography</span>
+      <span class="chip">Ceramics</span>
+      <span class="chip">Video</span>
+      <span class="chip">Drawing</span>
+      <span class="chip">Installation</span>
+      <span class="chip">BFA Fine Art</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ BLOG ══════════════ -->
+<section id="blog">
+  <div class="section-eyebrow">Writing</div>
+  <div class="blog-list">
+    <div class="blog-row reveal">
+      <span class="blog-date">March 2025</span>
+      <h3 class="blog-title">On the Weight of Wet Clay and What it Means to Work Slowly</h3>
+      <span class="blog-tag">Process</span>
+      <span class="blog-row-arrow">↗</span>
+    </div>
+    <div class="blog-row reveal">
+      <span class="blog-date">January 2025</span>
+      <h3 class="blog-title">Notes from a Residency: Silence as Method</h3>
+      <span class="blog-tag">Residency</span>
+      <span class="blog-row-arrow">↗</span>
+    </div>
+    <div class="blog-row reveal">
+      <span class="blog-date">October 2024</span>
+      <h3 class="blog-title">Why I Stopped Editing My Photos Immediately</h3>
+      <span class="blog-tag">Photography</span>
+      <span class="blog-row-arrow">↗</span>
+    </div>
+    <div class="blog-row reveal">
+      <span class="blog-date">July 2024</span>
+      <h3 class="blog-title">The Kiln As Collaborator: On Letting Things Fail</h3>
+      <span class="blog-tag">Ceramics</span>
+      <span class="blog-row-arrow">↗</span>
+    </div>
+    <div class="blog-row reveal">
+      <span class="blog-date">April 2024</span>
+      <h3 class="blog-title">Watching Durham Abbey for Twelve Minutes: A Video Diary</h3>
+      <span class="blog-tag">Video</span>
+      <span class="blog-row-arrow">↗</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<section id="contact">
+  <div class="contact-bg-word">hello</div>
+  <div class="contact-kicker reveal">Available for collaboration</div>
+  <h2 class="contact-h reveal">Get in<br><span>touch</span></h2>
+  <div class="contact-row reveal">
+    <a href="mailto:hello@yourname.com" class="c-btn fill">hello@yourname.com</a>
+    <a href="#" class="c-btn">Instagram</a>
+    <a href="#" class="c-btn">Are.na</a>
+    <a href="#" class="c-btn">Download CV</a>
+  </div>
+  <p class="contact-note reveal">I read every message, though I reply slowly.<br>That's probably evident from how I work.</p>
+</section>
+
+<footer>
+  <span class="footer-l">© 2026 Your Name — All works reserved</span>
+  <div class="footer-r">
+    <a href="#">Instagram</a>
+    <a href="#">Are.na</a>
+    <a href="#">CV</a>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR ──
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function anim(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
+document.querySelectorAll('a,button,.blog-row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.classList.add('sm');ring.classList.add('xl')});
+  el.addEventListener('mouseleave',()=>{cur.classList.remove('sm');ring.classList.remove('xl')});
+});
+document.querySelectorAll('.work-slide').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.classList.add('xl');ring.classList.add('xl')});
+  el.addEventListener('mouseleave',()=>{cur.classList.remove('xl');ring.classList.remove('xl')});
+});
+
+// ── COUNTER DOTS ──
+const slides = document.querySelectorAll('.work-slide');
+const dotsWrap = document.getElementById('counter-dots');
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');
+  d.className='counter-dot'+(i===0?' active':'');
+  d.onclick=()=>document.getElementById('slide-'+(i+1)).scrollIntoView({behavior:'smooth'});
+  dotsWrap.appendChild(d);
+});
+
+// ── SCROLL OBSERVER ──
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const idx = e.target.dataset.index;
+    if(idx){
+      document.querySelectorAll('.counter-dot').forEach((d,i)=>d.classList.toggle('active',i===+idx-1));
+      // hide scroll hint after first scroll
+      if(+idx>1) document.getElementById('scroll-hint')?.classList.add('gone');
+    }
+  });
+},{threshold:.6});
+slides.forEach(s=>io.observe(s));
+
+// ── REVEAL ──
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revObs.unobserve(e.target)}});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+// ── NAV hide/show ──
+let lastY=0;
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  nav.classList.toggle('hide',y>lastY&&y>80);
+  lastY=y;
+});
+// always show nav when hovering top
+nav.addEventListener('mouseenter',()=>nav.classList.remove('hide'));
+</script>
+</body>
+</html>
