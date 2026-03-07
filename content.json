@@ -1,0 +1,208 @@
+{
+  "contact": {
+    "email": "serenazhang1026@gmail.com",
+    "xhsUrl": "https://xhslink.com/m/9KMmbgxryKl",
+    "instagramUrl": "@skrrrena"
+  },
+
+  "en": {
+    "nav.name": "Tianan Zhang — Visual Artist",
+    "nav.about": "About",
+    "nav.writing": "Writing",
+    "nav.contact": "Contact",
+
+    "slide1.title": "Clay",
+    "slide1.category": "Ceramics",
+    "slide1.desc": "Objects made to hold — tea, warmth, and daily rituals.",
+    "slide1.year": "2024–2025",
+
+    "slide2.title": "Polaroid Real+",
+    "slide2.category": "Virtual Photography",
+    "slide2.desc": "An exploration of the uncanny valley of virtual photography through photogrammetry, Unity, and film photography.",
+    "slide2.year": "2023",
+
+    "slide3.title": "DESTINO",
+    "slide3.category": "Experimental Film",
+    "slide3.desc": "An experimental surrealist film about two souls intertwined by unfulfilled wishes, yet never meeting in reality.",
+    "slide3.year": "2021",
+
+    "slide4.title": "Portraiture<br/>in Analogue",
+    "slide4.category": "Film Photography",
+    "slide4.desc": "Portraiture: the performed self in analogue.",
+    "slide4.year": "2023",
+
+    "slide5.title": "Residue",
+    "slide5.category": "Mixed Media",
+    "slide5.desc": "Traces left behind — chemical, emotional, material.",
+    "slide5.year": "2022",
+
+    "slide6.title": "Archive<br/>of Absence",
+    "slide6.category": "Photography",
+    "slide6.desc": "Empty rooms, unmade beds, the imprint of someone recently gone.",
+    "slide6.year": "2022",
+
+    "slide7.title": "Threshold",
+    "slide7.category": "Installation",
+    "slide7.desc": "A site-specific work about the spaces between interior and exterior, private and shared.",
+    "slide7.year": "2021",
+
+    "about.name": "Tianan Zhang<br/>artist",
+    "about.p1": "Tianan Zhang is a material-based artist working between film photography, ceramics, and moving image. Her practice explores surface, tactility, and the quiet transformations produced through light, glaze, and time.",
+    "about.p2": "Moving between image-making and object-making, her work often treats ceramic surfaces as visual fields where color, texture, and atmosphere interact. Across photography and clay, she is interested in how materials record gesture, memory, and subtle shifts of perception.",
+    "about.mediumLabel": "Medium",
+    "about.mediumVal": "Film photography, ceramics, moving image",
+    "about.educationLabel": "Education",
+    "about.educationVal": "BFA, Fine Art & Film Studies, Carnegie Mellon University",
+    "about.locationLabel": "Based in",
+    "about.locationVal": "Tokyo, Japan",
+    "about.currentLabel": "Currently",
+    "about.currentVal": "Open to collaborations and commissions",
+
+    "blog.heading": "Writing",
+    "blog1.date": "2023",
+    "blog1.title": "Polaroid Real+: virtual photography and the uncanny valley",
+    "blog1.excerpt": "An exploration of the uncanny valley of virtual photography through photogrammetry, Unity, and film photography.",
+    "blog2.date": "2020",
+    "blog2.title": "ROSTRUM — when language dies",
+    "blog2.excerpt": "In response to the suppression of Zhujun's sexual harassment case, a literal and symbolic journey to the court with a rostrum, paired with Toni Morrison's speech When Language Dies.",
+    "blog3.date": "2021",
+    "blog3.title": "Portraiture: the performed self in analogue",
+    "blog3.excerpt": "Thinking through film photography as a space where the self is performed, rehearsed, and held in grain.",
+
+    "contact.heading": "Let's make<br/>something together"
+  },
+
+  "zh": {
+    "nav.name": "Tianan Zhang — 摄影师",
+    "nav.about": "关于",
+    "nav.writing": "写作",
+    "nav.contact": "联系",
+
+    "slide1.title": "Between<br/>Fire & Form",
+    "slide1.category": "陶瓷",
+    "slide1.desc": "用来盛放的器物——茶，温度，日常使用的仪式感。",
+    "slide1.year": "2024–2025",
+
+    "slide2.title": "Polaroid Real+",
+    "slide2.category": "虚拟摄影",
+    "slide2.desc": "通过摄影测量、Unity 与胶片摄影，追问虚拟摄影中「真实」与「不安」的边界。",
+    "slide2.year": "2023",
+
+    "slide3.title": "DESTINO",
+    "slide3.category": "实验电影",
+    "slide3.desc": "一部关于两个灵魂被未实现的愿望相互缠绕、却始终未曾在现实中相遇的超现实实验短片。",
+    "slide3.year": "2021",
+
+    "slide4.title": "肖像",
+    "slide4.category": "胶片摄影",
+    "slide4.desc": "肖像：在模拟影像中被表演的自我。",
+    "slide4.year": "2023",
+
+    "slide5.title": "Residue",
+    "slide5.category": "混合媒介",
+    "slide5.desc": "留下来的痕迹——化学的、情感的、物质的。",
+    "slide5.year": "2022",
+
+    "slide6.title": "缺席档案",
+    "slide6.category": "摄影",
+    "slide6.desc": "空荡的房间，未整理的床，某个刚刚离去的人留下的印记。",
+    "slide6.year": "2022",
+
+    "slide7.title": "阈值",
+    "slide7.category": "装置",
+    "slide7.desc": "一件关于内与外、私密与共享之间空间的场域特定装置。",
+    "slide7.year": "2021",
+
+    "about.name": "Tianan Zhang<br/>摄影师",
+    "about.p1": "张天安以胶片摄影、虚拟摄影、陶瓷与影像创作，搭建亲密却略带诡异的视觉世界。",
+    "about.p2": "近年的项目在宝丽来实验、法庭旅程与超现实叙述影像之间游走，关注影像如何表演自我，以及语言如何决定可见与不可见。",
+    "about.mediumLabel": "创作媒介",
+    "about.mediumVal": "胶片与虚拟摄影、陶瓷、影像",
+    "about.educationLabel": "教育背景",
+    "about.educationVal": "美术学学士（BFA Fine Art）",
+    "about.locationLabel": "常驻城市",
+    "about.locationVal": "—",
+    "about.currentLabel": "目前",
+    "about.currentVal": "开放合作与委约创作",
+
+    "blog.heading": "写作",
+    "blog1.date": "2023",
+    "blog1.title": "Polaroid Real+：虚拟摄影与恐怖谷",
+    "blog1.excerpt": "通过摄影测量、Unity 与胶片摄影，追问虚拟摄影中「真实」与「不安」的边界。",
+    "blog2.date": "2020",
+    "blog2.title": "ROSTRUM——当语言失效时",
+    "blog2.excerpt": "回应朱军性骚扰案被压制的现实，以讲台为载体踏上一段通往法院的象征与现实旅程，并与托妮·莫里森的演说 When Language Dies 并置。",
+    "blog3.date": "2021",
+    "blog3.title": "肖像：在模拟影像中被表演的自我",
+    "blog3.excerpt": "从胶片肖像出发，思考自我如何在镜头前被排练、被构造，并最终沉淀在颗粒之中。",
+
+    "contact.heading": "一起创作<br/>些什么吧"
+  },
+
+  "ja": {
+    "nav.name": "Tianan Zhang — Photographer",
+    "nav.about": "プロフィール",
+    "nav.writing": "テキスト",
+    "nav.contact": "コンタクト",
+
+    "slide1.title": "Between<br/>Fire & Form",
+    "slide1.category": "セラミック",
+    "slide1.desc": "盛るために作られた器——お茶、温もり、日常の儀式。",
+    "slide1.year": "2024–2025",
+
+    "slide2.title": "Polaroid Real+",
+    "slide2.category": "バーチャルフォト",
+    "slide2.desc": "フォトグラメトリーとUnity、フィルム写真を組み合わせながら、「現実らしさ」と不気味さのあいだの振れを見つめる。",
+    "slide2.year": "2023",
+
+    "slide3.title": "DESTINO",
+    "slide3.category": "実験映画",
+    "slide3.desc": "叶わぬ願いによって結ばれた二つの魂が、現実では決して出会えない——シュルレアリスト的実験短編。",
+    "slide3.year": "2021",
+
+    "slide4.title": "ポートレイト",
+    "slide4.category": "フィルム写真",
+    "slide4.desc": "ポートレイト：アナログにおける演じられた自己。",
+    "slide4.year": "2023",
+
+    "slide5.title": "Residue",
+    "slide5.category": "混合メディア",
+    "slide5.desc": "残されたもの——化学的、感情的、物質的な痕跡。",
+    "slide5.year": "2022",
+
+    "slide6.title": "不在のアーカイブ",
+    "slide6.category": "写真",
+    "slide6.desc": "空の部屋、乱れたベッド、誰かが立ち去った直後の痕跡。",
+    "slide6.year": "2022",
+
+    "slide7.title": "閾値",
+    "slide7.category": "インスタレーション",
+    "slide7.desc": "内と外、私的なものと共有されるものとのあいだの空間についてのサイトスペシフィックな作品。",
+    "slide7.year": "2021",
+
+    "about.name": "Tianan Zhang<br/>フォトグラファー",
+    "about.p1": "フィルム写真、バーチャルフォトグラフィー、セラミック、映像を横断しながら、親密さとわずかな異物感のある世界をつくり出している。",
+    "about.p2": "ポラロイドの実験、法廷への旅路、シュルレアリスト的な物語映画などを通して、イメージがどのように自己を上演し、言語が何を「見えるもの」として許すのかを問いかける。",
+    "about.mediumLabel": "メディウム",
+    "about.mediumVal": "フィルム/バーチャル写真、セラミック、映像",
+    "about.educationLabel": "学歴",
+    "about.educationVal": "BFA Fine Art",
+    "about.locationLabel": "拠点",
+    "about.locationVal": "—",
+    "about.currentLabel": "現在",
+    "about.currentVal": "コミッション・コラボ募集中",
+
+    "blog.heading": "テキスト",
+    "blog1.date": "2023",
+    "blog1.title": "Polaroid Real+：バーチャルフォトと不気味の谷",
+    "blog1.excerpt": "フォトグラメトリーとUnity、フィルム写真を組み合わせながら、「現実らしさ」と不気味さのあいだの振れを見つめる。",
+    "blog2.date": "2020",
+    "blog2.title": "ROSTRUM——言葉が死ぬとき",
+    "blog2.excerpt": "朱軍のセクシャルハラスメント事件の抑圧に応答し、講壇とともに裁判所へ向かう象徴的で物理的な旅路を描き、トニ・モリスンのスピーチ「When Language Dies」と重ね合わせる。",
+    "blog3.date": "2021",
+    "blog3.title": "ポートレイト：アナログにおける演じられた自己",
+    "blog3.excerpt": "フィルムによるポートレイトを通して、自己がどのようにカメラの前で排練され、構造され、ついにフィルムの粒子に沈殿していくのかを考察する。",
+
+    "contact.heading": "一緒に<br/>何かをつくろう"
+  }
+}
