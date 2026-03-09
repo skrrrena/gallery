@@ -106,19 +106,28 @@ body::before{
   font-family:var(--mono);font-size:.55rem;color:var(--dim);letter-spacing:.1em;
 }
 
-.hero-arrows{
-  display:flex;justify-content:flex-end;gap:.4rem;margin-top:.6rem;
-}
 .hero-arrow{
-  width:1.8rem;height:1.8rem;
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:2.6rem;height:2.6rem;
   border:1px solid rgba(237,234,226,.25);
   border-radius:999px;
-  background:rgba(11,11,10,.6);
+  background:rgba(11,11,10,.55);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   color:var(--bright);
-  font-family:var(--mono);font-size:.6rem;
+  font-family:var(--mono);font-size:.75rem;
   cursor:pointer;
+  z-index:20;
+  transition:background .2s,border-color .2s,opacity .2s;
+  opacity:.7;
 }
-.hero-arrow:hover{background:rgba(237,234,226,.08);border-color:rgba(237,234,226,.6);}
+.hero-arrow:hover{background:rgba(237,234,226,.12);border-color:rgba(237,234,226,.7);opacity:1;}
+.hero-arrow-prev{left:1.2rem;}
+.hero-arrow-next{right:1.2rem;}
+@media(max-width:600px){
+  .hero-arrow{width:2rem;height:2rem;font-size:.6rem;}
+  .hero-arrow-prev{left:.5rem;}
+  .hero-arrow-next{right:.5rem;}
+}
 
 /* view detail btn */
 .view-detail-btn{
@@ -549,15 +558,13 @@ input[type=file].admin-file-input{display:none}
       <div class="slide-category" data-i18n="slide1.category">Ceramics</div>
       <div class="work-desc" data-i18n="slide1.desc">Objects made to hold — tea, warmth, the ritual of daily use.</div>
       <div class="work-year" data-i18n="slide1.year">2024–2025</div>
-      <div class="hero-arrows">
-        <button class="hero-arrow hero-arrow-prev" onclick="cerHeroPrev(event)">←</button>
-        <button class="hero-arrow hero-arrow-next" onclick="cerHeroNext(event)">→</button>
-      </div>
       <button class="view-detail-btn" onclick="openCeramics()">
         View full series <span class="arr">→</span>
       </button>
     </div>
   </div>
+  <button class="hero-arrow hero-arrow-prev" onclick="cerHeroPrev(event)" aria-label="Previous">←</button>
+  <button class="hero-arrow hero-arrow-next" onclick="cerHeroNext(event)" aria-label="Next">→</button>
 </section>
 
 <!-- ══════════════════════════════
@@ -1037,6 +1044,7 @@ function initCerHero(){
   cerHeroStartTimer();
   const slide1 = document.querySelector('.slide[data-index="1"]');
   if(!slide1) return;
+  // touch swipe (mobile one-finger, or trackpad touch)
   let touchStartX = null;
   slide1.addEventListener('touchstart', e => {
     touchStartX = e.touches[0].clientX;
@@ -1050,6 +1058,25 @@ function initCerHero(){
     }
     touchStartX = null;
   }, {passive:true});
+
+  // trackpad two-finger horizontal swipe (Mac) + mouse wheel horizontal (Windows)
+  let wheelAccum = 0;
+  let wheelTimer = null;
+  slide1.addEventListener('wheel', e => {
+    // only react to horizontal component; ignore pure vertical scrolling
+    const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
+    if(dx === 0) return;
+    e.preventDefault();
+    wheelAccum += dx;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => {
+      if(Math.abs(wheelAccum) > 60){
+        if(wheelAccum > 0) cerHeroNext();
+        else cerHeroPrev();
+      }
+      wheelAccum = 0;
+    }, 80);
+  }, {passive:false});
 }
 fetch('assets/cover/list.json')
   .then(r => r.ok ? r.json() : [])
