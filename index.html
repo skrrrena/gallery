@@ -108,25 +108,30 @@ body::before{
 
 .hero-arrow{
   position:absolute;top:50%;transform:translateY(-50%);
-  width:2.6rem;height:2.6rem;
-  border:1px solid rgba(237,234,226,.25);
+  padding:.4rem .5rem;
   border-radius:999px;
-  background:rgba(11,11,10,.55);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  color:var(--bright);
-  font-family:var(--mono);font-size:.75rem;
+  border:1px solid transparent;
+  background:transparent;
+  color:rgba(237,234,226,.7);
+  font-family:var(--mono);font-size:.85rem;
   cursor:pointer;
   z-index:20;
-  transition:background .2s,border-color .2s,opacity .2s;
-  opacity:.7;
+  transition:background .18s,border-color .18s,color .18s,opacity .18s,transform .18s;
+  opacity:.35;
 }
-.hero-arrow:hover{background:rgba(237,234,226,.12);border-color:rgba(237,234,226,.7);opacity:1;}
-.hero-arrow-prev{left:1.2rem;}
-.hero-arrow-next{right:1.2rem;}
+.hero-arrow:hover{
+  background:rgba(11,11,10,.7);
+  border-color:rgba(237,234,226,.35);
+  color:var(--bright);
+  opacity:1;
+  transform:translateY(-50%) translateX(2px);
+}
+.hero-arrow-prev{left:1.3rem;}
+.hero-arrow-next{right:1.3rem;}
 @media(max-width:600px){
-  .hero-arrow{width:2rem;height:2rem;font-size:.6rem;}
-  .hero-arrow-prev{left:.5rem;}
-  .hero-arrow-next{right:.5rem;}
+  .hero-arrow{font-size:.7rem;padding:.3rem .45rem;}
+  .hero-arrow-prev{left:.6rem;}
+  .hero-arrow-next{right:.6rem;}
 }
 
 /* view detail btn */
@@ -1060,17 +1065,17 @@ function initCerHero(){
   }, {passive:true});
 
   // trackpad two-finger horizontal swipe (Mac) + mouse wheel horizontal (Windows)
+  // 使用水平滚动距离来判断方向，不再和垂直滚动比较，阈值也更小一点
   let wheelAccum = 0;
   let wheelTimer = null;
   slide1.addEventListener('wheel', e => {
-    // only react to horizontal component; ignore pure vertical scrolling
-    const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
-    if(dx === 0) return;
+    const dx = e.deltaX;
+    if(Math.abs(dx) < 10) return; // 忽略非常小的抖动
     e.preventDefault();
     wheelAccum += dx;
     clearTimeout(wheelTimer);
     wheelTimer = setTimeout(() => {
-      if(Math.abs(wheelAccum) > 60){
+      if(Math.abs(wheelAccum) > 30){
         if(wheelAccum > 0) cerHeroNext();
         else cerHeroPrev();
       }
