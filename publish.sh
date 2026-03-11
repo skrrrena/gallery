@@ -6,9 +6,10 @@
 #   ./publish.sh "add new ceramics"   → 自定义 commit message
 #
 # 修改内容的方式：
-#   图片（封面轮播）：把图放进 assets/cover/ → 运行 ./publish.sh
-#   图片（陶瓷页）：把图放进 assets/       → 运行 ./publish.sh
-#   文字/联系方式：编辑 content.json         → 运行 ./publish.sh
+#   图片（封面轮播）：把图放进 assets/cover/         → 运行 ./publish.sh
+#   图片（陶瓷页）：  把图放进 assets/ceramics/（或命名为 ceramics-xx 放在 assets/）
+#                    然后运行 ./publish.sh
+#   文字/联系方式：   编辑 content.json                 → 运行 ./publish.sh
 #
 # 前提：已在项目目录下执行过 git remote add origin <your-repo>
 
