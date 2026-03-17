@@ -4,7 +4,6 @@
     "xhsUrl": "https://xhslink.com/m/9KMmbgxryKl",
     "instagramUrl": "@skrrrena"
   },
-
   "vermilion": {
     "en": {
       "title": "Vermilion",
@@ -25,52 +24,51 @@
       "p4": "后来，当我回到中国，来到景德镇时，那种感觉既像回家，又像重新开始。在不断的实验中，我找到了一种釉料，在高温烧成后能够呈现出某种接近漆的深度与表面质感。这组作品尝试探索的，是朱红与黑之间的渐变关系——朱红在黑色中缓慢地沉入、过渡。但这种变化并不是通过一层层漆的耐心堆叠来完成，而是交由窑火：在一次烧成中，让釉与火共同作用，生成这种颜色之间的过渡。",
       "p5": "大漆工艺是中国的国家级非物质文化遗产，但同时也正面临逐渐式微的处境。这组作品并不是对漆工艺的复制，而是尝试将它的某种精神带入另一种材料之中。与其说是模仿，不如说是一种跨越工艺之间的对话。",
       "closing": "\"遗朱\"——留下的一抹朱红，也暗合\"遗珠\"。那些被时间与距离遮蔽的传统，如同遗落的明珠，在重新被找寻之时，熠熠生辉。"
+    },
+    "ja": {
+      "title": "《遗朱》 Vermilion",
+      "year": "セラミック · 景徳鎮 · 2024–2025",
+      "p1": "漆と初めて意識的に出会ったのは、中国ではなく、中国での不在を通じてだった。",
+      "p2": "海外での暮らしのなかで、私はこの工芸が日本にいかに深く根づいているかに気づき始めた——漆器への敬意、素材の扱い方、教育や継承、日常のなかに生きるその姿。そのとき初めて知ったのだ。漆は中国で生まれ、八千年以上の歴史を持つということを。自分の文化的な継承の一部であったものが、距離を置いてはじめて、より鮮明に見えてきた。",
+      "p3": "漆の本質は、漆の木から採取した天然の樹脂にある。それは幾重にも層を重ねて仕上げられる——ときには数十層も、それぞれを時間をかけて硬化させ、磨き上げ、次の層に埋めていく。こうして生まれる表面は、単なる塗料というより、積み重なった時間のようなもの——目で見るだけでなく、感触でも感じとれる深さだ。最も基本的な色彩は二つ——朱と黒。朱は辰砂から、黒は鉄から。古く、物質的で、還元できないもの。",
+      "p4": "中国へ——景徳鎮へ——戻ったとき、それは帰郷であり、同時に出直しでもあった。実験を重ねるなかで、焼成後に漆の深さと表面感覚に近い質感を持つ稀な釉薬を見つけた。このシリーズは、朱から黒へと静かに燃え移るグラデーションを探る。漆の層を辛抱強く重ねることによってではなく、窯という場で——一度の焼成のなかで釉と火が交渉し、その移行を生み出すことで。",
+      "p5": "漆工芸は中国の国家無形文化財であり、失われつつある伝統だ。このシリーズは漆の複製を試みるものではなく、その精神を別の素材へと引き継ごうとするもの——ある工芸の模倣ではなく、工芸の伝統をまたいだ対話として。",
+      "closing": "遗朱（いしゅ）——残されたもの——は、距離を越えて生き残るものについての、そして失ってはじめてその価値に気づくものについての問いだ。"
     }
   },
-
-
-
   "en": {
     "nav.name": "Tianan Zhang — Visual Artist",
     "nav.about": "About",
     "nav.writing": "Writing",
     "nav.contact": "Contact",
-
     "slide1.title": "Clay",
     "slide1.category": "Ceramics",
     "slide1.desc": "Objects made to hold — tea, warmth, and daily rituals.",
     "slide1.year": "2024–2025",
-
     "slide2.title": "Polaroid Real+",
     "slide2.category": "Virtual Photography",
     "slide2.desc": "An exploration of the uncanny valley of virtual photography through photogrammetry, Unity, and film photography.",
     "slide2.year": "2023",
-
     "slide3.title": "DESTINO",
     "slide3.category": "Experimental Film",
     "slide3.desc": "An experimental surrealist film about two souls intertwined by unfulfilled wishes, yet never meeting in reality.",
     "slide3.year": "2021",
-
     "slide4.title": "Portraiture<br/>in Analogue",
     "slide4.category": "Film Photography",
     "slide4.desc": "Portraiture: the performed self in analogue.",
     "slide4.year": "2023",
-
     "slide5.title": "Residue",
     "slide5.category": "Mixed Media",
     "slide5.desc": "Traces left behind — chemical, emotional, material.",
     "slide5.year": "2022",
-
     "slide6.title": "Archive<br/>of Absence",
     "slide6.category": "Photography",
     "slide6.desc": "Empty rooms, unmade beds, the imprint of someone recently gone.",
     "slide6.year": "2022",
-
     "slide7.title": "Threshold",
     "slide7.category": "Installation",
     "slide7.desc": "A site-specific work about the spaces between interior and exterior, private and shared.",
     "slide7.year": "2021",
-
     "about.name": "Tianan Zhang<br/>artist",
     "about.p1": "Tianan Zhang is a material-based artist working between film photography, ceramics, and moving image. Her practice explores surface, tactility, and the quiet transformations produced through light, glaze, and time.",
     "about.p2": "Moving between image-making and object-making, her work often treats ceramic surfaces as visual fields where color, texture, and atmosphere interact. Across photography and clay, she is interested in how materials record gesture, memory, and subtle shifts of perception.",
@@ -82,7 +80,6 @@
     "about.locationVal": "Tokyo, Japan",
     "about.currentLabel": "Currently",
     "about.currentVal": "Open to collaborations and commissions",
-
     "blog.heading": "Writing",
     "blog1.date": "2023",
     "blog1.title": "Polaroid Real+: virtual photography and the uncanny valley",
@@ -93,56 +90,57 @@
     "blog3.date": "2021",
     "blog3.title": "Portraiture: the performed self in analogue",
     "blog3.excerpt": "Thinking through film photography as a space where the self is performed, rehearsed, and held in grain.",
-
     "contact.heading": "Let's make<br/>something together",
-
     "ceramics.title": "Ceramics — Between Fire &amp; Form",
     "ceramics.back": "← Back to Works",
     "vermilion.navTitle": "Vermilion — 遗朱",
-    "vermilion.back": "← Back"
+    "vermilion.back": "← Back",
+    "ceramics.h2": "Material as memory",
+    "ceramics.p1": "These objects began as questions about use — what it means to make something that holds liquid, that fits a hand, that survives fire. The answers came slowly, through the clay itself.",
+    "ceramics.p2": "Each piece is thrown on the wheel and fired in a wood or gas kiln. The glazes are layered to encourage unpredictability: iron wash over shino, celadon over raw stoneware. The marks of making remain visible.",
+    "ceramics.quote": "A cup is a relationship between emptiness and its container.",
+    "ceramics.spec.materialsLabel": "Materials",
+    "ceramics.spec.materialsVal": "Stoneware, porcelain",
+    "ceramics.spec.methodLabel": "Method",
+    "ceramics.spec.methodVal": "Wheel-thrown",
+    "ceramics.spec.firingLabel": "Firing",
+    "ceramics.spec.firingVal": "Wood / gas reduction",
+    "ceramics.spec.yearLabel": "Year",
+    "ceramics.spec.yearVal": "2024–2025"
   },
-
   "zh": {
     "nav.name": "Tianan Zhang — 摄影师",
     "nav.about": "关于",
     "nav.writing": "写作",
     "nav.contact": "联系",
-
     "slide1.title": "Between<br/>Fire & Form",
     "slide1.category": "陶瓷",
     "slide1.desc": "用来盛放的器物——茶，温度，日常使用的仪式感。",
     "slide1.year": "2024–2025",
-
     "slide2.title": "Polaroid Real+",
     "slide2.category": "虚拟摄影",
     "slide2.desc": "通过摄影测量、Unity 与胶片摄影，追问虚拟摄影中「真实」与「不安」的边界。",
     "slide2.year": "2023",
-
     "slide3.title": "DESTINO",
     "slide3.category": "实验电影",
     "slide3.desc": "一部关于两个灵魂被未实现的愿望相互缠绕、却始终未曾在现实中相遇的超现实实验短片。",
     "slide3.year": "2021",
-
     "slide4.title": "肖像",
     "slide4.category": "胶片摄影",
     "slide4.desc": "肖像：在模拟影像中被表演的自我。",
     "slide4.year": "2023",
-
     "slide5.title": "Residue",
     "slide5.category": "混合媒介",
     "slide5.desc": "留下来的痕迹——化学的、情感的、物质的。",
     "slide5.year": "2022",
-
     "slide6.title": "缺席档案",
     "slide6.category": "摄影",
     "slide6.desc": "空荡的房间，未整理的床，某个刚刚离去的人留下的印记。",
     "slide6.year": "2022",
-
     "slide7.title": "阈值",
     "slide7.category": "装置",
     "slide7.desc": "一件关于内与外、私密与共享之间空间的场域特定装置。",
     "slide7.year": "2021",
-
     "about.name": "Tianan Zhang<br/>摄影师",
     "about.p1": "张天安以胶片摄影、虚拟摄影、陶瓷与影像创作，搭建亲密却略带诡异的视觉世界。",
     "about.p2": "近年的项目在宝丽来实验、法庭旅程与超现实叙述影像之间游走，关注影像如何表演自我，以及语言如何决定可见与不可见。",
@@ -154,7 +152,6 @@
     "about.locationVal": "—",
     "about.currentLabel": "目前",
     "about.currentVal": "开放合作与委约创作",
-
     "blog.heading": "写作",
     "blog1.date": "2023",
     "blog1.title": "Polaroid Real+：虚拟摄影与恐怖谷",
@@ -165,56 +162,57 @@
     "blog3.date": "2021",
     "blog3.title": "肖像：在模拟影像中被表演的自我",
     "blog3.excerpt": "从胶片肖像出发，思考自我如何在镜头前被排练、被构造，并最终沉淀在颗粒之中。",
-
     "contact.heading": "一起创作<br/>些什么吧",
-
     "ceramics.title": "陶瓷 — 火与形之间",
     "ceramics.back": "← 返回",
     "vermilion.navTitle": "Vermilion — 遗朱",
-    "vermilion.back": "← 返回"
+    "vermilion.back": "← 返回",
+    "ceramics.h2": "材料即记忆",
+    "ceramics.p1": "这些器物起初是关于使用的问题——做一件盛液体的东西、能被手握住的东西、能在火中存活下来的东西，意味着什么。答案在土本身里慢慢浮现。",
+    "ceramics.p2": "每一件作品都在轮上成形，在柴烧或气窑中烧制。釉料层层叠加，以鼓励不可预见性：铁锈釉覆志野釉，青瓷釉覆生坯。制作的痕迹保持可见。",
+    "ceramics.quote": "杯是空虚与容器之间的关系。",
+    "ceramics.spec.materialsLabel": "材料",
+    "ceramics.spec.materialsVal": "炻器、瓷器",
+    "ceramics.spec.methodLabel": "工艺",
+    "ceramics.spec.methodVal": "轮制",
+    "ceramics.spec.firingLabel": "烧制",
+    "ceramics.spec.firingVal": "柴烧 / 气烧还原",
+    "ceramics.spec.yearLabel": "年份",
+    "ceramics.spec.yearVal": "2024–2025"
   },
-
   "ja": {
     "nav.name": "Tianan Zhang — Photographer",
     "nav.about": "プロフィール",
     "nav.writing": "テキスト",
     "nav.contact": "コンタクト",
-
     "slide1.title": "Between<br/>Fire & Form",
     "slide1.category": "セラミック",
     "slide1.desc": "盛るために作られた器——お茶、温もり、日常の儀式。",
     "slide1.year": "2024–2025",
-
     "slide2.title": "Polaroid Real+",
     "slide2.category": "バーチャルフォト",
     "slide2.desc": "フォトグラメトリーとUnity、フィルム写真を組み合わせながら、「現実らしさ」と不気味さのあいだの振れを見つめる。",
     "slide2.year": "2023",
-
     "slide3.title": "DESTINO",
     "slide3.category": "実験映画",
     "slide3.desc": "叶わぬ願いによって結ばれた二つの魂が、現実では決して出会えない——シュルレアリスト的実験短編。",
     "slide3.year": "2021",
-
     "slide4.title": "ポートレイト",
     "slide4.category": "フィルム写真",
     "slide4.desc": "ポートレイト：アナログにおける演じられた自己。",
     "slide4.year": "2023",
-
     "slide5.title": "Residue",
     "slide5.category": "混合メディア",
     "slide5.desc": "残されたもの——化学的、感情的、物質的な痕跡。",
     "slide5.year": "2022",
-
     "slide6.title": "不在のアーカイブ",
     "slide6.category": "写真",
     "slide6.desc": "空の部屋、乱れたベッド、誰かが立ち去った直後の痕跡。",
     "slide6.year": "2022",
-
     "slide7.title": "閾値",
     "slide7.category": "インスタレーション",
     "slide7.desc": "内と外、私的なものと共有されるものとのあいだの空間についてのサイトスペシフィックな作品。",
     "slide7.year": "2021",
-
     "about.name": "Tianan Zhang<br/>フォトグラファー",
     "about.p1": "フィルム写真、バーチャルフォトグラフィー、セラミック、映像を横断しながら、親密さとわずかな異物感のある世界をつくり出している。",
     "about.p2": "ポラロイドの実験、法廷への旅路、シュルレアリスト的な物語映画などを通して、イメージがどのように自己を上演し、言語が何を「見えるもの」として許すのかを問いかける。",
@@ -226,7 +224,6 @@
     "about.locationVal": "—",
     "about.currentLabel": "現在",
     "about.currentVal": "コミッション・コラボ募集中",
-
     "blog.heading": "テキスト",
     "blog1.date": "2023",
     "blog1.title": "Polaroid Real+：バーチャルフォトと不気味の谷",
@@ -237,12 +234,22 @@
     "blog3.date": "2021",
     "blog3.title": "ポートレイト：アナログにおける演じられた自己",
     "blog3.excerpt": "フィルムによるポートレイトを通して、自己がどのようにカメラの前で排練され、構造され、ついにフィルムの粒子に沈殿していくのかを考察する。",
-
     "contact.heading": "一緒に<br/>何かをつくろう",
-
     "ceramics.title": "セラミック — Between Fire &amp; Form",
     "ceramics.back": "← 戻る",
     "vermilion.navTitle": "Vermilion — 遗朱",
-    "vermilion.back": "← 戻る"
+    "vermilion.back": "← 戻る",
+    "ceramics.h2": "素材は記憶",
+    "ceramics.p1": "これらの器は、使うことへの問いから始まった——液体を入れ、手に収まり、火を越えてくるものを作るとはどういうことか。答えは土そのものからゆっくりと現れた。",
+    "ceramics.p2": "すべての作品はろくろで成形され、柴窯またはガス窯で焼かれる。釉薬は重ねることで偶発性を生む——志野の上に鉄釉、生地の上に青磁釉。作る行為の痕跡は可視のまま残される。",
+    "ceramics.quote": "椀は、空虚とその器のあいだの関係だ。",
+    "ceramics.spec.materialsLabel": "素材",
+    "ceramics.spec.materialsVal": "炻器、磁器",
+    "ceramics.spec.methodLabel": "技法",
+    "ceramics.spec.methodVal": "ろくろ成形",
+    "ceramics.spec.firingLabel": "焼成",
+    "ceramics.spec.firingVal": "薪焼き / ガス還元焼成",
+    "ceramics.spec.yearLabel": "制作年",
+    "ceramics.spec.yearVal": "2024–2025"
   }
 }

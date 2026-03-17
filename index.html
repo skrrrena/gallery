@@ -289,23 +289,20 @@ body::before{
 
 /* grid */
 .c-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:2px;background:var(--bg);
-  padding:2px;margin-top:2px;
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:3px;background:var(--bg);
+  padding:3px;margin-top:3px;
 }
 .c-grid-cell{
   position:relative;overflow:hidden;cursor:none;
-  background:var(--surface);
+  background:var(--surface);aspect-ratio:4/5;
 }
-.c-grid-cell.wide{grid-column:span 2}
 .c-grid-cell img{
   width:100%;height:100%;display:block;
-  min-height:200px;object-fit:contain;object-position:center;
+  object-fit:cover;object-position:center;
   background:var(--surface);
   transition:transform .5s ease;
 }
-.c-grid-cell.wide img{min-height:240px}
-.c-grid-cell.wide{min-height:0}
 .c-grid-cell:hover img{transform:scale(1.04)}
 .c-grid-info{
   position:absolute;bottom:0;left:0;right:0;
@@ -367,7 +364,8 @@ body::before{
   max-width:740px;margin:0 auto;
   padding:5rem 2.5rem;
 }
-.v-essay-en,.v-essay-zh{margin-bottom:1rem}
+.v-essay-en,.v-essay-zh,.v-essay-ja{margin-bottom:1rem;display:none}
+.v-essay-en.active,.v-essay-zh.active,.v-essay-ja.active{display:block}
 .v-essay-title{
   font-family:var(--serif);font-style:italic;
   font-size:2.4rem;color:var(--bright);margin-bottom:.35rem;line-height:1.1;
@@ -829,7 +827,7 @@ input[type=file].admin-file-input{display:none}
 <div id="ceramics-overlay">
   <div class="ceramics-overlay-nav">
     <div class="ceramics-overlay-title" data-i18n="ceramics.title">Ceramics — Between Fire &amp; Form</div>
-    <button class="back-btn" onclick="closeCeramics()" data-i18n="ceramics.back">← Back to Works</button>
+    <button class="back-btn" onclick="history.back()" data-i18n="ceramics.back">← Back to Works</button>
   </div>
 
   <!-- Hero -->
@@ -885,27 +883,27 @@ input[type=file].admin-file-input{display:none}
   <!-- Text + specs -->
   <div class="c-text">
     <div class="c-text-left">
-      <h2>Material as memory</h2>
-      <p>These objects began as questions about use — what it means to make something that holds liquid, that fits a hand, that survives fire. The answers came slowly, through the clay itself.</p>
-      <p>Each piece is thrown on the wheel and fired in a wood or gas kiln. The glazes are layered to encourage unpredictability: iron wash over shino, celadon over raw stoneware. The marks of making remain visible.</p>
-      <blockquote>"A cup is a relationship between emptiness and its container."</blockquote>
+      <h2 data-i18n="ceramics.h2">Material as memory</h2>
+      <p data-i18n="ceramics.p1">These objects began as questions about use — what it means to make something that holds liquid, that fits a hand, that survives fire. The answers came slowly, through the clay itself.</p>
+      <p data-i18n="ceramics.p2">Each piece is thrown on the wheel and fired in a wood or gas kiln. The glazes are layered to encourage unpredictability: iron wash over shino, celadon over raw stoneware. The marks of making remain visible.</p>
+      <blockquote data-i18n="ceramics.quote">A cup is a relationship between emptiness and its container.</blockquote>
     </div>
     <div class="c-specs">
       <div>
-        <div class="c-spec-label">Materials</div>
-        <div class="c-spec-val">Stoneware, porcelain</div>
+        <div class="c-spec-label" data-i18n="ceramics.spec.materialsLabel">Materials</div>
+        <div class="c-spec-val" data-i18n="ceramics.spec.materialsVal">Stoneware, porcelain</div>
       </div>
       <div>
-        <div class="c-spec-label">Method</div>
-        <div class="c-spec-val">Wheel-thrown</div>
+        <div class="c-spec-label" data-i18n="ceramics.spec.methodLabel">Method</div>
+        <div class="c-spec-val" data-i18n="ceramics.spec.methodVal">Wheel-thrown</div>
       </div>
       <div>
-        <div class="c-spec-label">Firing</div>
-        <div class="c-spec-val">Wood / gas reduction</div>
+        <div class="c-spec-label" data-i18n="ceramics.spec.firingLabel">Firing</div>
+        <div class="c-spec-val" data-i18n="ceramics.spec.firingVal">Wood / gas reduction</div>
       </div>
       <div>
-        <div class="c-spec-label">Year</div>
-        <div class="c-spec-val">2024–2025</div>
+        <div class="c-spec-label" data-i18n="ceramics.spec.yearLabel">Year</div>
+        <div class="c-spec-val" data-i18n="ceramics.spec.yearVal">2024–2025</div>
       </div>
     </div>
   </div>
@@ -920,14 +918,14 @@ input[type=file].admin-file-input{display:none}
 <div id="vermilion-overlay">
   <div class="v-nav">
     <div class="v-nav-title" data-i18n="vermilion.navTitle">Vermilion — 遗朱</div>
-    <button class="back-btn" onclick="closeVermilion()" data-i18n="vermilion.back">← Back</button>
+    <button class="back-btn" onclick="history.back()" data-i18n="vermilion.back">← Back</button>
   </div>
 
   <!-- Vermilion 图片：由 assets/vermilion/list.json 自动生成，运行 node update-vermilion-list.js 更新 -->
   <div class="v-images" id="v-images-grid"></div>
 
   <div class="v-essay">
-    <div class="v-essay-en">
+    <div class="v-essay-en active">
       <h1 class="v-essay-title" id="v-en-title">Vermilion</h1>
       <span class="v-essay-year" id="v-en-year">Ceramics · Jingdezhen · 2024–2025</span>
       <p id="v-en-p1">I first encountered qi lacquer not in China, but through its absence from it.</p>
@@ -938,8 +936,6 @@ input[type=file].admin-file-input{display:none}
       <p class="v-closing" id="v-en-closing">遗朱 — the vermilion that remains — is about what survives the distance, and what we only learn to value once we've had to look for it.</p>
     </div>
 
-    <hr class="v-divider"/>
-
     <div class="v-essay-zh">
       <h1 class="v-essay-title" id="v-zh-title">《遗朱》</h1>
       <span class="v-essay-year" id="v-zh-year">陶瓷 · 景德镇 · 2024–2025</span>
@@ -949,6 +945,16 @@ input[type=file].admin-file-input{display:none}
       <p id="v-zh-p4">后来，当我回到中国，来到景德镇时，那种感觉既像回家，又像重新开始。在不断的实验中，我找到了一种釉料，在高温烧成后能够呈现出某种接近漆的深度与表面质感。这组作品尝试探索的，是朱红与黑之间的渐变关系——朱红在黑色中缓慢地沉入、过渡。但这种变化并不是通过一层层漆的耐心堆叠来完成，而是交由窑火：在一次烧成中，让釉与火共同作用，生成这种颜色之间的过渡。</p>
       <p id="v-zh-p5">大漆工艺是中国的国家级非物质文化遗产，但同时也正面临逐渐式微的处境。这组作品并不是对漆工艺的复制，而是尝试将它的某种精神带入另一种材料之中。与其说是模仿，不如说是一种跨越工艺之间的对话。</p>
       <p class="v-closing" id="v-zh-closing">"遗朱"——留下的一抹朱红，也暗合"遗珠"。那些被时间与距离遮蔽的传统，如同遗落的明珠，在重新被找寻之时，熠熠生辉。</p>
+    </div>
+    <div class="v-essay-ja">
+      <h1 class="v-essay-title" id="v-ja-title">《遗朱》 Vermilion</h1>
+      <span class="v-essay-year" id="v-ja-year">セラミック · 景徳鎮 · 2024–2025</span>
+      <p id="v-ja-p1">漆と初めて意識的に出会ったのは、中国ではなく、中国での不在を通じてだった。</p>
+      <p id="v-ja-p2">海外での暮らしのなかで、私はこの工芸が日本にいかに深く根づいているかに気づき始めた——漆器への敬意、素材の扱い方、教育や継承、日常のなかに生きるその姿。そのとき初めて知ったのだ。漆は中国で生まれ、八千年以上の歴史を持つということを。自分の文化的な継承の一部であったものが、距離を置いてはじめて、より鮮明に見えてきた。</p>
+      <p id="v-ja-p3">漆の本質は、漆の木から採取した天然の樹脂にある。それは幾重にも層を重ねて仕上げられる——ときには数十層も、それぞれを時間をかけて硬化させ、磨き上げ、次の層に埋めていく。こうして生まれる表面は、単なる塗料というより、積み重なった時間のようなもの——目で見るだけでなく、感触でも感じとれる深さだ。最も基本的な色彩は二つ——朱と黒。朱は辰砂から、黒は鉄から。古く、物質的で、還元できないもの。</p>
+      <p id="v-ja-p4">中国へ——景徳鎮へ——戻ったとき、それは帰郷であり、同時に出直しでもあった。実験を重ねるなかで、焼成後に漆の深さと表面感覚に近い質感を持つ稀な釉薬を見つけた。このシリーズは、朱から黒へと静かに燃え移るグラデーションを探る。漆の層を辛抱強く重ねることによってではなく、窯という場で——一度の焼成のなかで釉と火が交渉し、その移行を生み出すことで。</p>
+      <p id="v-ja-p5">漆工芸は中国の国家無形文化財であり、失われつつある伝統だ。このシリーズは漆の複製を試みるものではなく、その精神を別の素材へと引き継ごうとするもの——ある工芸の模倣ではなく、工芸の伝統をまたいだ対話として。</p>
+      <p class="v-closing" id="v-ja-closing">遗朱（いしゅ）——残されたもの——は、距離を越えて生き残るものについての、そして失ってはじめてその価値に気づくものについての問いだ。</p>
     </div>
   </div>
 </div>
@@ -980,12 +986,15 @@ document.querySelectorAll('button,a,.view-detail-btn,.c-grid-cell,.counter-dot,.
 });
 
 // ── CERAMICS OVERLAY ──
+history.replaceState({view: null}, '');
+
 function openCeramics(){
   const ov = document.getElementById('ceramics-overlay');
   ov.classList.add('open');
   document.body.style.overflow = 'hidden';
   document.documentElement.style.scrollSnapType = 'none';
   ov.scrollTop = 0;
+  history.pushState({view: 'ceramics'}, '');
 }
 function closeCeramics(){
   document.getElementById('ceramics-overlay').classList.remove('open');
@@ -999,6 +1008,7 @@ function openVermilion(){
   document.body.style.overflow = 'hidden';
   document.documentElement.style.scrollSnapType = 'none';
   ov.scrollTop = 0;
+  history.pushState({view: 'vermilion'}, '');
 }
 function closeVermilion(){
   document.getElementById('vermilion-overlay').classList.remove('open');
@@ -1010,6 +1020,17 @@ function closeVermilion(){
     document.documentElement.style.scrollSnapType = 'y mandatory';
   }
 }
+
+window.addEventListener('popstate', e => {
+  const view = e.state?.view ?? null;
+  if (view === 'ceramics') {
+    if (document.getElementById('vermilion-overlay').classList.contains('open')) closeVermilion();
+  } else {
+    if (document.getElementById('img-lightbox').classList.contains('show')) { closeLb(); return; }
+    if (document.getElementById('vermilion-overlay').classList.contains('open')) { closeVermilion(); return; }
+    if (document.getElementById('ceramics-overlay').classList.contains('open')) closeCeramics();
+  }
+});
 
 // ── LIGHTBOX ──
 function openLb(src, caption){
@@ -1030,8 +1051,8 @@ document.getElementById('img-lightbox').addEventListener('click', e => {
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape'){
     if(document.getElementById('img-lightbox').classList.contains('show')){ closeLb(); return; }
-    if(document.getElementById('vermilion-overlay').classList.contains('open')){ closeVermilion(); return; }
-    if(document.getElementById('ceramics-overlay').classList.contains('open')){ closeCeramics(); }
+    if(document.getElementById('vermilion-overlay').classList.contains('open')){ history.back(); return; }
+    if(document.getElementById('ceramics-overlay').classList.contains('open')){ history.back(); }
   }
 });
 
@@ -1088,7 +1109,15 @@ function applyLanguage(lang){
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
+  showEssayForLang(lang);
   localStorage.setItem('siteLang', lang);
+}
+
+function showEssayForLang(lang) {
+  ['en', 'zh', 'ja'].forEach(l => {
+    const el = document.querySelector('.v-essay-' + l);
+    if (el) el.classList.toggle('active', l === lang);
+  });
 }
 
 function applyContact(contact){
@@ -1118,7 +1147,7 @@ function applyVermilion(v) {
     const el = document.getElementById(id);
     if (el && val !== undefined) el.innerHTML = val;
   }
-  ['en', 'zh'].forEach(lang => {
+  ['en', 'zh', 'ja'].forEach(lang => {
     const d = v[lang];
     if (!d) return;
     setEl('v-' + lang + '-title', d.title);
@@ -1294,7 +1323,7 @@ fetch('assets/vermilion/list.json')
           const src = 'assets/ceramics/' + encodeURIComponent(name);
           const title = titleFromFilename(name);
           const cell = document.createElement('div');
-          cell.className = i === 0 ? 'c-grid-cell wide' : 'c-grid-cell';
+          cell.className = 'c-grid-cell';
           cell.onclick = () => openLb(src, title);
           cell.innerHTML =
             '<img src="' + src + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
