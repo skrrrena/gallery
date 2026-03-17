@@ -828,8 +828,8 @@ input[type=file].admin-file-input{display:none}
 ══════════════════════════════ -->
 <div id="ceramics-overlay">
   <div class="ceramics-overlay-nav">
-    <div class="ceramics-overlay-title">Ceramics — Between Fire &amp; Form</div>
-    <button class="back-btn" onclick="closeCeramics()">← Back to Works</button>
+    <div class="ceramics-overlay-title" data-i18n="ceramics.title">Ceramics — Between Fire &amp; Form</div>
+    <button class="back-btn" onclick="closeCeramics()" data-i18n="ceramics.back">← Back to Works</button>
   </div>
 
   <!-- Hero -->
@@ -919,38 +919,36 @@ input[type=file].admin-file-input{display:none}
 ══════════════════════════════ -->
 <div id="vermilion-overlay">
   <div class="v-nav">
-    <div class="v-nav-title">Vermilion — 遗朱</div>
-    <button class="back-btn" onclick="closeVermilion()">← Back</button>
+    <div class="v-nav-title" data-i18n="vermilion.navTitle">Vermilion — 遗朱</div>
+    <button class="back-btn" onclick="closeVermilion()" data-i18n="vermilion.back">← Back</button>
   </div>
 
-  <div class="v-images">
-    <img src="assets/ceramics/ceramics-01.jpg" alt="Vermilion 01" onclick="openLb('assets/ceramics/ceramics-01.jpg','Vermilion — 遗朱 I')"/>
-    <img src="assets/ceramics/ceramics-02.jpg" alt="Vermilion 02" onclick="openLb('assets/ceramics/ceramics-02.jpg','Vermilion — 遗朱 II')"/>
-  </div>
+  <!-- Vermilion 图片：由 assets/vermilion/list.json 自动生成，运行 node update-vermilion-list.js 更新 -->
+  <div class="v-images" id="v-images-grid"></div>
 
   <div class="v-essay">
     <div class="v-essay-en">
-      <h1 class="v-essay-title">Vermilion</h1>
-      <span class="v-essay-year">Ceramics · Jingdezhen · 2024–2025</span>
-      <p>I first encountered qi lacquer not in China, but through its absence from it.</p>
-      <p>Living abroad, I began noticing how deeply the craft had taken root in Japan — in the care given to urushi vessels, in the way the material was taught, preserved, celebrated. It was only then that I learned: lacquer originated in China, over 8,000 years ago. Something that had always been part of my cultural inheritance had become easier to see from a distance.</p>
-      <p>At its core, qi (漆, qī) — the raw resin harvested from the lacquer tree — is built up in layers, sometimes dozens, each coat slowly cured, polished, then buried under the next. The result is a surface that feels less like a coating and more like accumulated time — depth you sense, not just see. Its palette, at its most essential, is two colours: vermilion and black. Red from cinnabar, black from iron. Ancient, material, irreducible.</p>
-      <p>Returning to China — to Jingdezhen — felt like coming home and starting over at the same time. Through experimentation, I found a rare glaze that, once fired, carries something of qi's depth and surface quality. The series explores the gradient between these two colours — vermilion burning slowly into black — not through the patient accumulation of lacquer layers, but through the kiln itself: glaze and fire negotiating the transition in a single firing.</p>
-      <p>Qi lacquer is a recognised Chinese Intangible Cultural Heritage, a tradition at risk of disappearing. This series does not attempt to replicate it, but to carry something of its spirit into a different material — a conversation across craft traditions rather than a copy of one.</p>
-      <p class="v-closing">遗朱 — the vermilion that remains — is about what survives the distance, and what we only learn to value once we've had to look for it.</p>
+      <h1 class="v-essay-title" id="v-en-title">Vermilion</h1>
+      <span class="v-essay-year" id="v-en-year">Ceramics · Jingdezhen · 2024–2025</span>
+      <p id="v-en-p1">I first encountered qi lacquer not in China, but through its absence from it.</p>
+      <p id="v-en-p2">Living abroad, I began noticing how deeply the craft had taken root in Japan — in the care given to urushi vessels, in the way the material was taught, preserved, celebrated. It was only then that I learned: lacquer originated in China, over 8,000 years ago. Something that had always been part of my cultural inheritance had become easier to see from a distance.</p>
+      <p id="v-en-p3">At its core, qi (漆, qī) — the raw resin harvested from the lacquer tree — is built up in layers, sometimes dozens, each coat slowly cured, polished, then buried under the next. The result is a surface that feels less like a coating and more like accumulated time — depth you sense, not just see. Its palette, at its most essential, is two colours: vermilion and black. Red from cinnabar, black from iron. Ancient, material, irreducible.</p>
+      <p id="v-en-p4">Returning to China — to Jingdezhen — felt like coming home and starting over at the same time. Through experimentation, I found a rare glaze that, once fired, carries something of qi's depth and surface quality. The series explores the gradient between these two colours — vermilion burning slowly into black — not through the patient accumulation of lacquer layers, but through the kiln itself: glaze and fire negotiating the transition in a single firing.</p>
+      <p id="v-en-p5">Qi lacquer is a recognised Chinese Intangible Cultural Heritage, a tradition at risk of disappearing. This series does not attempt to replicate it, but to carry something of its spirit into a different material — a conversation across craft traditions rather than a copy of one.</p>
+      <p class="v-closing" id="v-en-closing">遗朱 — the vermilion that remains — is about what survives the distance, and what we only learn to value once we've had to look for it.</p>
     </div>
 
     <hr class="v-divider"/>
 
     <div class="v-essay-zh">
-      <h1 class="v-essay-title">《遗朱》</h1>
-      <span class="v-essay-year">陶瓷 · 景德镇 · 2024–2025</span>
-      <p>我第一次真正注意到大漆，并不是在中国，而是因为在中国几乎已经很少见到它。</p>
-      <p>在海外生活时，我开始慢慢意识到，这门工艺在日本是如何深深扎根的——人们对漆器的珍视，对材料与工艺的细致对待，以及它在教育、传承与日常生活中的存在。也是在那个时候，我才重新认识到：大漆其实起源于中国，已有八千多年的历史。某种本来属于自己文化传统的一部分，反而是在离开之后，才被看得更加清楚。</p>
-      <p>从本质上说，大漆是从漆树中采集的天然树脂。它的形成依赖于层层叠加：有时需要涂覆几十层，每一层都要经过缓慢的固化与打磨，再被下一层覆盖。最终呈现出的表面，与其说是一层涂层，不如说更像是时间不断沉积的结果——一种不仅能够被看到，也能够被感受到的深度。它最基本的色彩只有两种：朱红与黑。红来自辰砂，黑来自铁。古老而纯粹，带着强烈的物质感。</p>
-      <p>后来，当我回到中国，来到景德镇时，那种感觉既像回家，又像重新开始。在不断的实验中，我找到了一种釉料，在高温烧成后能够呈现出某种接近漆的深度与表面质感。这组作品尝试探索的，是朱红与黑之间的渐变关系——朱红在黑色中缓慢地沉入、过渡。但这种变化并不是通过一层层漆的耐心堆叠来完成，而是交由窑火：在一次烧成中，让釉与火共同作用，生成这种颜色之间的过渡。</p>
-      <p>大漆工艺是中国的国家级非物质文化遗产，但同时也正面临逐渐式微的处境。这组作品并不是对漆工艺的复制，而是尝试将它的某种精神带入另一种材料之中。与其说是模仿，不如说是一种跨越工艺之间的对话。</p>
-      <p class="v-closing">"遗朱"——留下的一抹朱红，也暗合"遗珠"。那些被时间与距离遮蔽的传统，如同遗落的明珠，在重新被找寻之时，熠熠生辉。</p>
+      <h1 class="v-essay-title" id="v-zh-title">《遗朱》</h1>
+      <span class="v-essay-year" id="v-zh-year">陶瓷 · 景德镇 · 2024–2025</span>
+      <p id="v-zh-p1">我第一次真正注意到大漆，并不是在中国，而是因为在中国几乎已经很少见到它。</p>
+      <p id="v-zh-p2">在海外生活时，我开始慢慢意识到，这门工艺在日本是如何深深扎根的——人们对漆器的珍视，对材料与工艺的细致对待，以及它在教育、传承与日常生活中的存在。也是在那个时候，我才重新认识到：大漆其实起源于中国，已有八千多年的历史。某种本来属于自己文化传统的一部分，反而是在离开之后，才被看得更加清楚。</p>
+      <p id="v-zh-p3">从本质上说，大漆是从漆树中采集的天然树脂。它的形成依赖于层层叠加：有时需要涂覆几十层，每一层都要经过缓慢的固化与打磨，再被下一层覆盖。最终呈现出的表面，与其说是一层涂层，不如说更像是时间不断沉积的结果——一种不仅能够被看到，也能够被感受到的深度。它最基本的色彩只有两种：朱红与黑。红来自辰砂，黑来自铁。古老而纯粹，带着强烈的物质感。</p>
+      <p id="v-zh-p4">后来，当我回到中国，来到景德镇时，那种感觉既像回家，又像重新开始。在不断的实验中，我找到了一种釉料，在高温烧成后能够呈现出某种接近漆的深度与表面质感。这组作品尝试探索的，是朱红与黑之间的渐变关系——朱红在黑色中缓慢地沉入、过渡。但这种变化并不是通过一层层漆的耐心堆叠来完成，而是交由窑火：在一次烧成中，让釉与火共同作用，生成这种颜色之间的过渡。</p>
+      <p id="v-zh-p5">大漆工艺是中国的国家级非物质文化遗产，但同时也正面临逐渐式微的处境。这组作品并不是对漆工艺的复制，而是尝试将它的某种精神带入另一种材料之中。与其说是模仿，不如说是一种跨越工艺之间的对话。</p>
+      <p class="v-closing" id="v-zh-closing">"遗朱"——留下的一抹朱红，也暗合"遗珠"。那些被时间与距离遮蔽的传统，如同遗落的明珠，在重新被找寻之时，熠熠生辉。</p>
     </div>
   </div>
 </div>
@@ -1114,12 +1112,29 @@ function initLanguage(){
   });
 }
 
+function applyVermilion(v) {
+  if (!v) return;
+  function setEl(id, val) {
+    const el = document.getElementById(id);
+    if (el && val !== undefined) el.innerHTML = val;
+  }
+  ['en', 'zh'].forEach(lang => {
+    const d = v[lang];
+    if (!d) return;
+    setEl('v-' + lang + '-title', d.title);
+    setEl('v-' + lang + '-year', d.year);
+    for (let i = 1; i <= 5; i++) setEl('v-' + lang + '-p' + i, d['p' + i]);
+    setEl('v-' + lang + '-closing', d.closing);
+  });
+}
+
 fetch('content.json')
   .then(r => r.ok ? r.json() : {})
   .then(data => {
-    const {contact, ...langs} = data;
+    const {contact, vermilion, ...langs} = data;
     translations = langs;
     applyContact(contact);
+    applyVermilion(vermilion);
     initLanguage();
   })
   .catch(() => initLanguage());
@@ -1228,50 +1243,65 @@ function titleFromFilename(name){
   return base || name;
 }
 
-const VERMILION_FILES = new Set(['ceramics-01.jpg','ceramics-02.jpg']);
+// ── 加载 Vermilion 图片并填充 ceramics grid 入口卡片 ──
+// Vermilion 图片放在 assets/vermilion/，运行 node update-vermilion-list.js 更新列表
+function populateVermilionImages(names) {
+  const grid = document.getElementById('v-images-grid');
+  if (!grid || !names.length) return;
+  grid.innerHTML = '';
+  names.forEach((name, i) => {
+    const src = 'assets/vermilion/' + encodeURIComponent(name);
+    const label = 'Vermilion — 遗朱 ' + (i + 1);
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = label;
+    img.onclick = () => openLb(src, label);
+    grid.appendChild(img);
+  });
+}
 
-fetch('assets/ceramics/list.json')
+let vermilionCount = 0;
+
+// 先加载 vermilion list，再加载 ceramics grid（保证 entry 卡片按需显示）
+fetch('assets/vermilion/list.json')
   .then(r => r.ok ? r.json() : [])
-  .then(names => {
-    const list = Array.isArray(names) ? names : [];
-    const grid = document.getElementById('ceramics-grid');
-    if(!grid) return;
-    grid.innerHTML = '';
+  .then(vNames => {
+    const vList = Array.isArray(vNames) ? vNames : [];
+    vermilionCount = vList.length;
+    populateVermilionImages(vList);
 
-    // 如果有 Vermilion 作品，在最前面插入一个 series 入口卡片
-    const hasVermilion = list.some(n => VERMILION_FILES.has(n));
-    if(hasVermilion){
-      const header = document.createElement('div');
-      header.className = 'v-series-cell';
-      header.onclick = openVermilion;
-      header.innerHTML =
-        '<div><div class="v-series-label">Series I</div><div class="v-series-name">Vermilion — 遗朱</div></div>'+
-        '<span class="v-series-arr">→</span>';
-      grid.appendChild(header);
-    }
+    // 加载 ceramics grid
+    return fetch('assets/ceramics/list.json')
+      .then(r => r.ok ? r.json() : [])
+      .then(names => {
+        const list = Array.isArray(names) ? names : [];
+        const grid = document.getElementById('ceramics-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
 
-    list.forEach((name, i) => {
-      const src = 'assets/ceramics/' + encodeURIComponent(name);
-      const title = titleFromFilename(name);
-      const cell = document.createElement('div');
-      const isVermilion = VERMILION_FILES.has(name);
-      cell.className = i === 0 ? 'c-grid-cell wide' : 'c-grid-cell';
-      if(isVermilion){
-        cell.onclick = openVermilion;
-        cell.innerHTML =
-          '<img src="'+src+'" alt="'+title.replace(/"/g,'&quot;')+'"/>'+
-          '<div class="c-grid-info">'+
-            '<div class="c-grid-info-title">Vermilion — 遗朱</div>'+
-            '<div class="c-grid-info-meta">Series I · 2024–2025</div>'+
-          '</div>';
-      } else {
-        cell.onclick = () => openLb(src, title);
-        cell.innerHTML =
-          '<img src="'+src+'" alt="'+title.replace(/"/g,'&quot;')+'"/>'+
-          '<div class="c-grid-info"><div class="c-grid-info-title">'+title.replace(/</g,'&lt;')+'</div></div>';
-      }
-      grid.appendChild(cell);
-    });
+        // 如果 vermilion 文件夹有图片，在最前面插入 series 入口卡片
+        if (vermilionCount > 0) {
+          const header = document.createElement('div');
+          header.className = 'v-series-cell';
+          header.onclick = openVermilion;
+          header.innerHTML =
+            '<div><div class="v-series-label">Series I</div><div class="v-series-name">Vermilion — 遗朱</div></div>' +
+            '<span class="v-series-arr">→</span>';
+          grid.appendChild(header);
+        }
+
+        list.forEach((name, i) => {
+          const src = 'assets/ceramics/' + encodeURIComponent(name);
+          const title = titleFromFilename(name);
+          const cell = document.createElement('div');
+          cell.className = i === 0 ? 'c-grid-cell wide' : 'c-grid-cell';
+          cell.onclick = () => openLb(src, title);
+          cell.innerHTML =
+            '<img src="' + src + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
+            '<div class="c-grid-info"><div class="c-grid-info-title">' + title.replace(/</g, '&lt;') + '</div></div>';
+          grid.appendChild(cell);
+        });
+      });
   })
   .catch(() => {});
 </script>

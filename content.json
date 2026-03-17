@@ -5,6 +5,31 @@
     "instagramUrl": "@skrrrena"
   },
 
+  "vermilion": {
+    "en": {
+      "title": "Vermilion",
+      "year": "Ceramics · Jingdezhen · 2024–2025",
+      "p1": "I first encountered qi lacquer not in China, but through its absence from it.",
+      "p2": "Living abroad, I began noticing how deeply the craft had taken root in Japan — in the care given to urushi vessels, in the way the material was taught, preserved, celebrated. It was only then that I learned: lacquer originated in China, over 8,000 years ago. Something that had always been part of my cultural inheritance had become easier to see from a distance.",
+      "p3": "At its core, qi (漆, qī) — the raw resin harvested from the lacquer tree — is built up in layers, sometimes dozens, each coat slowly cured, polished, then buried under the next. The result is a surface that feels less like a coating and more like accumulated time — depth you sense, not just see. Its palette, at its most essential, is two colours: vermilion and black. Red from cinnabar, black from iron. Ancient, material, irreducible.",
+      "p4": "Returning to China — to Jingdezhen — felt like coming home and starting over at the same time. Through experimentation, I found a rare glaze that, once fired, carries something of qi's depth and surface quality. The series explores the gradient between these two colours — vermilion burning slowly into black — not through the patient accumulation of lacquer layers, but through the kiln itself: glaze and fire negotiating the transition in a single firing.",
+      "p5": "Qi lacquer is a recognised Chinese Intangible Cultural Heritage, a tradition at risk of disappearing. This series does not attempt to replicate it, but to carry something of its spirit into a different material — a conversation across craft traditions rather than a copy of one.",
+      "closing": "遗朱 — the vermilion that remains — is about what survives the distance, and what we only learn to value once we've had to look for it."
+    },
+    "zh": {
+      "title": "《遗朱》",
+      "year": "陶瓷 · 景德镇 · 2024–2025",
+      "p1": "我第一次真正注意到大漆，并不是在中国，而是因为在中国几乎已经很少见到它。",
+      "p2": "在海外生活时，我开始慢慢意识到，这门工艺在日本是如何深深扎根的——人们对漆器的珍视，对材料与工艺的细致对待，以及它在教育、传承与日常生活中的存在。也是在那个时候，我才重新认识到：大漆其实起源于中国，已有八千多年的历史。某种本来属于自己文化传统的一部分，反而是在离开之后，才被看得更加清楚。",
+      "p3": "从本质上说，大漆是从漆树中采集的天然树脂。它的形成依赖于层层叠加：有时需要涂覆几十层，每一层都要经过缓慢的固化与打磨，再被下一层覆盖。最终呈现出的表面，与其说是一层涂层，不如说更像是时间不断沉积的结果——一种不仅能够被看到，也能够被感受到的深度。它最基本的色彩只有两种：朱红与黑。红来自辰砂，黑来自铁。古老而纯粹，带着强烈的物质感。",
+      "p4": "后来，当我回到中国，来到景德镇时，那种感觉既像回家，又像重新开始。在不断的实验中，我找到了一种釉料，在高温烧成后能够呈现出某种接近漆的深度与表面质感。这组作品尝试探索的，是朱红与黑之间的渐变关系——朱红在黑色中缓慢地沉入、过渡。但这种变化并不是通过一层层漆的耐心堆叠来完成，而是交由窑火：在一次烧成中，让釉与火共同作用，生成这种颜色之间的过渡。",
+      "p5": "大漆工艺是中国的国家级非物质文化遗产，但同时也正面临逐渐式微的处境。这组作品并不是对漆工艺的复制，而是尝试将它的某种精神带入另一种材料之中。与其说是模仿，不如说是一种跨越工艺之间的对话。",
+      "closing": "\"遗朱\"——留下的一抹朱红，也暗合\"遗珠\"。那些被时间与距离遮蔽的传统，如同遗落的明珠，在重新被找寻之时，熠熠生辉。"
+    }
+  },
+
+
+
   "en": {
     "nav.name": "Tianan Zhang — Visual Artist",
     "nav.about": "About",
@@ -69,7 +94,12 @@
     "blog3.title": "Portraiture: the performed self in analogue",
     "blog3.excerpt": "Thinking through film photography as a space where the self is performed, rehearsed, and held in grain.",
 
-    "contact.heading": "Let's make<br/>something together"
+    "contact.heading": "Let's make<br/>something together",
+
+    "ceramics.title": "Ceramics — Between Fire &amp; Form",
+    "ceramics.back": "← Back to Works",
+    "vermilion.navTitle": "Vermilion — 遗朱",
+    "vermilion.back": "← Back"
   },
 
   "zh": {
@@ -136,7 +166,12 @@
     "blog3.title": "肖像：在模拟影像中被表演的自我",
     "blog3.excerpt": "从胶片肖像出发，思考自我如何在镜头前被排练、被构造，并最终沉淀在颗粒之中。",
 
-    "contact.heading": "一起创作<br/>些什么吧"
+    "contact.heading": "一起创作<br/>些什么吧",
+
+    "ceramics.title": "陶瓷 — 火与形之间",
+    "ceramics.back": "← 返回",
+    "vermilion.navTitle": "Vermilion — 遗朱",
+    "vermilion.back": "← 返回"
   },
 
   "ja": {
@@ -203,6 +238,11 @@
     "blog3.title": "ポートレイト：アナログにおける演じられた自己",
     "blog3.excerpt": "フィルムによるポートレイトを通して、自己がどのようにカメラの前で排練され、構造され、ついにフィルムの粒子に沈殿していくのかを考察する。",
 
-    "contact.heading": "一緒に<br/>何かをつくろう"
+    "contact.heading": "一緒に<br/>何かをつくろう",
+
+    "ceramics.title": "セラミック — Between Fire &amp; Form",
+    "ceramics.back": "← 戻る",
+    "vermilion.navTitle": "Vermilion — 遗朱",
+    "vermilion.back": "← 戻る"
   }
 }
