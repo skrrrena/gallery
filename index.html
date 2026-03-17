@@ -336,6 +336,84 @@ body::before{
 .c-grid.c-grid-old{
   display:none;
 }
+
+/* ─────────────────────────────────────────
+   VERMILION SERIES OVERLAY
+───────────────────────────────────────── */
+#vermilion-overlay{
+  position:fixed;inset:0;z-index:5100;
+  background:var(--bg);overflow-y:auto;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease;
+}
+#vermilion-overlay.open{opacity:1;pointer-events:all}
+.v-nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(11,11,10,.9);backdrop-filter:blur(8px);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.25rem 2.5rem;border-bottom:1px solid rgba(237,234,226,.06);
+}
+.v-nav-title{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--bright)}
+.v-images{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  height:80vh;background:var(--bg);
+}
+.v-images img{
+  width:100%;height:100%;object-fit:contain;object-position:center;
+  display:block;background:var(--surface);cursor:none;
+  transition:transform .5s ease;
+}
+.v-images img:hover{transform:scale(1.02)}
+.v-essay{
+  max-width:740px;margin:0 auto;
+  padding:5rem 2.5rem;
+}
+.v-essay-en,.v-essay-zh{margin-bottom:1rem}
+.v-essay-title{
+  font-family:var(--serif);font-style:italic;
+  font-size:2.4rem;color:var(--bright);margin-bottom:.35rem;line-height:1.1;
+}
+.v-essay-zh .v-essay-title{font-style:normal;letter-spacing:.04em}
+.v-essay-year{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--rust);margin-bottom:3rem;display:block;
+}
+.v-essay p{font-size:.9rem;line-height:1.9;color:var(--text);margin-bottom:1.3rem}
+.v-essay .v-closing{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.05rem;color:var(--dim);margin-top:2rem;line-height:1.6;
+}
+.v-divider{
+  border:none;border-top:1px solid rgba(237,234,226,.08);
+  margin:4rem 0;
+}
+.v-series-cell{
+  grid-column:1/-1;
+  padding:1.8rem 2rem;
+  background:var(--surface);
+  cursor:none;
+  border-bottom:1px solid rgba(237,234,226,.06);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .2s;
+}
+.v-series-cell:hover{background:#1c1c1a}
+.v-series-label{
+  font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--rust);margin-bottom:.35rem;
+}
+.v-series-name{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.3rem;color:var(--bright);
+}
+.v-series-arr{
+  font-family:var(--mono);font-size:.7rem;color:var(--dim);
+}
+@media(max-width:700px){
+  .v-images{grid-template-columns:1fr;height:auto}
+  .v-images img{min-height:50vh}
+  .v-essay{padding:3rem 1.5rem}
+  .v-essay-title{font-size:1.8rem}
+}
 .c-specs{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-content:start}
 .c-spec-label{font-family:var(--mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem}
 .c-spec-val{font-family:var(--serif);font-size:.95rem;color:var(--bright)}
@@ -837,6 +915,47 @@ input[type=file].admin-file-input{display:none}
   <div class="c-grid" id="ceramics-grid"></div>
 </div>
 
+<!-- ══════════════════════════════
+     VERMILION 遗朱 — SERIES OVERLAY
+══════════════════════════════ -->
+<div id="vermilion-overlay">
+  <div class="v-nav">
+    <div class="v-nav-title">Vermilion — 遗朱</div>
+    <button class="back-btn" onclick="closeVermilion()">← Back</button>
+  </div>
+
+  <div class="v-images">
+    <img src="assets/ceramics/ceramics-01.jpg" alt="Vermilion 01" onclick="openLb('assets/ceramics/ceramics-01.jpg','Vermilion — 遗朱 I')"/>
+    <img src="assets/ceramics/ceramics-02.jpg" alt="Vermilion 02" onclick="openLb('assets/ceramics/ceramics-02.jpg','Vermilion — 遗朱 II')"/>
+  </div>
+
+  <div class="v-essay">
+    <div class="v-essay-en">
+      <h1 class="v-essay-title">Vermilion</h1>
+      <span class="v-essay-year">Ceramics · Jingdezhen · 2024–2025</span>
+      <p>I first encountered qi lacquer not in China, but through its absence from it.</p>
+      <p>Living abroad, I began noticing how deeply the craft had taken root in Japan — in the care given to urushi vessels, in the way the material was taught, preserved, celebrated. It was only then that I learned: lacquer originated in China, over 8,000 years ago. Something that had always been part of my cultural inheritance had become easier to see from a distance.</p>
+      <p>At its core, qi (漆, qī) — the raw resin harvested from the lacquer tree — is built up in layers, sometimes dozens, each coat slowly cured, polished, then buried under the next. The result is a surface that feels less like a coating and more like accumulated time — depth you sense, not just see. Its palette, at its most essential, is two colours: vermilion and black. Red from cinnabar, black from iron. Ancient, material, irreducible.</p>
+      <p>Returning to China — to Jingdezhen — felt like coming home and starting over at the same time. Through experimentation, I found a rare glaze that, once fired, carries something of qi's depth and surface quality. The series explores the gradient between these two colours — vermilion burning slowly into black — not through the patient accumulation of lacquer layers, but through the kiln itself: glaze and fire negotiating the transition in a single firing.</p>
+      <p>Qi lacquer is a recognised Chinese Intangible Cultural Heritage, a tradition at risk of disappearing. This series does not attempt to replicate it, but to carry something of its spirit into a different material — a conversation across craft traditions rather than a copy of one.</p>
+      <p class="v-closing">遗朱 — the vermilion that remains — is about what survives the distance, and what we only learn to value once we've had to look for it.</p>
+    </div>
+
+    <hr class="v-divider"/>
+
+    <div class="v-essay-zh">
+      <h1 class="v-essay-title">《遗朱》</h1>
+      <span class="v-essay-year">陶瓷 · 景德镇 · 2024–2025</span>
+      <p>我第一次真正注意到大漆，并不是在中国，而是因为在中国几乎已经很少见到它。</p>
+      <p>在海外生活时，我开始慢慢意识到，这门工艺在日本是如何深深扎根的——人们对漆器的珍视，对材料与工艺的细致对待，以及它在教育、传承与日常生活中的存在。也是在那个时候，我才重新认识到：大漆其实起源于中国，已有八千多年的历史。某种本来属于自己文化传统的一部分，反而是在离开之后，才被看得更加清楚。</p>
+      <p>从本质上说，大漆是从漆树中采集的天然树脂。它的形成依赖于层层叠加：有时需要涂覆几十层，每一层都要经过缓慢的固化与打磨，再被下一层覆盖。最终呈现出的表面，与其说是一层涂层，不如说更像是时间不断沉积的结果——一种不仅能够被看到，也能够被感受到的深度。它最基本的色彩只有两种：朱红与黑。红来自辰砂，黑来自铁。古老而纯粹，带着强烈的物质感。</p>
+      <p>后来，当我回到中国，来到景德镇时，那种感觉既像回家，又像重新开始。在不断的实验中，我找到了一种釉料，在高温烧成后能够呈现出某种接近漆的深度与表面质感。这组作品尝试探索的，是朱红与黑之间的渐变关系——朱红在黑色中缓慢地沉入、过渡。但这种变化并不是通过一层层漆的耐心堆叠来完成，而是交由窑火：在一次烧成中，让釉与火共同作用，生成这种颜色之间的过渡。</p>
+      <p>大漆工艺是中国的国家级非物质文化遗产，但同时也正面临逐渐式微的处境。这组作品并不是对漆工艺的复制，而是尝试将它的某种精神带入另一种材料之中。与其说是模仿，不如说是一种跨越工艺之间的对话。</p>
+      <p class="v-closing">"遗朱"——留下的一抹朱红，也暗合"遗珠"。那些被时间与距离遮蔽的传统，如同遗落的明珠，在重新被找寻之时，熠熠生辉。</p>
+    </div>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div id="img-lightbox">
   <img id="lb-img" src="" alt=""/>
@@ -877,6 +996,24 @@ function closeCeramics(){
   document.documentElement.style.scrollSnapType = 'y mandatory';
 }
 
+function openVermilion(){
+  const ov = document.getElementById('vermilion-overlay');
+  ov.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.documentElement.style.scrollSnapType = 'none';
+  ov.scrollTop = 0;
+}
+function closeVermilion(){
+  document.getElementById('vermilion-overlay').classList.remove('open');
+  // 如果 ceramics overlay 还开着，恢复为 body hidden（ceramics overlay 仍可滚动）
+  if(document.getElementById('ceramics-overlay').classList.contains('open')){
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+    document.documentElement.style.scrollSnapType = 'y mandatory';
+  }
+}
+
 // ── LIGHTBOX ──
 function openLb(src, caption){
   const lb = document.getElementById('img-lightbox');
@@ -896,6 +1033,7 @@ document.getElementById('img-lightbox').addEventListener('click', e => {
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape'){
     if(document.getElementById('img-lightbox').classList.contains('show')){ closeLb(); return; }
+    if(document.getElementById('vermilion-overlay').classList.contains('open')){ closeVermilion(); return; }
     if(document.getElementById('ceramics-overlay').classList.contains('open')){ closeCeramics(); }
   }
 });
@@ -1090,6 +1228,9 @@ function titleFromFilename(name){
   const base = name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ');
   return base || name;
 }
+
+const VERMILION_FILES = new Set(['ceramics-01.jpg','ceramics-02.jpg']);
+
 fetch('assets/ceramics/list.json')
   .then(r => r.ok ? r.json() : [])
   .then(names => {
@@ -1097,14 +1238,39 @@ fetch('assets/ceramics/list.json')
     const grid = document.getElementById('ceramics-grid');
     if(!grid) return;
     grid.innerHTML = '';
+
+    // 如果有 Vermilion 作品，在最前面插入一个 series 入口卡片
+    const hasVermilion = list.some(n => VERMILION_FILES.has(n));
+    if(hasVermilion){
+      const header = document.createElement('div');
+      header.className = 'v-series-cell';
+      header.onclick = openVermilion;
+      header.innerHTML =
+        '<div><div class="v-series-label">Series I</div><div class="v-series-name">Vermilion — 遗朱</div></div>'+
+        '<span class="v-series-arr">→</span>';
+      grid.appendChild(header);
+    }
+
     list.forEach((name, i) => {
       const src = 'assets/ceramics/' + encodeURIComponent(name);
       const title = titleFromFilename(name);
       const cell = document.createElement('div');
+      const isVermilion = VERMILION_FILES.has(name);
       cell.className = i === 0 ? 'c-grid-cell wide' : 'c-grid-cell';
-      cell.onclick = () => openLb(src, title);
-      cell.innerHTML = '<img src="'+src+'" alt="'+title.replace(/"/g,'&quot;')+'"/>'+
-        '<div class="c-grid-info"><div class="c-grid-info-title">'+title.replace(/</g,'&lt;')+'</div></div>';
+      if(isVermilion){
+        cell.onclick = openVermilion;
+        cell.innerHTML =
+          '<img src="'+src+'" alt="'+title.replace(/"/g,'&quot;')+'"/>'+
+          '<div class="c-grid-info">'+
+            '<div class="c-grid-info-title">Vermilion — 遗朱</div>'+
+            '<div class="c-grid-info-meta">Series I · 2024–2025</div>'+
+          '</div>';
+      } else {
+        cell.onclick = () => openLb(src, title);
+        cell.innerHTML =
+          '<img src="'+src+'" alt="'+title.replace(/"/g,'&quot;')+'"/>'+
+          '<div class="c-grid-info"><div class="c-grid-info-title">'+title.replace(/</g,'&lt;')+'</div></div>';
+      }
       grid.appendChild(cell);
     });
   })
