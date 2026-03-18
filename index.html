@@ -384,26 +384,50 @@ body::before{
   border:none;border-top:1px solid rgba(237,234,226,.08);
   margin:4rem 0;
 }
-.v-series-cell{
-  grid-column:1/-1;
-  padding:1.8rem 2rem;
+/* ─────────────────────────────────────────
+   SERIES BLOCKS (image-based entries)
+───────────────────────────────────────── */
+#series-section{
+  display:flex;flex-direction:column;
+  gap:3px;margin-bottom:3px;
+}
+.series-block{
+  position:relative;
+  width:100%;height:70vh;
+  overflow:hidden;cursor:none;
   background:var(--surface);
-  cursor:none;
-  border-bottom:1px solid rgba(237,234,226,.06);
-  display:flex;align-items:center;justify-content:space-between;
-  transition:background .2s;
 }
-.v-series-cell:hover{background:#1c1c1a}
-.v-series-label{
-  font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--rust);margin-bottom:.35rem;
+.series-block-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  filter:brightness(.55);
+  transition:transform .7s ease-out, filter .7s ease-out;
 }
-.v-series-name{
+.series-block:hover .series-block-bg{
+  transform:scale(1.03);
+  filter:brightness(.7);
+}
+.series-block-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right, rgba(11,11,10,.5) 0%, transparent 70%);
+}
+.series-block-text{
+  position:absolute;
+  left:3.5rem;bottom:3.5rem;
+}
+.series-block-label{
+  font-family:var(--mono);font-size:.48rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--rust);margin-bottom:.6rem;
+}
+.series-block-title{
   font-family:var(--serif);font-style:italic;
-  font-size:1.3rem;color:var(--bright);
+  font-size:clamp(2rem,4vw,3.2rem);color:var(--bright);
+  line-height:1.1;
 }
-.v-series-arr{
-  font-family:var(--mono);font-size:.7rem;color:var(--dim);
+@media(max-width:800px){
+  .series-block{height:50vh}
+  .series-block-text{left:2rem;bottom:2.5rem}
+  .series-block-title{font-size:1.8rem}
 }
 @media(max-width:700px){
   .v-images{grid-template-columns:1fr}
@@ -960,6 +984,9 @@ input[type=file].admin-file-input{display:none}
     </div>
   </div>
 
+  <!-- Series blocks：image-based entries for each named series -->
+  <div id="series-section"></div>
+
   <!-- Ceramics grid：由 assets/ceramics-list.json 自动生成，运行 node update-ceramics-list.js 或 python3 update-ceramics-list.py 更新 -->
   <div class="c-grid" id="ceramics-grid"></div>
 </div>
@@ -1446,6 +1473,28 @@ function populateAmberImages(names) {
 let vermilionCount = 0;
 let amberCount = 0;
 
+// ── SeriesBlock component ──
+// title: display name, label: "Series I" etc, openFn: function to open overlay, coverPath: image path
+function createSeriesBlock(label, title, openFn, coverPath) {
+  const block = document.createElement('div');
+  block.className = 'series-block';
+  block.onclick = openFn;
+  const bg = document.createElement('div');
+  bg.className = 'series-block-bg';
+  if (coverPath) bg.style.backgroundImage = 'url(' + coverPath + ')';
+  const overlay = document.createElement('div');
+  overlay.className = 'series-block-overlay';
+  const text = document.createElement('div');
+  text.className = 'series-block-text';
+  text.innerHTML =
+    '<div class="series-block-label">' + label + '</div>' +
+    '<div class="series-block-title">' + title + '</div>';
+  block.appendChild(bg);
+  block.appendChild(overlay);
+  block.appendChild(text);
+  return block;
+}
+
 // 先加载 series lists，再加载 ceramics grid（保证 entry 卡片按需显示）
 Promise.all([
   fetch('assets/vermilion/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
@@ -1462,30 +1511,28 @@ Promise.all([
   populateVermilionImages(vList);
   populateAmberImages(aList);
 
+  // Build series section
+  const seriesSection = document.getElementById('series-section');
+  if (seriesSection) {
+    seriesSection.innerHTML = '';
+    if (vermilionCount > 0) {
+      seriesSection.appendChild(createSeriesBlock(
+        'Series I', 'Vermilion — 遗朱', openVermilion,
+        'assets/series-covers/vermilion.jpg'
+      ));
+    }
+    if (amberCount > 0) {
+      seriesSection.appendChild(createSeriesBlock(
+        'Series II', 'Amber — 琥珀', openAmber,
+        'assets/series-covers/amber.jpg'
+      ));
+    }
+  }
+
+  // Build ceramics grid (individual works only)
   const grid = document.getElementById('ceramics-grid');
   if (!grid) return;
   grid.innerHTML = '';
-
-  // Series entry cards
-  if (vermilionCount > 0) {
-    const header = document.createElement('div');
-    header.className = 'v-series-cell';
-    header.onclick = openVermilion;
-    header.innerHTML =
-      '<div><div class="v-series-label">Series I</div><div class="v-series-name">Vermilion — 遗朱</div></div>' +
-      '<span class="v-series-arr">→</span>';
-    grid.appendChild(header);
-  }
-  if (amberCount > 0) {
-    const aHeader = document.createElement('div');
-    aHeader.className = 'v-series-cell';
-    aHeader.onclick = openAmber;
-    aHeader.innerHTML =
-      '<div><div class="v-series-label">Series II</div><div class="v-series-name">Amber — 琥珀</div></div>' +
-      '<span class="v-series-arr">→</span>';
-    grid.appendChild(aHeader);
-  }
-
   list.forEach((name) => {
     const src = 'assets/ceramics/' + encodeURIComponent(name);
     const title = titleFromFilename(name);
