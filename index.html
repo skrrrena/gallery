@@ -411,6 +411,58 @@ body::before{
   .v-essay{padding:3rem 1.5rem}
   .v-essay-title{font-size:1.8rem}
 }
+/* ─────────────────────────────────────────
+   AMBER SERIES OVERLAY
+───────────────────────────────────────── */
+#amber-overlay{
+  position:fixed;inset:0;z-index:5200;
+  background:var(--bg);overflow-y:auto;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease;
+}
+#amber-overlay.open{opacity:1;pointer-events:all}
+.a-nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(11,11,10,.9);backdrop-filter:blur(8px);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.25rem 2.5rem;border-bottom:1px solid rgba(237,234,226,.06);
+}
+.a-nav-title{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--bright)}
+.a-images{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  background:var(--bg);
+}
+.a-images img{
+  width:100%;aspect-ratio:3/4;
+  object-fit:contain;object-position:center;
+  display:block;background:var(--surface);cursor:none;
+}
+.a-essay{
+  max-width:740px;margin:0 auto;
+  padding:5rem 2.5rem;
+}
+.a-essay-en,.a-essay-zh,.a-essay-ja{margin-bottom:1rem;display:none}
+.a-essay-en.active,.a-essay-zh.active,.a-essay-ja.active{display:block}
+.a-essay-title{
+  font-family:var(--serif);font-style:italic;
+  font-size:2.4rem;color:var(--bright);margin-bottom:.35rem;line-height:1.1;
+}
+.a-essay-zh .a-essay-title{font-style:normal;letter-spacing:.04em}
+.a-essay-year{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;
+  text-transform:uppercase;color:#B8860B;margin-bottom:3rem;display:block;
+}
+.a-essay p{font-size:.9rem;line-height:1.9;color:var(--text);margin-bottom:1.3rem}
+.a-essay .a-closing{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.05rem;color:var(--dim);margin-top:2rem;line-height:1.6;
+}
+@media(max-width:700px){
+  .a-images{grid-template-columns:1fr}
+  .a-images img{aspect-ratio:4/3}
+  .a-essay{padding:3rem 1.5rem}
+  .a-essay-title{font-size:1.8rem}
+}
 .c-specs{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-content:start}
 .c-spec-label{font-family:var(--mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem}
 .c-spec-val{font-family:var(--serif);font-size:.95rem;color:var(--bright)}
@@ -959,6 +1011,54 @@ input[type=file].admin-file-input{display:none}
   </div>
 </div>
 
+<!-- ══════════════════════════════
+     AMBER 琥珀 — SERIES OVERLAY
+══════════════════════════════ -->
+<div id="amber-overlay">
+  <div class="a-nav">
+    <div class="a-nav-title" data-i18n="amber.navTitle">Amber — 琥珀</div>
+    <button class="back-btn" onclick="history.back()" data-i18n="amber.back">← Back</button>
+  </div>
+
+  <!-- Amber 图片：由 assets/amber/list.json 自动生成，运行 node update-amber-list.js 更新 -->
+  <div class="a-images" id="a-images-grid"></div>
+
+  <div class="a-essay">
+    <div class="a-essay-en active">
+      <h1 class="a-essay-title" id="a-en-title">Amber</h1>
+      <span class="a-essay-year" id="a-en-year">Ceramics · Jingdezhen · 2025</span>
+      <p id="a-en-p1">Amber is not simply a colour. It is light made solid — the warm, dark gold of something that once flowed, and then waited.</p>
+      <p id="a-en-p2">In Chinese ceramics, iron has always been the most honest colourant. Unlike cobalt's cool clarity or copper's fleeting green, iron burns through the firing in cycles of warmth — honey, rust, the deep brown-black of tenmoku. These are colours that record temperature, atmosphere, the precise moment the kiln sealed itself shut.</p>
+      <p id="a-en-p3">The glazes in this series are built from iron-bearing slips and local ash, applied in layers of varying thickness across wheel-thrown and handbuilt forms. In reduction, iron pulls warmth from the clay body itself; in oxidation, it opens into amber and ochre. The same material, the same hand — different air.</p>
+      <p id="a-en-p4">There is something geological about amber glazes: they feel like sediment, like the accumulation of slow time. A layer of ash from the kiln floor. A ring of iron oxide where the glaze pooled. These are marks left by heat rather than intention — the fire's record of its own passage.</p>
+      <p id="a-en-p5">This series does not try to control that record. Instead, it sets up conditions — formula, form, temperature — and then releases the piece into the kiln. What comes out carries the imprint of everything that happened while the door was closed.</p>
+      <p class="a-closing" id="a-en-closing">琥珀光 — the light of amber — is the light of things preserved: colour that has survived heat, pressure, and time, and still glows.</p>
+    </div>
+
+    <div class="a-essay-zh">
+      <h1 class="a-essay-title" id="a-zh-title">《琥珀》</h1>
+      <span class="a-essay-year" id="a-zh-year">陶瓷 · 景德镇 · 2025</span>
+      <p id="a-zh-p1">琥珀不仅仅是一种颜色，它是凝固的光——那种温润的、深沉的金，流动过，然后停驻，等待。</p>
+      <p id="a-zh-p2">在中国陶瓷的历史里，铁始终是最诚实的着色剂。不像钴的冷静纯粹，也不像铜的转瞬即逝，铁在窑火中以温度的循环来燃烧——蜂蜜色、铁锈色、天目的深褐黑。这些颜色记录的是温度、气氛，以及窑门合上的那一刻。</p>
+      <p id="a-zh-p3">这组作品的釉料以含铁泥浆和本地草木灰为基础，厚薄不均地涂抹在轮制和手捏的器形上。还原气氛中，铁从坯体本身汲取温暖；氧化气氛中，它展开为琥珀与赭石。同样的材料，同样的手——不同的空气。</p>
+      <p id="a-zh-p4">琥珀釉有某种地质感：它们像是沉积物，像是缓慢时间的积累。来自窑底的一层草木灰。釉料汇聚处留下的一圈氧化铁。这些是热度留下的痕迹，而非意图——是火对自身经过的记录。</p>
+      <p id="a-zh-p5">这组作品没有试图控制这份记录。它设定条件——配方、形态、温度——然后将器物送入窑中。出窑的作品，携带着窑门关上后所有发生之事的印记。</p>
+      <p class="a-closing" id="a-zh-closing">琥珀光——是那些被保存之物的光：颜色在热、压力与时间中幸存，依然发光。</p>
+    </div>
+
+    <div class="a-essay-ja">
+      <h1 class="a-essay-title" id="a-ja-title">《琥珀》 Amber</h1>
+      <span class="a-essay-year" id="a-ja-year">セラミック · 景徳鎮 · 2025</span>
+      <p id="a-ja-p1">琥珀はただの色ではない。かつて流れ、そして待ち続けたものの、凝固した光——温かく深い金色だ。</p>
+      <p id="a-ja-p2">中国陶磁の歴史において、鉄は常に最も誠実な着色剤であり続けた。コバルトの冷たい透明さや、銅のはかない緑とは異なり、鉄は窯の中で温度の循環とともに燃える——蜂蜜色、錆色、天目の深い茶黒。これらの色が記録するのは、温度であり、雰囲気であり、窯が閉じられた瞬間だ。</p>
+      <p id="a-ja-p3">このシリーズの釉薬は、鉄分を含む泥漿と地元の灰を基礎に、厚さを変えながらろくろ成形と手びねりの形に施される。還元焔では、鉄は坯体そのものから温かみを引き出す。酸化焔では、琥珀と黄土色に開く。同じ素材、同じ手——異なる空気だ。</p>
+      <p id="a-ja-p4">琥珀釉には地質学的な何かがある。それは堆積物のように感じられる、ゆっくりとした時間の積み重ねのように。窯底からの一層の灰。釉薬が溜まった場所に残る酸化鉄の輪。これらは意図ではなく、熱が残した痕跡——火が自らの通過を記録したものだ。</p>
+      <p id="a-ja-p5">このシリーズはその記録を制御しようとしない。代わりに条件を整える——調合、形、温度——そして器を窯に委ねる。出てくるものは、扉が閉じられていた間に起きたすべての出来事の痕跡を持っている。</p>
+      <p class="a-closing" id="a-ja-closing">琥珀光（こはくこう）——保存されたものの光。熱と圧力と時間を生き延びた色が、それでも輝き続ける。</p>
+    </div>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div id="img-lightbox">
   <img id="lb-img" src="" alt=""/>
@@ -1021,12 +1121,32 @@ function closeVermilion(){
   }
 }
 
+function openAmber(){
+  const ov = document.getElementById('amber-overlay');
+  ov.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.documentElement.style.scrollSnapType = 'none';
+  ov.scrollTop = 0;
+  history.pushState({view: 'amber'}, '');
+}
+function closeAmber(){
+  document.getElementById('amber-overlay').classList.remove('open');
+  if(document.getElementById('ceramics-overlay').classList.contains('open')){
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+    document.documentElement.style.scrollSnapType = 'y mandatory';
+  }
+}
+
 window.addEventListener('popstate', e => {
   const view = e.state?.view ?? null;
   if (view === 'ceramics') {
+    if (document.getElementById('amber-overlay').classList.contains('open')) closeAmber();
     if (document.getElementById('vermilion-overlay').classList.contains('open')) closeVermilion();
   } else {
     if (document.getElementById('img-lightbox').classList.contains('show')) { closeLb(); return; }
+    if (document.getElementById('amber-overlay').classList.contains('open')) { closeAmber(); return; }
     if (document.getElementById('vermilion-overlay').classList.contains('open')) { closeVermilion(); return; }
     if (document.getElementById('ceramics-overlay').classList.contains('open')) closeCeramics();
   }
@@ -1051,6 +1171,7 @@ document.getElementById('img-lightbox').addEventListener('click', e => {
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape'){
     if(document.getElementById('img-lightbox').classList.contains('show')){ closeLb(); return; }
+    if(document.getElementById('amber-overlay').classList.contains('open')){ history.back(); return; }
     if(document.getElementById('vermilion-overlay').classList.contains('open')){ history.back(); return; }
     if(document.getElementById('ceramics-overlay').classList.contains('open')){ history.back(); }
   }
@@ -1117,6 +1238,8 @@ function showEssayForLang(lang) {
   ['en', 'zh', 'ja'].forEach(l => {
     const el = document.querySelector('.v-essay-' + l);
     if (el) el.classList.toggle('active', l === lang);
+    const ae = document.querySelector('.a-essay-' + l);
+    if (ae) ae.classList.toggle('active', l === lang);
   });
 }
 
@@ -1157,13 +1280,30 @@ function applyVermilion(v) {
   });
 }
 
+function applyAmber(a) {
+  if (!a) return;
+  function setEl(id, val) {
+    const el = document.getElementById(id);
+    if (el && val !== undefined) el.innerHTML = val;
+  }
+  ['en', 'zh', 'ja'].forEach(lang => {
+    const d = a[lang];
+    if (!d) return;
+    setEl('a-' + lang + '-title', d.title);
+    setEl('a-' + lang + '-year', d.year);
+    for (let i = 1; i <= 5; i++) setEl('a-' + lang + '-p' + i, d['p' + i]);
+    setEl('a-' + lang + '-closing', d.closing);
+  });
+}
+
 fetch('content.json')
   .then(r => r.ok ? r.json() : {})
   .then(data => {
-    const {contact, vermilion, ...langs} = data;
+    const {contact, vermilion, amber, ...langs} = data;
     translations = langs;
     applyContact(contact);
     applyVermilion(vermilion);
+    applyAmber(amber);
     initLanguage();
   })
   .catch(() => initLanguage());
@@ -1272,8 +1412,7 @@ function titleFromFilename(name){
   return base || name;
 }
 
-// ── 加载 Vermilion 图片并填充 ceramics grid 入口卡片 ──
-// Vermilion 图片放在 assets/vermilion/，运行 node update-vermilion-list.js 更新列表
+// ── 加载 Vermilion / Amber 图片并填充 ceramics grid 入口卡片 ──
 function populateVermilionImages(names) {
   const grid = document.getElementById('v-images-grid');
   if (!grid || !names.length) return;
@@ -1289,50 +1428,76 @@ function populateVermilionImages(names) {
   });
 }
 
+function populateAmberImages(names) {
+  const grid = document.getElementById('a-images-grid');
+  if (!grid || !names.length) return;
+  grid.innerHTML = '';
+  names.forEach((name, i) => {
+    const src = 'assets/amber/' + encodeURIComponent(name);
+    const label = 'Amber — 琥珀 ' + (i + 1);
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = label;
+    img.onclick = () => openLb(src, label);
+    grid.appendChild(img);
+  });
+}
+
 let vermilionCount = 0;
+let amberCount = 0;
 
-// 先加载 vermilion list，再加载 ceramics grid（保证 entry 卡片按需显示）
-fetch('assets/vermilion/list.json')
-  .then(r => r.ok ? r.json() : [])
-  .then(vNames => {
-    const vList = Array.isArray(vNames) ? vNames : [];
-    vermilionCount = vList.length;
-    populateVermilionImages(vList);
+// 先加载 series lists，再加载 ceramics grid（保证 entry 卡片按需显示）
+Promise.all([
+  fetch('assets/vermilion/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
+  fetch('assets/amber/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
+  fetch('assets/ceramics/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+]).then(([vNames, aNames, cNames]) => {
+  const vList = Array.isArray(vNames) ? vNames : [];
+  const aList = Array.isArray(aNames) ? aNames : [];
+  const list = Array.isArray(cNames) ? cNames : [];
 
-    // 加载 ceramics grid
-    return fetch('assets/ceramics/list.json')
-      .then(r => r.ok ? r.json() : [])
-      .then(names => {
-        const list = Array.isArray(names) ? names : [];
-        const grid = document.getElementById('ceramics-grid');
-        if (!grid) return;
-        grid.innerHTML = '';
+  vermilionCount = vList.length;
+  amberCount = aList.length;
 
-        // 如果 vermilion 文件夹有图片，在最前面插入 series 入口卡片
-        if (vermilionCount > 0) {
-          const header = document.createElement('div');
-          header.className = 'v-series-cell';
-          header.onclick = openVermilion;
-          header.innerHTML =
-            '<div><div class="v-series-label">Series I</div><div class="v-series-name">Vermilion — 遗朱</div></div>' +
-            '<span class="v-series-arr">→</span>';
-          grid.appendChild(header);
-        }
+  populateVermilionImages(vList);
+  populateAmberImages(aList);
 
-        list.forEach((name, i) => {
-          const src = 'assets/ceramics/' + encodeURIComponent(name);
-          const title = titleFromFilename(name);
-          const cell = document.createElement('div');
-          cell.className = 'c-grid-cell';
-          cell.onclick = () => openLb(src, title);
-          cell.innerHTML =
-            '<img src="' + src + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
-            '<div class="c-grid-info"><div class="c-grid-info-title">' + title.replace(/</g, '&lt;') + '</div></div>';
-          grid.appendChild(cell);
-        });
-      });
-  })
-  .catch(() => {});
+  const grid = document.getElementById('ceramics-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  // Series entry cards
+  if (vermilionCount > 0) {
+    const header = document.createElement('div');
+    header.className = 'v-series-cell';
+    header.onclick = openVermilion;
+    header.innerHTML =
+      '<div><div class="v-series-label">Series I</div><div class="v-series-name">Vermilion — 遗朱</div></div>' +
+      '<span class="v-series-arr">→</span>';
+    grid.appendChild(header);
+  }
+  if (amberCount > 0) {
+    const aHeader = document.createElement('div');
+    aHeader.className = 'v-series-cell';
+    aHeader.onclick = openAmber;
+    aHeader.innerHTML =
+      '<div><div class="v-series-label">Series II</div><div class="v-series-name">Amber — 琥珀</div></div>' +
+      '<span class="v-series-arr">→</span>';
+    grid.appendChild(aHeader);
+  }
+
+  list.forEach((name) => {
+    const src = 'assets/ceramics/' + encodeURIComponent(name);
+    const title = titleFromFilename(name);
+    const cell = document.createElement('div');
+    cell.className = 'c-grid-cell';
+    cell.onclick = () => openLb(src, title);
+    cell.innerHTML =
+      '<img src="' + src + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
+      '<div class="c-grid-info"><div class="c-grid-info-title">' + title.replace(/</g, '&lt;') + '</div></div>';
+    grid.appendChild(cell);
+  });
+}).catch(() => {});
 </script>
 
 <!-- ══════════════════════════════

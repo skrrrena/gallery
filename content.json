@@ -4,6 +4,38 @@
     "xhsUrl": "https://xhslink.com/m/9KMmbgxryKl",
     "instagramUrl": "@skrrrena"
   },
+  "amber": {
+    "en": {
+      "title": "Amber",
+      "year": "Ceramics · Jingdezhen · 2025",
+      "p1": "Amber is not simply a colour. It is light made solid — the warm, dark gold of something that once flowed, and then waited.",
+      "p2": "In Chinese ceramics, iron has always been the most honest colourant. Unlike cobalt's cool clarity or copper's fleeting green, iron burns through the firing in cycles of warmth — honey, rust, the deep brown-black of tenmoku. These are colours that record temperature, atmosphere, the precise moment the kiln sealed itself shut.",
+      "p3": "The glazes in this series are built from iron-bearing slips and local ash, applied in layers of varying thickness across wheel-thrown and handbuilt forms. In reduction, iron pulls warmth from the clay body itself; in oxidation, it opens into amber and ochre. The same material, the same hand — different air.",
+      "p4": "There is something geological about amber glazes: they feel like sediment, like the accumulation of slow time. A layer of ash from the kiln floor. A ring of iron oxide where the glaze pooled. These are marks left by heat rather than intention — the fire's record of its own passage.",
+      "p5": "This series does not try to control that record. Instead, it sets up conditions — formula, form, temperature — and then releases the piece into the kiln. What comes out carries the imprint of everything that happened while the door was closed.",
+      "closing": "琥珀光 — the light of amber — is the light of things preserved: colour that has survived heat, pressure, and time, and still glows."
+    },
+    "zh": {
+      "title": "《琥珀》",
+      "year": "陶瓷 · 景德镇 · 2025",
+      "p1": "琥珀不仅仅是一种颜色，它是凝固的光——那种温润的、深沉的金，流动过，然后停驻，等待。",
+      "p2": "在中国陶瓷的历史里，铁始终是最诚实的着色剂。不像钴的冷静纯粹，也不像铜的转瞬即逝，铁在窑火中以温度的循环来燃烧——蜂蜜色、铁锈色、天目的深褐黑。这些颜色记录的是温度、气氛，以及窑门合上的那一刻。",
+      "p3": "这组作品的釉料以含铁泥浆和本地草木灰为基础，厚薄不均地涂抹在轮制和手捏的器形上。还原气氛中，铁从坯体本身汲取温暖；氧化气氛中，它展开为琥珀与赭石。同样的材料，同样的手——不同的空气。",
+      "p4": "琥珀釉有某种地质感：它们像是沉积物，像是缓慢时间的积累。来自窑底的一层草木灰。釉料汇聚处留下的一圈氧化铁。这些是热度留下的痕迹，而非意图——是火对自身经过的记录。",
+      "p5": "这组作品没有试图控制这份记录。它设定条件——配方、形态、温度——然后将器物送入窑中。出窑的作品，携带着窑门关上后所有发生之事的印记。",
+      "closing": "琥珀光——是那些被保存之物的光：颜色在热、压力与时间中幸存，依然发光。"
+    },
+    "ja": {
+      "title": "《琥珀》 Amber",
+      "year": "セラミック · 景徳鎮 · 2025",
+      "p1": "琥珀はただの色ではない。かつて流れ、そして待ち続けたものの、凝固した光——温かく深い金色だ。",
+      "p2": "中国陶磁の歴史において、鉄は常に最も誠実な着色剤であり続けた。コバルトの冷たい透明さや、銅のはかない緑とは異なり、鉄は窯の中で温度の循環とともに燃える——蜂蜜色、錆色、天目の深い茶黒。これらの色が記録するのは、温度であり、雰囲気であり、窯が閉じられた瞬間だ。",
+      "p3": "このシリーズの釉薬は、鉄分を含む泥漿と地元の灰を基礎に、厚さを変えながらろくろ成形と手びねりの形に施される。還元焔では、鉄は坯体そのものから温かみを引き出す。酸化焔では、琥珀と黄土色に開く。同じ素材、同じ手——異なる空気だ。",
+      "p4": "琥珀釉には地質学的な何かがある。それは堆積物のように感じられる、ゆっくりとした時間の積み重ねのように。窯底からの一層の灰。釉薬が溜まった場所に残る酸化鉄の輪。これらは意図ではなく、熱が残した痕跡——火が自らの通過を記録したものだ。",
+      "p5": "このシリーズはその記録を制御しようとしない。代わりに条件を整える——調合、形、温度——そして器を窯に委ねる。出てくるものは、扉が閉じられていた間に起きたすべての出来事の痕跡を持っている。",
+      "closing": "琥珀光（こはくこう）——保存されたものの光。熱と圧力と時間を生き延びた色が、それでも輝き続ける。"
+    }
+  },
   "vermilion": {
     "en": {
       "title": "Vermilion",
@@ -95,6 +127,8 @@
     "ceramics.back": "← Back to Works",
     "vermilion.navTitle": "Vermilion — 遗朱",
     "vermilion.back": "← Back",
+    "amber.navTitle": "Amber — 琥珀",
+    "amber.back": "← Back",
     "ceramics.h2": "Material as memory",
     "ceramics.p1": "These objects began as questions about use — what it means to make something that holds liquid, that fits a hand, that survives fire. The answers came slowly, through the clay itself.",
     "ceramics.p2": "Each piece is thrown on the wheel and fired in a wood or gas kiln. The glazes are layered to encourage unpredictability: iron wash over shino, celadon over raw stoneware. The marks of making remain visible.",
@@ -167,6 +201,8 @@
     "ceramics.back": "← 返回",
     "vermilion.navTitle": "Vermilion — 遗朱",
     "vermilion.back": "← 返回",
+    "amber.navTitle": "Amber — 琥珀",
+    "amber.back": "← 返回",
     "ceramics.h2": "材料即记忆",
     "ceramics.p1": "这些器物起初是关于使用的问题——做一件盛液体的东西、能被手握住的东西、能在火中存活下来的东西，意味着什么。答案在土本身里慢慢浮现。",
     "ceramics.p2": "每一件作品都在轮上成形，在柴烧或气窑中烧制。釉料层层叠加，以鼓励不可预见性：铁锈釉覆志野釉，青瓷釉覆生坯。制作的痕迹保持可见。",
@@ -239,6 +275,8 @@
     "ceramics.back": "← 戻る",
     "vermilion.navTitle": "Vermilion — 遗朱",
     "vermilion.back": "← 戻る",
+    "amber.navTitle": "Amber — 琥珀",
+    "amber.back": "← 戻る",
     "ceramics.h2": "素材は記憶",
     "ceramics.p1": "これらの器は、使うことへの問いから始まった——液体を入れ、手に収まり、火を越えてくるものを作るとはどういうことか。答えは土そのものからゆっくりと現れた。",
     "ceramics.p2": "すべての作品はろくろで成形され、柴窯またはガス窯で焼かれる。釉薬は重ねることで偶発性を生む——志野の上に鉄釉、生地の上に青磁釉。作る行為の痕跡は可視のまま残される。",
