@@ -469,18 +469,27 @@ body::before{
   padding:1.25rem 2.5rem;border-bottom:1px solid rgba(237,234,226,.06);
 }
 .a-nav-title{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--bright)}
+.a-hero{
+  width:100%;height:92vh;overflow:hidden;
+  background:var(--surface);
+}
+.a-hero img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  display:block;
+}
 .a-images{
-  display:grid;grid-template-columns:1fr 1fr;gap:2px;
-  background:var(--bg);
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;background:var(--bg);padding-top:2px;
 }
 .a-images img{
   width:100%;aspect-ratio:3/4;
-  object-fit:contain;object-position:center;
+  object-fit:cover;object-position:center;
   display:block;background:var(--surface);cursor:none;
 }
 .a-essay{
   max-width:740px;margin:0 auto;
-  padding:5rem 2.5rem;
+  padding:4.5rem 2.5rem 3.5rem;
 }
 .a-essay-en,.a-essay-zh,.a-essay-ja{margin-bottom:1rem;display:none}
 .a-essay-en.active,.a-essay-zh.active,.a-essay-ja.active{display:block}
@@ -498,9 +507,9 @@ body::before{
   font-family:var(--serif);font-style:italic;
   font-size:1.05rem;color:var(--dim);margin-top:2rem;line-height:1.6;
 }
-@media(max-width:700px){
+@media(max-width:640px){
+  .a-nav{padding:1rem 1.5rem}
   .a-images{grid-template-columns:1fr}
-  .a-images img{aspect-ratio:4/3}
   .a-essay{padding:3rem 1.5rem}
   .a-essay-title{font-size:1.8rem}
 }
@@ -1069,8 +1078,9 @@ input[type=file].admin-file-input{display:none}
     <button class="back-btn" onclick="history.back()" data-i18n="amber.back">← Back</button>
   </div>
 
-  <!-- Amber 图片：由 assets/amber/list.json 自动生成，运行 node update-amber-list.js 更新 -->
-  <div class="a-images" id="a-images-grid"></div>
+  <div class="a-hero">
+    <img id="a-hero-img" src="" alt="Amber"/>
+  </div>
 
   <div class="a-essay">
     <div class="a-essay-en active">
@@ -1106,6 +1116,10 @@ input[type=file].admin-file-input{display:none}
       <p class="a-closing" id="a-ja-closing">琥珀光（こはくこう）——保存されたものの光。熱と圧力と時間を生き延びた色が、それでも輝き続ける。</p>
     </div>
   </div>
+
+  <hr class="v-divider"/>
+  <!-- Amber 图片：由 assets/amber/list.json 自动生成，运行 node update-amber-list.js 更新 -->
+  <div class="a-images" id="a-images-grid"></div>
 </div>
 
 <!-- LIGHTBOX -->
@@ -1487,12 +1501,21 @@ function populateVermilionImages(names) {
 }
 
 function populateAmberImages(names) {
+  if (!names.length) return;
+  // First image → hero
+  const heroImg = document.getElementById('a-hero-img');
+  if (heroImg) {
+    const heroSrc = 'assets/amber/' + encodeURIComponent(names[0]);
+    heroImg.src = heroSrc;
+    heroImg.onclick = () => openLb(heroSrc, 'Amber — 琥珀 1');
+  }
+  // Remaining images → grid
   const grid = document.getElementById('a-images-grid');
-  if (!grid || !names.length) return;
+  if (!grid) return;
   grid.innerHTML = '';
-  names.forEach((name, i) => {
+  names.slice(1).forEach((name, i) => {
     const src = 'assets/amber/' + encodeURIComponent(name);
-    const label = 'Amber — 琥珀 ' + (i + 1);
+    const label = 'Amber — 琥珀 ' + (i + 2);
     const img = document.createElement('img');
     img.src = src;
     img.alt = label;
