@@ -372,6 +372,16 @@ body::before{
   font-family:var(--serif);font-style:italic;
   font-size:1.05rem;color:var(--dim);margin-top:2rem;line-height:1.6;
 }
+/* Hero: first image, full-width, fills viewport */
+.v-hero{
+  width:100%;height:92vh;overflow:hidden;
+  background:var(--surface);
+}
+.v-hero img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  display:block;
+}
 .v-divider{
   border:none;border-top:1px solid rgba(237,234,226,.08);
   margin:0;
@@ -1014,6 +1024,10 @@ input[type=file].admin-file-input{display:none}
     <button class="back-btn" onclick="history.back()" data-i18n="vermilion.back">← Back</button>
   </div>
 
+  <div class="v-hero">
+    <img id="v-hero-img" src="" alt="Vermilion"/>
+  </div>
+
   <div class="v-essay">
     <div class="v-essay-en active">
       <h1 class="v-essay-title" id="v-en-title">Vermilion</h1>
@@ -1456,12 +1470,21 @@ function titleFromFilename(name){
 
 // ── 加载 Vermilion / Amber 图片并填充 ceramics grid 入口卡片 ──
 function populateVermilionImages(names) {
+  if (!names.length) return;
+  // First image → hero
+  const heroImg = document.getElementById('v-hero-img');
+  if (heroImg) {
+    const heroSrc = 'assets/vermilion/' + encodeURIComponent(names[0]);
+    heroImg.src = heroSrc;
+    heroImg.onclick = () => openLb(heroSrc, 'Vermilion — 遗朱 1');
+  }
+  // Remaining images → mixed grid
   const grid = document.getElementById('v-images-grid');
-  if (!grid || !names.length) return;
+  if (!grid) return;
   grid.innerHTML = '';
-  names.forEach((name, i) => {
+  names.slice(1).forEach((name, i) => {
     const src = 'assets/vermilion/' + encodeURIComponent(name);
-    const label = 'Vermilion — 遗朱 ' + (i + 1);
+    const label = 'Vermilion — 遗朱 ' + (i + 2);
     const img = document.createElement('img');
     img.src = src;
     img.alt = label;
