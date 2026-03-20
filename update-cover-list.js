@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const dir = path.join(__dirname, 'assets', 'cover');
+const dir = path.join(__dirname, 'assets', 's1-ceramics', 'cover');
 const exts = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
 let names = [];
 

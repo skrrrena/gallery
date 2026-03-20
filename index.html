@@ -815,7 +815,7 @@ input[type=file].admin-file-input{display:none}
 ══════════════════════════════ -->
 <section class="slide slide-placeholder" data-index="4">
   <div class="slide-bg">
-    <video class="slide-video" src="assets/slide3cover/destino_websitever.mov" autoplay loop muted playsinline></video>
+    <video class="slide-video" src="assets/s4-destino/destino_websitever.mov" autoplay loop muted playsinline></video>
   </div>
   <div class="slide-overlay"></div>
   <div class="slide-content">
@@ -1054,7 +1054,7 @@ input[type=file].admin-file-input{display:none}
   <!-- Series blocks：image-based entries for each named series -->
   <div id="series-section"></div>
 
-  <!-- Ceramics grid：由 assets/ceramics-list.json 自动生成，运行 node update-ceramics-list.js 或 python3 update-ceramics-list.py 更新 -->
+  <!-- Ceramics grid：由 assets/s1-ceramics/grid/list.json 自动生成，运行 node update-ceramics-list.js 更新 -->
   <div class="c-grid" id="ceramics-grid"></div>
 </div>
 
@@ -1106,7 +1106,7 @@ input[type=file].admin-file-input{display:none}
   </div>
 
   <hr class="v-divider"/>
-  <!-- Vermilion 图片：由 assets/vermilion/list.json 自动生成，运行 node update-vermilion-list.js 更新 -->
+  <!-- Vermilion 图片：由 assets/s1-ceramics/vermilion/list.json 自动生成，运行 node update-vermilion-list.js 更新 -->
   <div class="v-images" id="v-images-grid"></div>
 </div>
 
@@ -1159,7 +1159,7 @@ input[type=file].admin-file-input{display:none}
   </div>
 
   <hr class="v-divider"/>
-  <!-- Amber 图片：由 assets/amber/list.json 自动生成，运行 node update-amber-list.js 更新 -->
+  <!-- Amber 图片：由 assets/s1-ceramics/amber/list.json 自动生成，运行 node update-amber-list.js 更新 -->
   <div class="a-images" id="a-images-grid"></div>
 </div>
 
@@ -1464,7 +1464,7 @@ fetch('content.json')
   .catch(() => initLanguage());
 
 // ── CERAMIC HERO CAROUSEL (SLIDE 1) ──
-// 轮播图片 = assets/cover/ 里的所有图片（由 list.json 提供）。更新图片后运行 node update-cover-list.js 再提交。
+// 轮播图片 = assets/s1-ceramics/cover/ 里的所有图片（由 list.json 提供）。更新图片后运行 node update-cover-list.js 再提交。
 let cerHeroImages = [];
 let cerHeroIndex = 0;
 let cerHeroCurrentLayer = 0;
@@ -1554,10 +1554,10 @@ function initCerHero(){
     }, 80);
   }, {passive:false});
 }
-fetch('assets/cover/list.json')
+fetch('assets/s1-ceramics/cover/list.json')
   .then(r => r.ok ? r.json() : [])
   .then(names => {
-    cerHeroImages = (names || []).map(f => 'assets/cover/' + encodeURIComponent(f));
+    cerHeroImages = (names || []).map(f => 'assets/s1-ceramics/cover/' + encodeURIComponent(f));
     initCerHero();
   })
   .catch(() => { cerHeroImages = []; initCerHero(); });
@@ -1573,7 +1573,7 @@ function populateVermilionImages(names) {
   // First image → hero
   const heroImg = document.getElementById('v-hero-img');
   if (heroImg) {
-    const heroSrc = 'assets/vermilion/' + encodeURIComponent(names[0]);
+    const heroSrc = 'assets/s1-ceramics/vermilion/' + encodeURIComponent(names[0]);
     heroImg.src = heroSrc;
     heroImg.onclick = () => openLb(heroSrc, 'Vermilion — 遗朱 1');
   }
@@ -1582,7 +1582,7 @@ function populateVermilionImages(names) {
   if (!grid) return;
   grid.innerHTML = '';
   names.slice(1).forEach((name, i) => {
-    const src = 'assets/vermilion/' + encodeURIComponent(name);
+    const src = 'assets/s1-ceramics/vermilion/' + encodeURIComponent(name);
     const label = 'Vermilion — 遗朱 ' + (i + 2);
     const img = document.createElement('img');
     img.src = src;
@@ -1597,7 +1597,7 @@ function populateAmberImages(names) {
   // First image → hero
   const heroImg = document.getElementById('a-hero-img');
   if (heroImg) {
-    const heroSrc = 'assets/amber/' + encodeURIComponent(names[0]);
+    const heroSrc = 'assets/s1-ceramics/amber/' + encodeURIComponent(names[0]);
     heroImg.src = heroSrc;
     heroImg.onclick = () => openLb(heroSrc, 'Amber — 琥珀 1');
   }
@@ -1606,7 +1606,7 @@ function populateAmberImages(names) {
   if (!grid) return;
   grid.innerHTML = '';
   names.slice(1).forEach((name, i) => {
-    const src = 'assets/amber/' + encodeURIComponent(name);
+    const src = 'assets/s1-ceramics/amber/' + encodeURIComponent(name);
     const label = 'Amber — 琥珀 ' + (i + 2);
     const img = document.createElement('img');
     img.src = src;
@@ -1620,7 +1620,7 @@ function populatePortraitureImages(names) {
   if (!names.length) return;
   const heroImg = document.getElementById('p-hero-img');
   if (heroImg) {
-    const heroSrc = 'assets/portraiture/' + encodeURIComponent(names[0]);
+    const heroSrc = 'assets/s2-portraiture/' + encodeURIComponent(names[0]);
     heroImg.src = heroSrc;
     heroImg.onclick = () => openLb(heroSrc, 'Commercial Portraiture 1');
   }
@@ -1628,7 +1628,7 @@ function populatePortraitureImages(names) {
   if (!grid) return;
   grid.innerHTML = '';
   names.slice(1).forEach((name, i) => {
-    const src = 'assets/portraiture/' + encodeURIComponent(name);
+    const src = 'assets/s2-portraiture/' + encodeURIComponent(name);
     const label = 'Commercial Portraiture ' + (i + 2);
     const img = document.createElement('img');
     img.src = src; img.alt = label;
@@ -1664,10 +1664,10 @@ function createSeriesBlock(label, title, openFn, coverPath) {
 
 // 先加载 series lists，再加载 ceramics grid（保证 entry 卡片按需显示）
 Promise.all([
-  fetch('assets/vermilion/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
-  fetch('assets/amber/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
-  fetch('assets/portraiture/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
-  fetch('assets/ceramics/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+  fetch('assets/s1-ceramics/vermilion/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
+  fetch('assets/s1-ceramics/amber/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
+  fetch('assets/s2-portraiture/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
+  fetch('assets/s1-ceramics/grid/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
 ]).then(([vNames, aNames, pNames, cNames]) => {
   const vList = Array.isArray(vNames) ? vNames : [];
   const aList = Array.isArray(aNames) ? aNames : [];
@@ -1688,13 +1688,13 @@ Promise.all([
     if (vermilionCount > 0) {
       seriesSection.appendChild(createSeriesBlock(
         'Series I', 'Vermilion — 遗朱', openVermilion,
-        'assets/series-covers/vermilion.jpg'
+        'assets/s1-ceramics/series-covers/vermilion.jpg'
       ));
     }
     if (amberCount > 0) {
       seriesSection.appendChild(createSeriesBlock(
         'Series II', 'Amber — 琥珀', openAmber,
-        'assets/series-covers/amber.png'
+        'assets/s1-ceramics/series-covers/amber.png'
       ));
     }
   }
@@ -1704,7 +1704,7 @@ Promise.all([
   if (!grid) return;
   grid.innerHTML = '';
   list.forEach((name) => {
-    const src = 'assets/ceramics/' + encodeURIComponent(name);
+    const src = 'assets/s1-ceramics/grid/' + encodeURIComponent(name);
     const title = titleFromFilename(name);
     const cell = document.createElement('div');
     cell.className = 'c-grid-cell';

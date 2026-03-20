@@ -12,7 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const verDir = path.join(__dirname, 'assets', 'vermilion');
+const verDir = path.join(__dirname, 'assets', 's1-ceramics', 'vermilion');
 const exts = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
 
 if (!fs.existsSync(verDir)) {

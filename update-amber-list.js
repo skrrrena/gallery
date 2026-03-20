@@ -12,7 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const amberDir = path.join(__dirname, 'assets', 'amber');
+const amberDir = path.join(__dirname, 'assets', 's1-ceramics', 'amber');
 const exts = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
 
 if (!fs.existsSync(amberDir)) {
