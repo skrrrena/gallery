@@ -21,8 +21,3 @@ yarn-debug.log*
 yarn-error.log*
 assets/2M3A3975_副本.tiff
 .claude/
-
-# Large video files (>100MB, cannot be pushed to GitHub)
-assets/s5-rostrum/cover/Work01_Rostrum.mov
-assets/s5-rostrum/video/Work01_Rostrum.mov
-assets/s6-destino/cover/destino_websitever.mov
