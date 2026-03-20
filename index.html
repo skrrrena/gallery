@@ -348,21 +348,13 @@ body::before{
   position:sticky;top:0;z-index:10;
   background:rgba(11,11,10,.9);backdrop-filter:blur(8px);
   display:flex;justify-content:space-between;align-items:center;
-  padding:1.25rem 2.5rem;border-bottom:1px solid rgba(237,234,226,.06);
+  padding:1.25rem 2.5rem;
+  border-bottom:1px solid rgba(237,234,226,.06);
 }
 .v-nav-title{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--bright)}
-.v-images{
-  display:grid;grid-template-columns:1fr 1fr;gap:2px;
-  background:var(--bg);
-}
-.v-images img{
-  width:100%;aspect-ratio:3/4;
-  object-fit:contain;object-position:center;
-  display:block;background:var(--surface);cursor:none;
-}
 .v-essay{
   max-width:740px;margin:0 auto;
-  padding:5rem 2.5rem;
+  padding:4.5rem 2.5rem 3.5rem;
 }
 .v-essay-en,.v-essay-zh,.v-essay-ja{margin-bottom:1rem;display:none}
 .v-essay-en.active,.v-essay-zh.active,.v-essay-ja.active{display:block}
@@ -382,7 +374,29 @@ body::before{
 }
 .v-divider{
   border:none;border-top:1px solid rgba(237,234,226,.08);
-  margin:4rem 0;
+  margin:0;
+}
+/* Mixed grid: every 3rd image (1st, 4th, 7th…) spans full width */
+.v-images{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;background:var(--bg);padding-top:2px;
+}
+.v-images img{
+  width:100%;aspect-ratio:3/4;
+  object-fit:contain;object-position:center;
+  display:block;background:var(--surface);cursor:none;
+}
+.v-images img:nth-child(3n+1){
+  grid-column:1/-1;
+  aspect-ratio:16/9;
+  object-fit:cover;
+}
+@media(max-width:640px){
+  .v-nav{padding:1rem 1.5rem}
+  .v-essay{padding:3rem 1.5rem}
+  .v-essay-title{font-size:1.8rem}
+  .v-images{grid-template-columns:1fr}
+  .v-images img:nth-child(3n+1){grid-column:auto}
 }
 /* ─────────────────────────────────────────
    SERIES BLOCKS (image-based entries)
@@ -1000,9 +1014,6 @@ input[type=file].admin-file-input{display:none}
     <button class="back-btn" onclick="history.back()" data-i18n="vermilion.back">← Back</button>
   </div>
 
-  <!-- Vermilion 图片：由 assets/vermilion/list.json 自动生成，运行 node update-vermilion-list.js 更新 -->
-  <div class="v-images" id="v-images-grid"></div>
-
   <div class="v-essay">
     <div class="v-essay-en active">
       <h1 class="v-essay-title" id="v-en-title">Vermilion</h1>
@@ -1036,6 +1047,10 @@ input[type=file].admin-file-input{display:none}
       <p class="v-closing" id="v-ja-closing">遗朱（いしゅ）——残されたもの——は、距離を越えて生き残るものについての、そして失ってはじめてその価値に気づくものについての問いだ。</p>
     </div>
   </div>
+
+  <hr class="v-divider"/>
+  <!-- Vermilion 图片：由 assets/vermilion/list.json 自动生成，运行 node update-vermilion-list.js 更新 -->
+  <div class="v-images" id="v-images-grid"></div>
 </div>
 
 <!-- ══════════════════════════════
