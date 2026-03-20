@@ -6,7 +6,7 @@
   },
   "amber": {
     "en": {
-      "title": "Amber",
+      "title": "Amber 琥珀",
       "year": "Ceramics · Jingdezhen · 2025",
       "p1": "Amber is not simply a colour. It is light made solid — the warm, dark gold of something that once flowed, and then waited.",
       "p2": "In Chinese ceramics, iron has always been the most honest colourant. Unlike cobalt's cool clarity or copper's fleeting green, iron burns through the firing in cycles of warmth — honey, rust, the deep brown-black of tenmoku. These are colours that record temperature, atmosphere, the precise moment the kiln sealed itself shut.",
@@ -16,7 +16,7 @@
       "closing": "琥珀光 — the light of amber — is the light of things preserved: colour that has survived heat, pressure, and time, and still glows."
     },
     "zh": {
-      "title": "《琥珀》",
+      "title": "琥珀",
       "year": "陶瓷 · 景德镇 · 2025",
       "p1": "琥珀不仅仅是一种颜色，它是凝固的光——那种温润的、深沉的金，流动过，然后停驻，等待。",
       "p2": "在中国陶瓷的历史里，铁始终是最诚实的着色剂。不像钴的冷静纯粹，也不像铜的转瞬即逝，铁在窑火中以温度的循环来燃烧——蜂蜜色、铁锈色、天目的深褐黑。这些颜色记录的是温度、气氛，以及窑门合上的那一刻。",
@@ -26,7 +26,7 @@
       "closing": "琥珀光——是那些被保存之物的光：颜色在热、压力与时间中幸存，依然发光。"
     },
     "ja": {
-      "title": "《琥珀》 Amber",
+      "title": "琥珀 Amber",
       "year": "セラミック · 景徳鎮 · 2025",
       "p1": "琥珀はただの色ではない。かつて流れ、そして待ち続けたものの、凝固した光——温かく深い金色だ。",
       "p2": "中国陶磁の歴史において、鉄は常に最も誠実な着色剤であり続けた。コバルトの冷たい透明さや、銅のはかない緑とは異なり、鉄は窯の中で温度の循環とともに燃える——蜂蜜色、錆色、天目の深い茶黒。これらの色が記録するのは、温度であり、雰囲気であり、窯が閉じられた瞬間だ。",
@@ -38,7 +38,7 @@
   },
   "vermilion": {
     "en": {
-      "title": "Vermilion",
+      "title": "Vermilion 遗朱",
       "year": "Ceramics · Jingdezhen · 2024–2025",
       "p1": "I first encountered qi lacquer not in China, but through its absence from it.",
       "p2": "Living abroad, I began noticing how deeply the craft had taken root in Japan — in the care given to urushi vessels, in the way the material was taught, preserved, celebrated. It was only then that I learned: lacquer originated in China, over 8,000 years ago. Something that had always been part of my cultural inheritance had become easier to see from a distance.",
@@ -48,7 +48,7 @@
       "closing": "遗朱 — the vermilion that remains — is about what survives the distance, and what we only learn to value once we've had to look for it."
     },
     "zh": {
-      "title": "《遗朱》",
+      "title": "遗朱",
       "year": "陶瓷 · 景德镇 · 2024–2025",
       "p1": "我第一次真正注意到大漆，并不是在中国，而是因为在中国几乎已经很少见到它。",
       "p2": "在海外生活时，我开始慢慢意识到，这门工艺在日本是如何深深扎根的——人们对漆器的珍视，对材料与工艺的细致对待，以及它在教育、传承与日常生活中的存在。也是在那个时候，我才重新认识到：大漆其实起源于中国，已有八千多年的历史。某种本来属于自己文化传统的一部分，反而是在离开之后，才被看得更加清楚。",
@@ -58,7 +58,7 @@
       "closing": "\"遗朱\"——留下的一抹朱红，也暗合\"遗珠\"。那些被时间与距离遮蔽的传统，如同遗落的明珠，在重新被找寻之时，熠熠生辉。"
     },
     "ja": {
-      "title": "《遗朱》 Vermilion",
+      "title": "遗朱 Vermilion",
       "year": "セラミック · 景徳鎮 · 2024–2025",
       "p1": "漆と初めて意識的に出会ったのは、中国ではなく、中国での不在を通じてだった。",
       "p2": "海外での暮らしのなかで、私はこの工芸が日本にいかに深く根づいているかに気づき始めた——漆器への敬意、素材の扱い方、教育や継承、日常のなかに生きるその姿。そのとき初めて知ったのだ。漆は中国で生まれ、八千年以上の歴史を持つということを。自分の文化的な継承の一部であったものが、距離を置いてはじめて、より鮮明に見えてきた。",
@@ -73,10 +73,10 @@
     "nav.about": "About",
     "nav.writing": "Writing",
     "nav.contact": "Contact",
-    "slide1.title": "Vermilion & more...",
+    "slide1.title": "Vermilion and more...",
     "slide1.category": "Ceramics",
-    "slide1.desc": "Handmade ceramics made in Jingdezhen, as a way of returning.",
-    "slide1.year": "2024–2025",
+    "slide1.desc": "Handmade ceramics made in Jingdezhen, <br>as a way of returning.",
+    "slide1.year": "2025–2026",
     "slide2.title": "Polaroid Real+",
     "slide2.category": "Virtual Photography",
     "slide2.desc": "An exploration of the uncanny valley of virtual photography through photogrammetry, Unity, and film photography.",
@@ -125,6 +125,12 @@
     "contact.heading": "Let's make<br/>something together",
     "ceramics.title": "Ceramics",
     "ceramics.back": "← Back to Works",
+    "slideP.title": "Commercial<br/>Portraiture",
+    "slideP.category": "Photography",
+    "slideP.desc": "Studio and editorial portrait work — collaborations with clients, brands, and individuals.",
+    "slideP.year": "2025–2026",
+    "portraiture.navTitle": "Commercial Portraiture",
+    "portraiture.back": "← Back",
     "vermilion.navTitle": "Vermilion 遗朱",
     "vermilion.back": "← Back",
     "amber.navTitle": "Amber 琥珀",
@@ -199,6 +205,12 @@
     "contact.heading": "一起创作<br/>些什么吧",
     "ceramics.title": "陶瓷 — 火与形之间",
     "ceramics.back": "← 返回",
+    "slideP.title": "商业<br/>肖像摄影",
+    "slideP.category": "摄影",
+    "slideP.desc": "棚拍与商业肖像作品——与客户、品牌及个人的合作项目。",
+    "slideP.year": "2025–2026",
+    "portraiture.navTitle": "商业肖像摄影",
+    "portraiture.back": "← 返回",
     "vermilion.navTitle": "Vermilion — 遗朱",
     "vermilion.back": "← 返回",
     "amber.navTitle": "Amber — 琥珀",
@@ -217,7 +229,7 @@
     "ceramics.spec.yearVal": "2024–2025"
   },
   "ja": {
-    "nav.name": "Tianan Zhang — Photographer",
+    "nav.name": "Tianan Zhang",
     "nav.about": "プロフィール",
     "nav.writing": "テキスト",
     "nav.contact": "コンタクト",
@@ -273,6 +285,12 @@
     "contact.heading": "一緒に<br/>何かをつくろう",
     "ceramics.title": "セラミック — Between Fire &amp; Form",
     "ceramics.back": "← 戻る",
+    "slideP.title": "コマーシャル<br/>ポートレイト",
+    "slideP.category": "写真",
+    "slideP.desc": "スタジオおよびエディトリアルのポートレイト作品——クライアント、ブランド、個人とのコラボレーション。",
+    "slideP.year": "2025–2026",
+    "portraiture.navTitle": "コマーシャルポートレイト",
+    "portraiture.back": "← 戻る",
     "vermilion.navTitle": "Vermilion — 遗朱",
     "vermilion.back": "← 戻る",
     "amber.navTitle": "Amber — 琥珀",
