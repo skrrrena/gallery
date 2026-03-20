@@ -408,7 +408,8 @@ body::before{
 ───────────────────────────────────────── */
 #polaroid-overlay,
 #analogue-overlay,
-#exhibition-overlay{
+#exhibition-overlay,
+#generic-series-overlay{
   position:fixed;inset:0;z-index:5400;
   background:var(--bg);overflow-y:auto;
   opacity:0;pointer-events:none;
@@ -416,7 +417,8 @@ body::before{
 }
 #polaroid-overlay.open,
 #analogue-overlay.open,
-#exhibition-overlay.open{opacity:1;pointer-events:all}
+#exhibition-overlay.open,
+#generic-series-overlay.open{opacity:1;pointer-events:all}
 
 /* ─────────────────────────────────────────
    VIDEO OVERLAYS (shared base)
@@ -1294,6 +1296,7 @@ input[type=file].admin-file-input{display:none}
   </div>
 
   <hr class="v-divider"/>
+  <div id="p-series-section"></div>
   <div class="v-images" id="p-images-grid"></div>
 </div>
 
@@ -1317,6 +1320,7 @@ input[type=file].admin-file-input{display:none}
   </div>
 
   <hr class="v-divider"/>
+  <div id="pol-series-section"></div>
   <div class="o-grid" id="polaroid-grid"></div>
 </div>
 
@@ -1340,6 +1344,7 @@ input[type=file].admin-file-input{display:none}
   </div>
 
   <hr class="v-divider"/>
+  <div id="ana-series-section"></div>
   <div class="o-grid" id="analogue-grid"></div>
 </div>
 
@@ -1409,7 +1414,23 @@ input[type=file].admin-file-input{display:none}
   </div>
 
   <hr class="v-divider"/>
+  <div id="exh-series-section"></div>
   <div class="o-grid" id="exhibition-grid"></div>
+</div>
+
+<!-- ══════════════════════════════
+     GENERIC SERIES OVERLAY
+══════════════════════════════ -->
+<div id="generic-series-overlay">
+  <div class="o-nav">
+    <div class="o-nav-title" id="gseries-title"></div>
+    <button class="back-btn" onclick="closeGenericSeries()">← Back</button>
+  </div>
+  <div class="o-hero">
+    <img id="gseries-hero-img" src="" alt=""/>
+  </div>
+  <hr class="v-divider"/>
+  <div class="o-grid" id="gseries-grid"></div>
 </div>
 
 <!-- LIGHTBOX -->
@@ -1499,6 +1520,11 @@ function openPortraiture(){
   document.body.style.overflow = 'hidden';
   document.documentElement.style.scrollSnapType = 'none';
   history.pushState({view: 'portraiture'}, '');
+  loadSeriesSection('p-series-section', 'assets/s2-portraiture', [
+    { key: 'series-i',   label: 'Series I',   title: 'Series I' },
+    { key: 'series-ii',  label: 'Series II',  title: 'Series II' },
+    { key: 'series-iii', label: 'Series III', title: 'Series III' },
+  ]);
 }
 function closePortraiture(){
   document.getElementById('portraiture-overlay').classList.remove('open');
@@ -1525,25 +1551,33 @@ function _closeOverlay(id){
 // ── Polaroid Real+ ──
 function openPolaroid(){
   _openOverlay('polaroid-overlay', 'polaroid', () => {
-    fetch('assets/s3-polaroid/grid/list.json')
-      .then(r => r.json()).then(files => {
-        const grid = document.getElementById('polaroid-grid');
-        grid.innerHTML = '';
-        const hero = document.getElementById('pol-hero-img');
-        if(files.length > 0 && !hero.src.includes('assets')){
-          hero.src = 'assets/s3-polaroid/cover/' + encodeURIComponent(files[0]);
-        }
-        files.forEach(f => {
-          const cell = document.createElement('div');
-          cell.className = 'o-grid-cell';
-          const img = document.createElement('img');
-          img.src = 'assets/s3-polaroid/grid/' + encodeURIComponent(f);
-          img.alt = f;
-          img.onclick = () => openLb(img.src, '');
-          cell.appendChild(img);
-          grid.appendChild(cell);
+    const hero = document.getElementById('pol-hero-img');
+    if (!hero.src.includes('assets')) {
+      fetch('assets/s3-polaroid/cover/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+        .then(files => { if (files[0]) hero.src = 'assets/s3-polaroid/cover/' + encodeURIComponent(files[0]); });
+    }
+    const grid = document.getElementById('polaroid-grid');
+    if (!grid.children.length) {
+      fetch('assets/s3-polaroid/grid/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+        .then(files => {
+          files.forEach(f => {
+            const cell = document.createElement('div');
+            cell.className = 'o-grid-cell';
+            const img = document.createElement('img');
+            img.src = 'assets/s3-polaroid/grid/' + encodeURIComponent(f);
+            img.alt = f;
+            img.onclick = () => openLb(img.src, '');
+            cell.appendChild(img);
+            grid.appendChild(cell);
+          });
         });
-      }).catch(() => {});
+    }
+    loadSeriesSection('pol-series-section', 'assets/s3-polaroid', [
+      { key: 'series-i',   label: 'Series I',   title: 'Series I' },
+      { key: 'series-ii',  label: 'Series II',  title: 'Series II' },
+      { key: 'series-iii', label: 'Series III', title: 'Series III' },
+      { key: 'series-iv',  label: 'Series IV',  title: 'Series IV' },
+    ]);
   });
 }
 function closePolaroid(){ _closeOverlay('polaroid-overlay'); }
@@ -1551,25 +1585,33 @@ function closePolaroid(){ _closeOverlay('polaroid-overlay'); }
 // ── Analogue Photography ──
 function openAnalogue(){
   _openOverlay('analogue-overlay', 'analogue', () => {
-    fetch('assets/s4-analogue/grid/list.json')
-      .then(r => r.json()).then(files => {
-        const grid = document.getElementById('analogue-grid');
-        grid.innerHTML = '';
-        const hero = document.getElementById('ana-hero-img');
-        if(files.length > 0 && !hero.src.includes('assets')){
-          hero.src = 'assets/s4-analogue/cover/' + encodeURIComponent(files[0]);
-        }
-        files.forEach(f => {
-          const cell = document.createElement('div');
-          cell.className = 'o-grid-cell';
-          const img = document.createElement('img');
-          img.src = 'assets/s4-analogue/grid/' + encodeURIComponent(f);
-          img.alt = f;
-          img.onclick = () => openLb(img.src, '');
-          cell.appendChild(img);
-          grid.appendChild(cell);
+    const hero = document.getElementById('ana-hero-img');
+    if (!hero.src.includes('assets')) {
+      fetch('assets/s4-analogue/cover/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+        .then(files => { if (files[0]) hero.src = 'assets/s4-analogue/cover/' + encodeURIComponent(files[0]); });
+    }
+    const grid = document.getElementById('analogue-grid');
+    if (!grid.children.length) {
+      fetch('assets/s4-analogue/grid/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+        .then(files => {
+          files.forEach(f => {
+            const cell = document.createElement('div');
+            cell.className = 'o-grid-cell';
+            const img = document.createElement('img');
+            img.src = 'assets/s4-analogue/grid/' + encodeURIComponent(f);
+            img.alt = f;
+            img.onclick = () => openLb(img.src, '');
+            cell.appendChild(img);
+            grid.appendChild(cell);
+          });
         });
-      }).catch(() => {});
+    }
+    loadSeriesSection('ana-series-section', 'assets/s4-analogue', [
+      { key: 'series-i',   label: 'Series I',   title: 'Series I' },
+      { key: 'series-ii',  label: 'Series II',  title: 'Series II' },
+      { key: 'series-iii', label: 'Series III', title: 'Series III' },
+      { key: 'series-iv',  label: 'Series IV',  title: 'Series IV' },
+    ]);
   });
 }
 function closeAnalogue(){ _closeOverlay('analogue-overlay'); }
@@ -1597,28 +1639,98 @@ function closeDestino(){
 // ── Exhibition ──
 function openExhibition(){
   _openOverlay('exhibition-overlay', 'exhibition', () => {
-    fetch('assets/s7-exhibition/grid/list.json')
-      .then(r => r.json()).then(files => {
-        const grid = document.getElementById('exhibition-grid');
-        grid.innerHTML = '';
-        const hero = document.getElementById('exh-hero-img');
-        if(files.length > 0 && !hero.src.includes('assets')){
-          hero.src = 'assets/s7-exhibition/cover/' + encodeURIComponent(files[0]);
-        }
-        files.forEach(f => {
-          const cell = document.createElement('div');
-          cell.className = 'o-grid-cell';
-          const img = document.createElement('img');
-          img.src = 'assets/s7-exhibition/grid/' + encodeURIComponent(f);
-          img.alt = f;
-          img.onclick = () => openLb(img.src, '');
-          cell.appendChild(img);
-          grid.appendChild(cell);
+    const hero = document.getElementById('exh-hero-img');
+    if (!hero.src.includes('assets')) {
+      fetch('assets/s7-exhibition/cover/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+        .then(files => { if (files[0]) hero.src = 'assets/s7-exhibition/cover/' + encodeURIComponent(files[0]); });
+    }
+    const grid = document.getElementById('exhibition-grid');
+    if (!grid.children.length) {
+      fetch('assets/s7-exhibition/grid/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+        .then(files => {
+          files.forEach(f => {
+            const cell = document.createElement('div');
+            cell.className = 'o-grid-cell';
+            const img = document.createElement('img');
+            img.src = 'assets/s7-exhibition/grid/' + encodeURIComponent(f);
+            img.alt = f;
+            img.onclick = () => openLb(img.src, '');
+            cell.appendChild(img);
+            grid.appendChild(cell);
+          });
         });
-      }).catch(() => {});
+    }
+    loadSeriesSection('exh-series-section', 'assets/s7-exhibition', [
+      { key: 'series-i',  label: 'Series I',  title: 'Series I' },
+      { key: 'series-ii', label: 'Series II', title: 'Series II' },
+    ]);
   });
 }
 function closeExhibition(){ _closeOverlay('exhibition-overlay'); }
+
+// ── Generic Series Overlay ──
+function openSeries(title, basePath) {
+  document.getElementById('gseries-title').textContent = title;
+  _openOverlay('generic-series-overlay', 'gseries', () => {
+    fetch(basePath + '/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+      .then(files => {
+        const hero = document.getElementById('gseries-hero-img');
+        const grid = document.getElementById('gseries-grid');
+        grid.innerHTML = '';
+        if (files.length > 0) {
+          hero.src = basePath + '/' + encodeURIComponent(files[0]);
+          hero.style.display = '';
+          files.slice(1).forEach(f => {
+            const cell = document.createElement('div');
+            cell.className = 'o-grid-cell';
+            const img = document.createElement('img');
+            img.src = basePath + '/' + encodeURIComponent(f);
+            img.alt = f;
+            img.onclick = () => openLb(img.src, '');
+            cell.appendChild(img);
+            grid.appendChild(cell);
+          });
+        } else {
+          hero.style.display = 'none';
+        }
+      });
+  });
+}
+function closeGenericSeries() { _closeOverlay('generic-series-overlay'); }
+
+// ── Series Section Loader ──
+function loadSeriesSection(sectionId, basePath, seriesDefs) {
+  const section = document.getElementById(sectionId);
+  if (!section || section.children.length) return;
+  Promise.all(seriesDefs.map(s =>
+    fetch(basePath + '/' + s.key + '/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+  )).then(results => {
+    seriesDefs.forEach((s, i) => {
+      if (results[i].length > 0) {
+        const cover = basePath + '/' + s.key + '/' + encodeURIComponent(results[i][0]);
+        section.appendChild(createSeriesBlock(s.label, s.title,
+          () => openSeries(s.title, basePath + '/' + s.key), cover));
+      }
+    });
+  });
+}
+
+// ── Slide backgrounds s2–s5, s7 (loaded from cover/list.json) ──
+function setSlideBg(idx, url) {
+  const slide = document.querySelector('.slide[data-index="' + idx + '"]');
+  if (!slide) return;
+  const bg = slide.querySelector('.slide-bg');
+  if (!bg) return;
+  bg.style.backgroundImage = 'url(' + url + ')';
+  bg.style.backgroundSize = 'cover';
+  bg.style.backgroundPosition = 'center';
+}
+[[2,'assets/s2-portraiture/cover'],[3,'assets/s3-polaroid/cover'],
+ [4,'assets/s4-analogue/cover'],[5,'assets/s5-rostrum/cover'],
+ [7,'assets/s7-exhibition/cover']].forEach(([idx, base]) => {
+  fetch(base + '/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
+    .then(files => { if (files[0]) setSlideBg(idx, base + '/' + encodeURIComponent(files[0])); });
+});
 
 window.addEventListener('popstate', e => {
   const view = e.state?.view ?? null;
@@ -1627,6 +1739,7 @@ window.addEventListener('popstate', e => {
     if (document.getElementById('vermilion-overlay').classList.contains('open')) closeVermilion();
   } else {
     if (document.getElementById('img-lightbox').classList.contains('show')) { closeLb(); return; }
+    if (document.getElementById('generic-series-overlay').classList.contains('open')) { closeGenericSeries(); return; }
     if (document.getElementById('exhibition-overlay').classList.contains('open')) { closeExhibition(); return; }
     if (document.getElementById('destino-overlay').classList.contains('open')) { closeDestino(); return; }
     if (document.getElementById('rostrum-overlay').classList.contains('open')) { closeRostrum(); return; }
@@ -1658,6 +1771,7 @@ document.getElementById('img-lightbox').addEventListener('click', e => {
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape'){
     if(document.getElementById('img-lightbox').classList.contains('show')){ closeLb(); return; }
+    if(document.getElementById('generic-series-overlay').classList.contains('open')){ history.back(); return; }
     if(document.getElementById('exhibition-overlay').classList.contains('open')){ history.back(); return; }
     if(document.getElementById('destino-overlay').classList.contains('open')){ history.back(); return; }
     if(document.getElementById('rostrum-overlay').classList.contains('open')){ history.back(); return; }
@@ -1958,7 +2072,7 @@ function populatePortraitureImages(names) {
   if (!names.length) return;
   const heroImg = document.getElementById('p-hero-img');
   if (heroImg) {
-    const heroSrc = 'assets/s2-portraiture/' + encodeURIComponent(names[0]);
+    const heroSrc = 'assets/s2-portraiture/grid/' + encodeURIComponent(names[0]);
     heroImg.src = heroSrc;
     heroImg.onclick = () => openLb(heroSrc, 'Commercial Portraiture 1');
   }
@@ -1966,7 +2080,7 @@ function populatePortraitureImages(names) {
   if (!grid) return;
   grid.innerHTML = '';
   names.slice(1).forEach((name, i) => {
-    const src = 'assets/s2-portraiture/' + encodeURIComponent(name);
+    const src = 'assets/s2-portraiture/grid/' + encodeURIComponent(name);
     const label = 'Commercial Portraiture ' + (i + 2);
     const img = document.createElement('img');
     img.src = src; img.alt = label;
@@ -2004,7 +2118,7 @@ function createSeriesBlock(label, title, openFn, coverPath) {
 Promise.all([
   fetch('assets/s1-ceramics/vermilion/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
   fetch('assets/s1-ceramics/amber/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
-  fetch('assets/s2-portraiture/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
+  fetch('assets/s2-portraiture/grid/list.json').then(r => r.ok ? r.json() : []).catch(() => []),
   fetch('assets/s1-ceramics/grid/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
 ]).then(([vNames, aNames, pNames, cNames]) => {
   const vList = Array.isArray(vNames) ? vNames : [];

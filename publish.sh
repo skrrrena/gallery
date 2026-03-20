@@ -14,11 +14,7 @@
 MSG=${1:-"update"}
 
 echo "→ 更新所有图片列表..."
-node update-cover-list.js
-node update-ceramics-list.js
-node update-vermilion-list.js
-node update-amber-list.js
-node update-portraiture-list.js
+node update-all-lists.js
 
 echo "→ 暂存所有变更..."
 git add -A
