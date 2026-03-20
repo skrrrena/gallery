@@ -386,27 +386,20 @@ body::before{
   border:none;border-top:1px solid rgba(237,234,226,.08);
   margin:0;
 }
-/* Mixed grid: every 3rd image (1st, 4th, 7th…) spans full width */
 .v-images{
   display:grid;grid-template-columns:1fr 1fr;
   gap:2px;background:var(--bg);padding-top:2px;
 }
 .v-images img{
   width:100%;aspect-ratio:3/4;
-  object-fit:contain;object-position:center;
+  object-fit:cover;object-position:center;
   display:block;background:var(--surface);cursor:none;
-}
-.v-images img:nth-child(3n+1){
-  grid-column:1/-1;
-  aspect-ratio:16/9;
-  object-fit:cover;
 }
 @media(max-width:640px){
   .v-nav{padding:1rem 1.5rem}
   .v-essay{padding:3rem 1.5rem}
   .v-essay-title{font-size:1.8rem}
   .v-images{grid-template-columns:1fr}
-  .v-images img:nth-child(3n+1){grid-column:auto}
 }
 /* ─────────────────────────────────────────
    SERIES BLOCKS (image-based entries)
