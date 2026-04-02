@@ -1789,18 +1789,32 @@ document.addEventListener('keydown', e => {
 // ── DOT NAV ──
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.counter-dot');
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      const idx = e.target.dataset.index;
-      if(idx){
-        dots.forEach((d,i) => d.classList.toggle('active', i === +idx-1));
-        if(+idx > 1) document.getElementById('scroll-hint')?.classList.add('gone');
-      }
-    }
+
+function getActiveSlideIndex() {
+  let best = 0, bestDist = Infinity;
+  slides.forEach((s, i) => {
+    const dist = Math.abs(s.getBoundingClientRect().top);
+    if(dist < bestDist){ bestDist = dist; best = i; }
   });
-}, {threshold:.6});
-slides.forEach(s => io.observe(s));
+  return best;
+}
+
+function updateDots() {
+  const idx = getActiveSlideIndex();
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  if(idx > 0) document.getElementById('scroll-hint')?.classList.add('gone');
+}
+
+if('onscrollend' in window) {
+  window.addEventListener('scrollend', updateDots);
+} else {
+  let scrollTimer;
+  window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(updateDots, 200);
+  }, {passive: true});
+}
+
 dots.forEach(dot => {
   dot.addEventListener('click', () => {
     const idx = dot.dataset.index;
