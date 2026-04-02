@@ -143,7 +143,13 @@
     "ceramics.spec.firingLabel": "Firing",
     "ceramics.spec.firingVal": "Wood / gas reduction",
     "ceramics.spec.yearLabel": "Year",
-    "ceramics.spec.yearVal": "2024–2025"
+    "ceramics.spec.yearVal": "2024–2025",
+    "portraiture.h2": "Portraiture / Commissioned Work",
+    "portraiture.p1": "A portrait practice developed through commissioned sessions, using digital tools to construct images that carry the texture and temporal distance of film.",
+    "portraiture.spec.mediumLabel": "Medium",
+    "portraiture.spec.mediumVal": "Digital photography",
+    "portraiture.spec.yearLabel": "Year",
+    "portraiture.spec.yearVal": "2025–"
   },
   "zh": {
     "nav.name": "张天安",
@@ -197,7 +203,6 @@
     "blog2.date": "2020",
     "blog2.title": "ROSTRUM——当语言失效时",
     "blog2.excerpt": "作品回应弦子朱军案，以一座讲台为线索，既是一次通往法院的具象行进，也是一场关于言说与沉默的象征之旅。片中并置托妮·莫里森的演说《当语言消亡时》，于无声之处，重新辨认开口的可能。",
-    "slide5.year": "2020",
     "blog3.date": "2021",
     "blog3.title": "肖像：在模拟影像中被表演的自我",
     "blog3.excerpt": "从胶片肖像出发，思考自我如何在镜头前被表演、被排练，并最终沉淀在颗粒之中。",
@@ -221,7 +226,13 @@
     "ceramics.spec.firingLabel": "烧制方式",
     "ceramics.spec.firingVal": "电窑烧制",
     "ceramics.spec.yearLabel": "年份",
-    "ceramics.spec.yearVal": "2024–2025"
+    "ceramics.spec.yearVal": "2024–2025",
+    "portraiture.h2": "肖像 / 委托创作",
+    "portraiture.p1": "在委托拍摄中发展出的肖像实践，借助数码工具构建图像，同时保留胶片般的质感与时间的距离感。",
+    "portraiture.spec.mediumLabel": "创作媒介",
+    "portraiture.spec.mediumVal": "数码摄影",
+    "portraiture.spec.yearLabel": "年份",
+    "portraiture.spec.yearVal": "2025–"
   },
   "ja": {
     "nav.name": "Tianan Zhang",
@@ -297,6 +308,12 @@
     "ceramics.spec.firingLabel": "焼成",
     "ceramics.spec.firingVal": "薪焼き / ガス還元焼成",
     "ceramics.spec.yearLabel": "制作年",
-    "ceramics.spec.yearVal": "2024–2025"
+    "ceramics.spec.yearVal": "2024–2025",
+    "portraiture.h2": "コマーシャルポートレイト",
+    "portraiture.p1": "コミッションセッションを通じて発展させたポートレイト実践。デジタルツールを用いながら、フィルムの質感と時間的な距離感を持つイメージを構築する。",
+    "portraiture.spec.mediumLabel": "メディウム",
+    "portraiture.spec.mediumVal": "デジタル写真",
+    "portraiture.spec.yearLabel": "制作年",
+    "portraiture.spec.yearVal": "2025–"
   }
 }

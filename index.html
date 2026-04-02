@@ -1288,31 +1288,25 @@ input[type=file].admin-file-input{display:none}
     <button class="back-btn" onclick="history.back()" data-i18n="portraiture.back">← Back</button>
   </div>
 
-  <div class="v-hero">
-    <img id="p-hero-img" src="" alt="Commercial Portraiture"/>
-  </div>
-
-  <div class="v-essay">
-    <div class="p-essay-en active">
-      <h1 class="v-essay-title" id="p-en-title">Commercial Portraiture</h1>
-      <span class="v-essay-year" id="p-en-year">Photography · 2025–2026</span>
-      <p id="p-en-p1"></p>
+  <div class="c-text">
+    <div class="c-text-left">
+      <h2 data-i18n="portraiture.h2">Portraiture / Commissioned Work</h2>
+      <p data-i18n="portraiture.p1">A portrait practice developed through commissioned sessions, using digital tools to construct images that carry the texture and temporal distance of film.</p>
     </div>
-    <div class="p-essay-zh">
-      <h1 class="v-essay-title" id="p-zh-title">商业肖像摄影</h1>
-      <span class="v-essay-year" id="p-zh-year">摄影 · 2025–2026</span>
-      <p id="p-zh-p1"></p>
-    </div>
-    <div class="p-essay-ja">
-      <h1 class="v-essay-title" id="p-ja-title">コマーシャルポートレイト</h1>
-      <span class="v-essay-year" id="p-ja-year">写真 · 2025–2026</span>
-      <p id="p-ja-p1"></p>
+    <div class="c-specs">
+      <div>
+        <div class="c-spec-label" data-i18n="portraiture.spec.mediumLabel">Medium</div>
+        <div class="c-spec-val" data-i18n="portraiture.spec.mediumVal">Digital photography</div>
+      </div>
+      <div>
+        <div class="c-spec-label" data-i18n="portraiture.spec.yearLabel">Year</div>
+        <div class="c-spec-val" data-i18n="portraiture.spec.yearVal">2025–</div>
+      </div>
     </div>
   </div>
 
-  <hr class="v-divider"/>
   <div id="p-series-section"></div>
-  <div class="v-images" id="p-images-grid"></div>
+  <div class="c-grid" id="p-grid"></div>
 </div>
 
 <!-- ══════════════════════════════
@@ -2167,22 +2161,19 @@ function populateAmberImages(names) {
 
 function populatePortraitureImages(names) {
   if (!names.length) return;
-  const heroImg = document.getElementById('p-hero-img');
-  if (heroImg) {
-    const heroSrc = 'assets/s2-portraiture/grid/' + encodeURIComponent(names[0]);
-    heroImg.src = heroSrc;
-    heroImg.onclick = () => openLb(heroSrc, 'Commercial Portraiture 1');
-  }
-  const grid = document.getElementById('p-images-grid');
+  const grid = document.getElementById('p-grid');
   if (!grid) return;
   grid.innerHTML = '';
-  names.slice(1).forEach((name, i) => {
+  names.forEach((name) => {
     const src = 'assets/s2-portraiture/grid/' + encodeURIComponent(name);
-    const label = 'Commercial Portraiture ' + (i + 2);
-    const img = document.createElement('img');
-    img.src = src; img.alt = label;
-    img.onclick = () => openLb(src, label);
-    grid.appendChild(img);
+    const title = titleFromFilename(name);
+    const cell = document.createElement('div');
+    cell.className = 'c-grid-cell';
+    cell.onclick = () => openLb(src, title);
+    cell.innerHTML =
+      '<img src="' + src + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
+      '<div class="c-grid-info"><div class="c-grid-info-title">' + title.replace(/</g, '&lt;') + '</div></div>';
+    grid.appendChild(cell);
   });
 }
 
