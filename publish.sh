@@ -14,7 +14,7 @@
 MSG=${1:-"update"}
 
 echo "→ 更新所有图片列表..."
-node update-all-lists.js
+python3 update-all-lists.py
 
 echo "→ 暂存所有变更..."
 git add -A
