@@ -1255,24 +1255,20 @@ input[type=file].admin-file-input{display:none}
       <h2 data-i18n="ceramics.h2">Material as memory</h2>
       <p data-i18n="ceramics.p1">These objects began as questions about use — what it means to make something that holds liquid, that fits a hand, that survives fire. The answers came slowly, through the clay itself.</p>
       <p data-i18n="ceramics.p2">Each piece is thrown on the wheel and fired in a wood or gas kiln. The glazes are layered to encourage unpredictability: iron wash over shino, celadon over raw stoneware. The marks of making remain visible.</p>
-      <div class="c-specs">
-        <div>
-          <div class="c-spec-label" data-i18n="ceramics.spec.materialsLabel">Materials</div>
-          <div class="c-spec-val" data-i18n="ceramics.spec.materialsVal">Stoneware, porcelain</div>
-        </div>
-        <div>
-          <div class="c-spec-label" data-i18n="ceramics.spec.methodLabel">Method</div>
-          <div class="c-spec-val" data-i18n="ceramics.spec.methodVal">Wheel-thrown</div>
-        </div>
-        <div>
-          <div class="c-spec-label" data-i18n="ceramics.spec.yearLabel">Year</div>
-          <div class="c-spec-val" data-i18n="ceramics.spec.yearVal">2024–2025</div>
-        </div>
-      </div>
     </div>
-    <div class="c-text-photo">
-      <img src="assets/s1-ceramics/process-thumb.JPG" alt="Process"/>
-      <img src="assets/s1-ceramics/process_1-thumb.JPG" alt="Process"/>
+    <div class="c-specs">
+      <div>
+        <div class="c-spec-label" data-i18n="ceramics.spec.materialsLabel">Materials</div>
+        <div class="c-spec-val" data-i18n="ceramics.spec.materialsVal">Stoneware, porcelain</div>
+      </div>
+      <div>
+        <div class="c-spec-label" data-i18n="ceramics.spec.methodLabel">Method</div>
+        <div class="c-spec-val" data-i18n="ceramics.spec.methodVal">Wheel-thrown</div>
+      </div>
+      <div>
+        <div class="c-spec-label" data-i18n="ceramics.spec.yearLabel">Year</div>
+        <div class="c-spec-val" data-i18n="ceramics.spec.yearVal">2024–2025</div>
+      </div>
     </div>
   </div>
 
@@ -2186,7 +2182,7 @@ function cerHeroStartTimer(){
   cerHeroTimer = setInterval(() => {
     cerHeroIndex = (cerHeroIndex + 1) % cerHeroImages.length;
     cerHeroSet();
-  }, 2500);
+  }, 2000);
 }
 function cerHeroResetTimer(){
   cerHeroStartTimer();
@@ -2286,7 +2282,7 @@ function createHeroCarousel(layers, slideEl, images) {
   }
   function startTimer() {
     if (timer) clearInterval(timer);
-    timer = setInterval(function(){ currentIdx = (currentIdx + 1) % images.length; set(); }, 2500);
+    timer = setInterval(function(){ currentIdx = (currentIdx + 1) % images.length; set(); }, 2000);
   }
   function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
   function goTo(idx, pause) {
