@@ -132,12 +132,38 @@ body::before{
   opacity:1;
   transform:translateY(-50%) translateX(2px);
 }
-.hero-arrow-prev{left:1.3rem;}
-.hero-arrow-next{right:1.3rem;}
+.hero-arrow-prev{left:18%;}
+.hero-arrow-next{right:18%;}
 @media(max-width:600px){
   .hero-arrow{font-size:.7rem;padding:.3rem .45rem;}
   .hero-arrow-prev{left:.6rem;}
   .hero-arrow-next{right:.6rem;}
+}
+
+/* ── SLIDE THUMB STRIP ── */
+.slide-thumb-strip{
+  grid-column:1/-1;
+  display:flex;gap:.35rem;align-items:center;justify-content:center;
+  padding:.4rem .75rem .6rem;
+  opacity:0;
+  transition:opacity .25s ease;
+  pointer-events:none;
+}
+.slide:hover .slide-thumb-strip{opacity:1;pointer-events:all;}
+.slide-thumb-strip img{
+  width:48px;height:32px;object-fit:cover;
+  border-radius:2px;
+  opacity:.35;
+  border:1px solid transparent;
+  transition:opacity .15s,border-color .15s;
+  flex-shrink:0;
+}
+.slide-thumb-strip img:hover,.slide-thumb-strip img.st-active{
+  opacity:1;
+  border-color:rgba(237,234,226,.6);
+}
+@media(hover:none){
+  .slide-thumb-strip{opacity:1;pointer-events:all;}
 }
 
 /* view detail btn */
@@ -291,10 +317,12 @@ body::before{
 
 /* grid */
 .c-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);
+  display:grid;grid-template-columns:repeat(4,1fr);
   gap:3px;background:var(--bg);
   padding:3px;margin-top:3px;
 }
+@media(max-width:1000px){.c-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.c-grid{grid-template-columns:repeat(2,1fr)}}
 .c-grid-cell{
   position:relative;overflow:hidden;cursor:none;
   background:var(--surface);aspect-ratio:4/5;
@@ -604,6 +632,12 @@ body::before{
   display:flex;flex-direction:column;
   gap:3px;margin-bottom:3px;
 }
+.c-other-header{
+  padding:2.5rem 2.5rem 1rem;
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);
+  border-top:1px solid rgba(237,234,226,.06);
+}
 .series-block{
   position:relative;
   width:100%;height:70vh;
@@ -742,8 +776,6 @@ body::before{
   .blog-grid{grid-template-columns:1fr}
   .c-hero{grid-template-columns:1fr;height:60vh}
   .c-hero-side{display:none}
-  .c-grid{grid-template-columns:1fr 1fr}
-  .c-grid-cell.wide{grid-column:span 2}
   .c-text{grid-template-columns:1fr;padding:3rem 1.5rem;gap:2rem}
   .ceramics-overlay-nav{padding:1rem 1.5rem}
   #nav{padding:1rem 1.5rem}
@@ -1233,6 +1265,8 @@ input[type=file].admin-file-input{display:none}
 
   <!-- Series blocks：image-based entries for each named series -->
   <div id="series-section"></div>
+
+  <div class="c-other-header" data-i18n="ceramics.otherWorks">Other Works</div>
 
   <!-- Ceramics grid：由 assets/s1-ceramics/grid/list.json 自动生成，运行 node update-ceramics-list.js 更新 -->
   <div class="c-grid" id="ceramics-grid"></div>
@@ -2112,13 +2146,15 @@ let cerHeroTimer;
 
 function cerHeroSet(){
   if(!cerLayers[0] || !cerLayers[1] || !cerHeroImages.length) return;
-  const nextIndex = (cerHeroIndex + 1) % cerHeroImages.length;
   const nextSrc = cerHeroImages[cerHeroIndex];
   const otherLayer = 1 - cerHeroCurrentLayer;
   cerLayers[otherLayer].style.backgroundImage = `url(${nextSrc})`;
   cerLayers[otherLayer].classList.remove('hide');
   cerLayers[cerHeroCurrentLayer].classList.add('hide');
   cerHeroCurrentLayer = otherLayer;
+  document.querySelectorAll('.slide[data-index="1"] .slide-thumb-strip img').forEach((t, i) => {
+    t.classList.toggle('st-active', i === cerHeroIndex);
+  });
 }
 function cerHeroGoTo(index){
   cerHeroIndex = (index + cerHeroImages.length) % cerHeroImages.length;
@@ -2126,13 +2162,16 @@ function cerHeroGoTo(index){
   cerLayers[cerHeroCurrentLayer].style.backgroundImage = `url(${src})`;
   cerLayers[cerHeroCurrentLayer].classList.remove('hide');
   cerLayers[1 - cerHeroCurrentLayer].classList.add('hide');
+  document.querySelectorAll('.slide[data-index="1"] .slide-thumb-strip img').forEach((t, i) => {
+    t.classList.toggle('st-active', i === cerHeroIndex);
+  });
 }
 function cerHeroStartTimer(){
   if(cerHeroTimer) clearInterval(cerHeroTimer);
   cerHeroTimer = setInterval(() => {
     cerHeroIndex = (cerHeroIndex + 1) % cerHeroImages.length;
     cerHeroSet();
-  }, 5000);
+  }, 3500);
 }
 function cerHeroResetTimer(){
   cerHeroStartTimer();
@@ -2159,6 +2198,24 @@ function initCerHero(){
   cerHeroStartTimer();
   const slide1 = document.querySelector('.slide[data-index="1"]');
   if(!slide1) return;
+
+  // thumb strip for slide 1
+  if(cerHeroImages.length > 1){
+    const strip = document.createElement('div');
+    strip.className = 'slide-thumb-strip';
+    cerHeroImages.forEach((src, i) => {
+      const t = document.createElement('img');
+      t.src = src; t.alt = '';
+      if(i === 0) t.classList.add('st-active');
+      t.addEventListener('mouseenter', () => { cerHeroGoTo(i); cerHeroTimer && clearInterval(cerHeroTimer); cerHeroTimer = null; });
+      t.addEventListener('click', e => { e.stopPropagation(); cerHeroGoTo(i); cerHeroTimer && clearInterval(cerHeroTimer); cerHeroTimer = null; });
+      strip.appendChild(t);
+    });
+    strip.addEventListener('mouseleave', () => cerHeroStartTimer());
+    const content = slide1.querySelector('.slide-content');
+    if(content) content.insertBefore(strip, content.firstChild);
+    else slide1.appendChild(strip);
+  }
   // touch swipe (mobile one-finger, or trackpad touch)
   let touchStartX = null;
   slide1.addEventListener('touchstart', e => {
@@ -2214,10 +2271,19 @@ function createHeroCarousel(layers, slideEl, images) {
   }
   function startTimer() {
     if (timer) clearInterval(timer);
-    timer = setInterval(function(){ currentIdx = (currentIdx + 1) % images.length; set(); }, 5000);
+    timer = setInterval(function(){ currentIdx = (currentIdx + 1) % images.length; set(); }, 3500);
   }
-  function next(e) { if(e) e.stopPropagation(); currentIdx = (currentIdx + 1) % images.length; set(); startTimer(); }
-  function prev(e) { if(e) e.stopPropagation(); currentIdx = (currentIdx - 1 + images.length) % images.length; set(); startTimer(); }
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+  function goTo(idx, pause) {
+    currentIdx = ((idx % images.length) + images.length) % images.length;
+    set();
+    if (pause) stopTimer(); else startTimer();
+    if (slideEl) {
+      slideEl.querySelectorAll('.slide-thumb-strip img').forEach(function(t, i){ t.classList.toggle('st-active', i === currentIdx); });
+    }
+  }
+  function next(e) { if(e) e.stopPropagation(); goTo(currentIdx + 1); }
+  function prev(e) { if(e) e.stopPropagation(); goTo(currentIdx - 1); }
   function init() {
     layers[0].style.backgroundImage = 'url(' + images[0] + ')';
     layers[0].classList.remove('hide');
@@ -2225,6 +2291,45 @@ function createHeroCarousel(layers, slideEl, images) {
     currentLayer = 0;
     startTimer();
     if (!slideEl) return;
+
+    // arrows
+    if (images.length > 1) {
+      var btnPrev = document.createElement('button');
+      btnPrev.className = 'hero-arrow hero-arrow-prev';
+      btnPrev.setAttribute('aria-label', 'Previous');
+      btnPrev.textContent = '←';
+      btnPrev.addEventListener('click', prev);
+      var btnNext = document.createElement('button');
+      btnNext.className = 'hero-arrow hero-arrow-next';
+      btnNext.setAttribute('aria-label', 'Next');
+      btnNext.textContent = '→';
+      btnNext.addEventListener('click', next);
+      slideEl.appendChild(btnPrev);
+      slideEl.appendChild(btnNext);
+    }
+
+    // thumb strip
+    if (images.length > 1) {
+      var strip = document.createElement('div');
+      strip.className = 'slide-thumb-strip';
+      images.forEach(function(src, i) {
+        var t = document.createElement('img');
+        t.src = src;
+        t.alt = '';
+        if (i === 0) t.classList.add('st-active');
+        // desktop: hover; mobile: click
+        t.addEventListener('mouseenter', function() { goTo(i, true); });
+        t.addEventListener('click', function(e) { e.stopPropagation(); goTo(i, true); });
+        strip.appendChild(t);
+      });
+      strip.addEventListener('mouseleave', function() { startTimer(); });
+      // insert as first child of slide-content (grid-column:1/-1 spans full width)
+      var content = slideEl.querySelector('.slide-content');
+      if (content) content.insertBefore(strip, content.firstChild);
+      else slideEl.appendChild(strip);
+    }
+
+    // touch swipe
     let touchStartX = null;
     slideEl.addEventListener('touchstart', function(e){ touchStartX = e.touches[0].clientX; }, {passive:true});
     slideEl.addEventListener('touchend', function(e){
@@ -2233,6 +2338,8 @@ function createHeroCarousel(layers, slideEl, images) {
       if (Math.abs(dx) > 40) { if (dx < 0) next(); else prev(); }
       touchStartX = null;
     }, {passive:true});
+
+    // trackpad/wheel
     let wheelAccum = 0, wheelTimer = null;
     slideEl.addEventListener('wheel', function(e){
       const dx = e.deltaX;
