@@ -360,19 +360,29 @@ body::before{
   gap:3rem;padding:3rem 2.5rem;
 }
 /* carousel */
-.c-detail-carousel{
-  position:relative;
-  background:var(--surface);
-}
+.c-detail-carousel{background:var(--surface);}
 #c-carousel-img{
   width:100%;display:block;object-fit:contain;
-  aspect-ratio:4/5;
+  max-height:70vh;
   background:var(--surface);
 }
+.c-carousel-nav{
+  display:flex;align-items:center;justify-content:center;
+  gap:1.2rem;padding:.6rem 0;
+  border-top:1px solid rgba(237,234,226,.06);
+}
+.c-carousel-nav-btn{
+  font-family:var(--mono);font-size:.75rem;
+  color:rgba(237,234,226,.6);
+  background:none;border:none;cursor:pointer;
+  padding:.2rem .5rem;
+  transition:color .18s;
+}
+.c-carousel-nav-btn:hover{color:var(--bright);}
+.c-carousel-nav-btn:disabled{opacity:.2;cursor:default;}
 .c-carousel-counter{
-  position:absolute;bottom:.8rem;left:50%;transform:translateX(-50%);
   font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;
-  color:rgba(237,234,226,.5);pointer-events:none;
+  color:rgba(237,234,226,.4);min-width:3rem;text-align:center;
 }
 /* info + thumbs */
 .c-detail-info-title{
@@ -1239,9 +1249,11 @@ input[type=file].admin-file-input{display:none}
   <div class="c-detail-body">
     <div class="c-detail-carousel">
       <img id="c-carousel-img" src="" alt=""/>
-      <button class="hero-arrow hero-arrow-prev" id="c-carousel-prev" aria-label="Previous">←</button>
-      <button class="hero-arrow hero-arrow-next" id="c-carousel-next" aria-label="Next">→</button>
-      <div class="c-carousel-counter" id="c-carousel-counter"></div>
+      <div class="c-carousel-nav">
+        <button class="c-carousel-nav-btn" id="c-carousel-prev" aria-label="Previous">←</button>
+        <div class="c-carousel-counter" id="c-carousel-counter"></div>
+        <button class="c-carousel-nav-btn" id="c-carousel-next" aria-label="Next">→</button>
+      </div>
     </div>
     <div class="c-detail-info">
       <div class="c-detail-info-title" id="c-detail-info-title"></div>
