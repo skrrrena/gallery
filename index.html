@@ -359,24 +359,45 @@ body::before{
   display:grid;grid-template-columns:1fr 1fr;
   gap:3rem;padding:3rem 2.5rem;
 }
-.c-detail-main img{width:100%;display:block;object-fit:contain;}
+/* carousel */
+.c-detail-carousel{
+  position:relative;overflow:hidden;
+  background:var(--surface);
+}
+.c-detail-carousel-track{
+  display:flex;
+  transition:transform .35s ease;
+}
+.c-detail-carousel-track img{
+  flex:0 0 100%;min-width:100%;
+  display:block;object-fit:contain;
+  aspect-ratio:4/5;
+  background:var(--surface);
+}
+.c-carousel-counter{
+  position:absolute;bottom:.8rem;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;
+  color:rgba(237,234,226,.5);pointer-events:none;
+}
+/* info + thumbs */
 .c-detail-info-title{
   font-family:var(--serif);font-style:italic;
   font-size:1.5rem;color:var(--bright);margin-bottom:1rem;
 }
 .c-detail-info-desc{font-size:.85rem;line-height:1.8;color:var(--text);}
-.c-detail-details{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
-  gap:3px;margin-top:1.5rem;
+.c-detail-thumbs{
+  display:flex;flex-wrap:wrap;gap:4px;margin-top:1.5rem;
 }
-.c-detail-details img{
-  width:100%;aspect-ratio:1;object-fit:cover;display:block;
-  cursor:none;transition:opacity .2s;
+.c-detail-thumbs img{
+  width:64px;height:64px;object-fit:cover;display:block;
+  opacity:.4;cursor:pointer;transition:opacity .2s;
 }
-.c-detail-details img:hover{opacity:.85}
+.c-detail-thumbs img.active{opacity:1;outline:1px solid rgba(237,234,226,.6);}
+.c-detail-thumbs img:hover{opacity:.75;}
 @media(max-width:800px){
   .c-detail-body{grid-template-columns:1fr;gap:1.5rem;padding:2rem 1.5rem;}
   .c-detail-nav{padding:1rem 1.5rem;}
+  .c-detail-carousel-track img{aspect-ratio:1/1;}
 }
 
 /* ─────────────────────────────────────────
@@ -1221,11 +1242,16 @@ input[type=file].admin-file-input{display:none}
     <div class="c-detail-nav-title" id="c-detail-nav-title"></div>
   </div>
   <div class="c-detail-body">
-    <div class="c-detail-main"><img id="c-detail-main-img" src="" alt=""/></div>
+    <div class="c-detail-carousel">
+      <div class="c-detail-carousel-track" id="c-carousel-track"></div>
+      <button class="hero-arrow hero-arrow-prev" id="c-carousel-prev" aria-label="Previous">←</button>
+      <button class="hero-arrow hero-arrow-next" id="c-carousel-next" aria-label="Next">→</button>
+      <div class="c-carousel-counter" id="c-carousel-counter"></div>
+    </div>
     <div class="c-detail-info">
       <div class="c-detail-info-title" id="c-detail-info-title"></div>
       <div class="c-detail-info-desc" id="c-detail-info-desc"></div>
-      <div class="c-detail-details" id="c-detail-details"></div>
+      <div class="c-detail-thumbs" id="c-detail-thumbs"></div>
     </div>
   </div>
 </div>
@@ -1832,28 +1858,70 @@ function openCeramicsDetail(item) {
   const title = item['title_' + lang] || item.title || '';
   const desc = item['desc_' + lang] || item.desc || '';
   const base = 'assets/s1-ceramics/grid/';
-  // Bug 2: clear images before loading new content
-  const mainImg = document.getElementById('c-detail-main-img');
-  mainImg.src = '';
-  const detailsEl = document.getElementById('c-detail-details');
-  detailsEl.innerHTML = '';
+  const allFiles = [item.main, ...(item.details || [])];
+  const N = allFiles.length;
+
+  // Clear previous content
+  const track = document.getElementById('c-carousel-track');
+  const thumbsEl = document.getElementById('c-detail-thumbs');
+  track.innerHTML = '';
+  thumbsEl.innerHTML = '';
+  track.style.transition = 'none';
+  track.style.transform = 'translateX(0)';
+
   // Text
   document.getElementById('c-detail-nav-title').textContent = title;
   document.getElementById('c-detail-info-title').textContent = title;
   document.getElementById('c-detail-info-desc').textContent = desc;
-  // Bug 3+4: load thumb, click opens lightbox with original
-  const origMain = base + encodeURIComponent(item.main);
-  mainImg.src = toThumb(origMain);
-  mainImg.alt = title;
-  mainImg.onclick = () => openLb(origMain, title);
-  (item.details || []).forEach(d => {
+
+  // Build carousel slides (all -thumb)
+  allFiles.forEach((filename, i) => {
     const img = document.createElement('img');
-    const origDetail = base + encodeURIComponent(d);
-    img.src = toThumb(origDetail);
-    img.alt = title;
-    img.onclick = () => openLb(origDetail, title);
-    detailsEl.appendChild(img);
+    img.src = toThumb(base + encodeURIComponent(filename));
+    img.alt = title + (i > 0 ? ' — ' + i : '');
+    track.appendChild(img);
   });
+
+  // goTo: translate track, update counter and active thumb
+  let currentIdx = 0;
+  function goTo(idx) {
+    currentIdx = ((idx % N) + N) % N;
+    track.style.transition = 'transform .35s ease';
+    track.style.transform = 'translateX(-' + (currentIdx / N * 100) + '%)';
+    document.getElementById('c-carousel-counter').textContent = (currentIdx + 1) + ' / ' + N;
+    thumbsEl.querySelectorAll('img').forEach((t, i) => t.classList.toggle('active', i === currentIdx));
+  }
+
+  // Build thumbnails
+  allFiles.forEach((filename, i) => {
+    const t = document.createElement('img');
+    t.src = toThumb(base + encodeURIComponent(filename));
+    t.alt = title;
+    t.onclick = () => goTo(i);
+    thumbsEl.appendChild(t);
+  });
+
+  // Arrow buttons
+  document.getElementById('c-carousel-prev').onclick = (e) => { e.stopPropagation(); goTo(currentIdx - 1); };
+  document.getElementById('c-carousel-next').onclick = (e) => { e.stopPropagation(); goTo(currentIdx + 1); };
+
+  // Touch swipe
+  const carousel = document.querySelector('.c-detail-carousel');
+  let _tx = null;
+  carousel.ontouchstart = (e) => { _tx = e.touches[0].clientX; };
+  carousel.ontouchend = (e) => {
+    if (_tx === null) return;
+    const dx = e.changedTouches[0].clientX - _tx;
+    if (Math.abs(dx) > 40) goTo(currentIdx + (dx < 0 ? 1 : -1));
+    _tx = null;
+  };
+
+  // Hide arrows if only one image
+  const showArrows = N > 1;
+  document.getElementById('c-carousel-prev').style.display = showArrows ? '' : 'none';
+  document.getElementById('c-carousel-next').style.display = showArrows ? '' : 'none';
+
+  goTo(0);
   document.getElementById('c-detail-panel').classList.add('open');
   document.getElementById('c-detail-panel').scrollTop = 0;
   history.pushState({view: 'ceramics-detail'}, '');
