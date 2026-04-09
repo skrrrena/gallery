@@ -196,9 +196,10 @@ body::before{
 
 /* ── SLIDE THUMB STRIP ── */
 .slide-thumb-strip{
-  grid-column:1/-1;
-  display:flex;gap:.35rem;align-items:center;justify-content:center;
-  padding:.4rem .75rem .6rem;
+  grid-column:1;
+  align-self:start;
+  display:flex;gap:.35rem;align-items:center;justify-content:flex-start;
+  padding:.6rem 0 0;
   opacity:0;
   transition:opacity .25s ease;
   pointer-events:none;
@@ -247,13 +248,19 @@ body::before{
 
 /* ── SCROLL HINT ── */
 #scroll-hint{
-  position:fixed;bottom:calc(2rem + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
+  position:fixed;bottom:calc(2rem + env(safe-area-inset-bottom));left:50%;
   font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;
   color:var(--dim);z-index:200;transition:opacity .5s;display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  opacity:.5;
+  animation:sh-float 2s ease-in-out infinite;
 }
-#scroll-hint .sh-line{width:1px;height:40px;background:var(--dim);animation:sh-pulse 2s infinite}
-#scroll-hint.gone{opacity:0;pointer-events:none}
-@keyframes sh-pulse{0%,100%{opacity:.3}50%{opacity:1}}
+#scroll-hint .sh-line{width:1px;height:40px;background:var(--dim);}
+#scroll-hint .sh-arrow{font-size:.65rem;color:var(--dim);margin-top:-.3rem;line-height:1;}
+#scroll-hint.gone{opacity:0!important;pointer-events:none}
+@keyframes sh-float{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(6px)}
+}
 
 /* ── ABOUT ── */
 #about{
@@ -1038,6 +1045,7 @@ input[type=file].admin-file-input{display:none}
 <div id="scroll-hint">
   <span>scroll</span>
   <div class="sh-line"></div>
+  <span class="sh-arrow">↓</span>
 </div>
 
 <!-- ══════════════════════════════
@@ -2306,7 +2314,9 @@ function initCerHero(){
     });
     strip.addEventListener('mouseleave', () => cerHeroStartTimer());
     const content = slide1.querySelector('.slide-content');
-    if(content) content.appendChild(strip);
+    const titleEl1 = slide1.querySelector('.slide-title');
+    if(titleEl1) titleEl1.insertAdjacentElement('afterend', strip);
+    else if(content) content.appendChild(strip);
     else slide1.appendChild(strip);
   }
   // touch swipe (mobile one-finger, or trackpad touch)
@@ -2418,7 +2428,9 @@ function createHeroCarousel(layers, slideEl, images) {
       strip.addEventListener('mouseleave', function() { startTimer(); });
       // insert as first child of slide-content (grid-column:1/-1 spans full width)
       var content = slideEl.querySelector('.slide-content');
-      if (content) content.appendChild(strip);
+      var titleEl = slideEl.querySelector('.slide-title');
+      if (titleEl) titleEl.insertAdjacentElement('afterend', strip);
+      else if (content) content.appendChild(strip);
       else slideEl.appendChild(strip);
     }
 
