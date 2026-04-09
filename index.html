@@ -340,6 +340,7 @@ body::before{
 #c-detail-panel{
   position:fixed;inset:0;z-index:5500;
   background:var(--bg);overflow-y:auto;
+  overscroll-behavior:contain;
   opacity:0;pointer-events:none;
   transform:translateX(100%);
   transition:transform .4s cubic-bezier(.25,.46,.45,.94), opacity .4s ease;
@@ -1831,18 +1832,26 @@ function openCeramicsDetail(item) {
   const title = item['title_' + lang] || item.title || '';
   const desc = item['desc_' + lang] || item.desc || '';
   const base = 'assets/s1-ceramics/grid/';
+  // Bug 2: clear images before loading new content
+  const mainImg = document.getElementById('c-detail-main-img');
+  mainImg.src = '';
+  const detailsEl = document.getElementById('c-detail-details');
+  detailsEl.innerHTML = '';
+  // Text
   document.getElementById('c-detail-nav-title').textContent = title;
   document.getElementById('c-detail-info-title').textContent = title;
   document.getElementById('c-detail-info-desc').textContent = desc;
-  const mainImg = document.getElementById('c-detail-main-img');
-  mainImg.src = base + encodeURIComponent(item.main);
+  // Bug 3+4: load thumb, click opens lightbox with original
+  const origMain = base + encodeURIComponent(item.main);
+  mainImg.src = toThumb(origMain);
   mainImg.alt = title;
-  const detailsEl = document.getElementById('c-detail-details');
-  detailsEl.innerHTML = '';
+  mainImg.onclick = () => openLb(origMain, title);
   (item.details || []).forEach(d => {
     const img = document.createElement('img');
-    img.src = base + encodeURIComponent(d);
+    const origDetail = base + encodeURIComponent(d);
+    img.src = toThumb(origDetail);
     img.alt = title;
+    img.onclick = () => openLb(origDetail, title);
     detailsEl.appendChild(img);
   });
   document.getElementById('c-detail-panel').classList.add('open');
