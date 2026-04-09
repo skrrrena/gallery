@@ -80,11 +80,11 @@ body::before{
 .slide-bg-layer{
   position:absolute;inset:0;
   background-size:cover;background-position:center;
-  transition:opacity 1.4s ease;
+  transition:opacity .8s ease;
 }
 .slide-bg-layer.hide{opacity:0;pointer-events:none}
-.slide[data-index="1"]:hover .slide-bg-layer{transform:scale(1.03);transition:transform 8s ease,opacity 1.4s ease}
-.slide[data-index="2"]:hover .slide-bg-layer,.slide[data-index="3"]:hover .slide-bg-layer,.slide[data-index="4"]:hover .slide-bg-layer,.slide[data-index="7"]:hover .slide-bg-layer{transform:scale(1.03);transition:transform 8s ease,opacity 1.4s ease}
+.slide[data-index="1"]:hover .slide-bg-layer{transform:scale(1.03);transition:transform 8s ease,opacity .8s ease}
+.slide[data-index="2"]:hover .slide-bg-layer,.slide[data-index="3"]:hover .slide-bg-layer,.slide[data-index="4"]:hover .slide-bg-layer,.slide[data-index="7"]:hover .slide-bg-layer{transform:scale(1.03);transition:transform 8s ease,opacity .8s ease}
 .slide-overlay{
   position:absolute;inset:0;
   background:linear-gradient(to top,rgba(11,11,10,.85) 0%,rgba(11,11,10,.2) 50%,transparent 100%);
@@ -151,8 +151,8 @@ body::before{
 }
 .slide:hover .slide-thumb-strip{opacity:1;pointer-events:all;}
 .slide-thumb-strip img{
-  width:48px;height:32px;object-fit:cover;
-  border-radius:2px;
+  width:40px;height:40px;object-fit:cover;
+  border-radius:7px;
   opacity:.35;
   border:1px solid transparent;
   transition:opacity .15s,border-color .15s;
@@ -2172,9 +2172,11 @@ function cerHeroSet(){
 function cerHeroGoTo(index){
   cerHeroIndex = (index + cerHeroImages.length) % cerHeroImages.length;
   const src = cerHeroImages[cerHeroIndex];
-  cerLayers[cerHeroCurrentLayer].style.backgroundImage = `url(${src})`;
-  cerLayers[cerHeroCurrentLayer].classList.remove('hide');
-  cerLayers[1 - cerHeroCurrentLayer].classList.add('hide');
+  const other = 1 - cerHeroCurrentLayer;
+  cerLayers[other].style.backgroundImage = `url(${src})`;
+  cerLayers[other].classList.remove('hide');
+  cerLayers[cerHeroCurrentLayer].classList.add('hide');
+  cerHeroCurrentLayer = other;
   document.querySelectorAll('.slide[data-index="1"] .slide-thumb-strip img').forEach((t, i) => {
     t.classList.toggle('st-active', i === cerHeroIndex);
   });
@@ -2184,7 +2186,7 @@ function cerHeroStartTimer(){
   cerHeroTimer = setInterval(() => {
     cerHeroIndex = (cerHeroIndex + 1) % cerHeroImages.length;
     cerHeroSet();
-  }, 3500);
+  }, 2500);
 }
 function cerHeroResetTimer(){
   cerHeroStartTimer();
@@ -2226,7 +2228,7 @@ function initCerHero(){
     });
     strip.addEventListener('mouseleave', () => cerHeroStartTimer());
     const content = slide1.querySelector('.slide-content');
-    if(content) content.insertBefore(strip, content.firstChild);
+    if(content) content.appendChild(strip);
     else slide1.appendChild(strip);
   }
   // touch swipe (mobile one-finger, or trackpad touch)
@@ -2284,7 +2286,7 @@ function createHeroCarousel(layers, slideEl, images) {
   }
   function startTimer() {
     if (timer) clearInterval(timer);
-    timer = setInterval(function(){ currentIdx = (currentIdx + 1) % images.length; set(); }, 3500);
+    timer = setInterval(function(){ currentIdx = (currentIdx + 1) % images.length; set(); }, 2500);
   }
   function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
   function goTo(idx, pause) {
@@ -2338,7 +2340,7 @@ function createHeroCarousel(layers, slideEl, images) {
       strip.addEventListener('mouseleave', function() { startTimer(); });
       // insert as first child of slide-content (grid-column:1/-1 spans full width)
       var content = slideEl.querySelector('.slide-content');
-      if (content) content.insertBefore(strip, content.firstChild);
+      if (content) content.appendChild(strip);
       else slideEl.appendChild(strip);
     }
 
