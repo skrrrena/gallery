@@ -697,10 +697,12 @@ body::before{
 }
 .c-other-header{
   padding:2.5rem 2.5rem 1rem;
-  font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--dim);
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(2rem,4vw,3.2rem);color:var(--bright);
+  line-height:1.1;
   border-top:1px solid rgba(237,234,226,.06);
 }
+@media(max-width:800px){.c-other-header{font-size:1.8rem}}
 .series-block{
   position:relative;
   width:100%;height:70vh;
