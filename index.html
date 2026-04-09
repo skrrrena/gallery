@@ -361,16 +361,11 @@ body::before{
 }
 /* carousel */
 .c-detail-carousel{
-  position:relative;overflow:hidden;
+  position:relative;
   background:var(--surface);
 }
-.c-detail-carousel-track{
-  display:flex;
-  transition:transform .35s ease;
-}
-.c-detail-carousel-track img{
-  flex:0 0 100%;min-width:100%;
-  display:block;object-fit:contain;
+#c-carousel-img{
+  width:100%;display:block;object-fit:contain;
   aspect-ratio:4/5;
   background:var(--surface);
 }
@@ -1243,7 +1238,7 @@ input[type=file].admin-file-input{display:none}
   </div>
   <div class="c-detail-body">
     <div class="c-detail-carousel">
-      <div class="c-detail-carousel-track" id="c-carousel-track"></div>
+      <img id="c-carousel-img" src="" alt=""/>
       <button class="hero-arrow hero-arrow-prev" id="c-carousel-prev" aria-label="Previous">←</button>
       <button class="hero-arrow hero-arrow-next" id="c-carousel-next" aria-label="Next">→</button>
       <div class="c-carousel-counter" id="c-carousel-counter"></div>
@@ -1862,33 +1857,23 @@ function openCeramicsDetail(item) {
   const N = allFiles.length;
 
   // Clear previous content
-  const track = document.getElementById('c-carousel-track');
+  const mainImg = document.getElementById('c-carousel-img');
   const thumbsEl = document.getElementById('c-detail-thumbs');
-  track.innerHTML = '';
+  mainImg.src = '';
   thumbsEl.innerHTML = '';
-  track.style.transition = 'none';
-  track.style.transform = 'translateX(0)';
 
   // Text
   document.getElementById('c-detail-nav-title').textContent = title;
   document.getElementById('c-detail-info-title').textContent = title;
   document.getElementById('c-detail-info-desc').textContent = desc;
 
-  // Build carousel slides (all -thumb)
-  allFiles.forEach((filename, i) => {
-    const img = document.createElement('img');
-    img.src = toThumb(base + encodeURIComponent(filename));
-    img.alt = title + (i > 0 ? ' — ' + i : '');
-    track.appendChild(img);
-  });
-
-  // goTo: translate track, update counter and active thumb
+  // goTo: swap single image src, update counter + active thumb
   let currentIdx = 0;
   function goTo(idx) {
     currentIdx = ((idx % N) + N) % N;
-    track.style.transition = 'transform .35s ease';
-    track.style.transform = 'translateX(-' + (currentIdx / N * 100) + '%)';
-    document.getElementById('c-carousel-counter').textContent = (currentIdx + 1) + ' / ' + N;
+    mainImg.src = toThumb(base + encodeURIComponent(allFiles[currentIdx]));
+    mainImg.alt = title + (currentIdx > 0 ? ' — ' + currentIdx : '');
+    document.getElementById('c-carousel-counter').textContent = N > 1 ? (currentIdx + 1) + ' / ' + N : '';
     thumbsEl.querySelectorAll('img').forEach((t, i) => t.classList.toggle('active', i === currentIdx));
   }
 
@@ -1901,7 +1886,10 @@ function openCeramicsDetail(item) {
     thumbsEl.appendChild(t);
   });
 
-  // Arrow buttons
+  // Arrows
+  const showArrows = N > 1;
+  document.getElementById('c-carousel-prev').style.display = showArrows ? '' : 'none';
+  document.getElementById('c-carousel-next').style.display = showArrows ? '' : 'none';
   document.getElementById('c-carousel-prev').onclick = (e) => { e.stopPropagation(); goTo(currentIdx - 1); };
   document.getElementById('c-carousel-next').onclick = (e) => { e.stopPropagation(); goTo(currentIdx + 1); };
 
@@ -1915,11 +1903,6 @@ function openCeramicsDetail(item) {
     if (Math.abs(dx) > 40) goTo(currentIdx + (dx < 0 ? 1 : -1));
     _tx = null;
   };
-
-  // Hide arrows if only one image
-  const showArrows = N > 1;
-  document.getElementById('c-carousel-prev').style.display = showArrows ? '' : 'none';
-  document.getElementById('c-carousel-next').style.display = showArrows ? '' : 'none';
 
   goTo(0);
   document.getElementById('c-detail-panel').classList.add('open');
