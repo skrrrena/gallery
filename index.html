@@ -359,6 +359,15 @@ body::before{
   border-left:2px solid var(--rust);
   font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--dim);
 }
+.c-text-left .c-specs{margin-top:2rem;}
+.c-text-photo{
+  display:flex;flex-direction:column;gap:3px;
+  align-self:start;
+}
+.c-text-photo img{
+  width:100%;display:block;
+  object-fit:cover;
+}
 .c-hero.c-hero-old,
 .c-grid.c-grid-old{
   display:none;
@@ -1246,20 +1255,24 @@ input[type=file].admin-file-input{display:none}
       <h2 data-i18n="ceramics.h2">Material as memory</h2>
       <p data-i18n="ceramics.p1">These objects began as questions about use — what it means to make something that holds liquid, that fits a hand, that survives fire. The answers came slowly, through the clay itself.</p>
       <p data-i18n="ceramics.p2">Each piece is thrown on the wheel and fired in a wood or gas kiln. The glazes are layered to encourage unpredictability: iron wash over shino, celadon over raw stoneware. The marks of making remain visible.</p>
+      <div class="c-specs">
+        <div>
+          <div class="c-spec-label" data-i18n="ceramics.spec.materialsLabel">Materials</div>
+          <div class="c-spec-val" data-i18n="ceramics.spec.materialsVal">Stoneware, porcelain</div>
+        </div>
+        <div>
+          <div class="c-spec-label" data-i18n="ceramics.spec.methodLabel">Method</div>
+          <div class="c-spec-val" data-i18n="ceramics.spec.methodVal">Wheel-thrown</div>
+        </div>
+        <div>
+          <div class="c-spec-label" data-i18n="ceramics.spec.yearLabel">Year</div>
+          <div class="c-spec-val" data-i18n="ceramics.spec.yearVal">2024–2025</div>
+        </div>
+      </div>
     </div>
-    <div class="c-specs">
-      <div>
-        <div class="c-spec-label" data-i18n="ceramics.spec.materialsLabel">Materials</div>
-        <div class="c-spec-val" data-i18n="ceramics.spec.materialsVal">Stoneware, porcelain</div>
-      </div>
-      <div>
-        <div class="c-spec-label" data-i18n="ceramics.spec.methodLabel">Method</div>
-        <div class="c-spec-val" data-i18n="ceramics.spec.methodVal">Wheel-thrown</div>
-      </div>
-      <div>
-        <div class="c-spec-label" data-i18n="ceramics.spec.yearLabel">Year</div>
-        <div class="c-spec-val" data-i18n="ceramics.spec.yearVal">2024–2025</div>
-      </div>
+    <div class="c-text-photo">
+      <img src="assets/s1-ceramics/process-thumb.JPG" alt="Process"/>
+      <img src="assets/s1-ceramics/process_1-thumb.JPG" alt="Process"/>
     </div>
   </div>
 
