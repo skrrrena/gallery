@@ -336,6 +336,48 @@ body::before{
   display:none;
 }
 
+/* ── CERAMICS DETAIL PANEL ── */
+#c-detail-panel{
+  position:fixed;inset:0;z-index:5500;
+  background:var(--bg);overflow-y:auto;
+  opacity:0;pointer-events:none;
+  transform:translateY(3rem);
+  transition:transform .35s ease, opacity .35s ease;
+}
+#c-detail-panel.open{opacity:1;pointer-events:all;transform:translateY(0)}
+.c-detail-nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(11,11,10,.9);backdrop-filter:blur(8px);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.25rem 2.5rem;border-bottom:1px solid rgba(237,234,226,.06);
+}
+.c-detail-nav-title{
+  font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--bright);
+}
+.c-detail-body{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:3rem;padding:3rem 2.5rem;
+}
+.c-detail-main img{width:100%;display:block;object-fit:contain;}
+.c-detail-info-title{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.5rem;color:var(--bright);margin-bottom:1rem;
+}
+.c-detail-info-desc{font-size:.85rem;line-height:1.8;color:var(--text);}
+.c-detail-details{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:3px;margin-top:1.5rem;
+}
+.c-detail-details img{
+  width:100%;aspect-ratio:1;object-fit:cover;display:block;
+  cursor:none;transition:opacity .2s;
+}
+.c-detail-details img:hover{opacity:.85}
+@media(max-width:800px){
+  .c-detail-body{grid-template-columns:1fr;gap:1.5rem;padding:2rem 1.5rem;}
+  .c-detail-nav{padding:1rem 1.5rem;}
+}
+
 /* ─────────────────────────────────────────
    VERMILION SERIES OVERLAY
 ───────────────────────────────────────── */
@@ -1170,6 +1212,24 @@ input[type=file].admin-file-input{display:none}
 </div>
 
 <!-- ══════════════════════════════
+     CERAMICS DETAIL PANEL
+══════════════════════════════ -->
+<div id="c-detail-panel">
+  <div class="c-detail-nav">
+    <button class="back-btn" onclick="closeCeramicsDetail()">← Grid</button>
+    <div class="c-detail-nav-title" id="c-detail-nav-title"></div>
+  </div>
+  <div class="c-detail-body">
+    <div class="c-detail-main"><img id="c-detail-main-img" src="" alt=""/></div>
+    <div class="c-detail-info">
+      <div class="c-detail-info-title" id="c-detail-info-title"></div>
+      <div class="c-detail-info-desc" id="c-detail-info-desc"></div>
+      <div class="c-detail-details" id="c-detail-details"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
      VERMILION 遗朱 — SERIES OVERLAY
 ══════════════════════════════ -->
 <div id="vermilion-overlay">
@@ -1558,7 +1618,7 @@ function openPolaroid(){
     const hero = document.getElementById('pol-hero-img');
     if (!hero.src.includes('assets')) {
       fetch('assets/s3-polaroid/cover/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
-        .then(files => { if (files[0]) hero.src = 'assets/s3-polaroid/cover/' + encodeURIComponent(files[0]); });
+        .then(files => { if (files[0]) hero.src = toThumb('assets/s3-polaroid/cover/' + encodeURIComponent(files[0])); });
     }
     const grid = document.getElementById('polaroid-grid');
     if (!grid.children.length) {
@@ -1568,9 +1628,10 @@ function openPolaroid(){
             const cell = document.createElement('div');
             cell.className = 'o-grid-cell';
             const img = document.createElement('img');
-            img.src = 'assets/s3-polaroid/grid/' + encodeURIComponent(f);
+            const orig = 'assets/s3-polaroid/grid/' + encodeURIComponent(f);
+            img.src = toThumb(orig);
             img.alt = f;
-            img.onclick = () => openLb(img.src, '');
+            img.onclick = () => openLb(orig, '');
             cell.appendChild(img);
             grid.appendChild(cell);
           });
@@ -1592,7 +1653,7 @@ function openAnalogue(){
     const hero = document.getElementById('ana-hero-img');
     if (!hero.src.includes('assets')) {
       fetch('assets/s4-analogue/cover/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
-        .then(files => { if (files[0]) hero.src = 'assets/s4-analogue/cover/' + encodeURIComponent(files[0]); });
+        .then(files => { if (files[0]) hero.src = toThumb('assets/s4-analogue/cover/' + encodeURIComponent(files[0])); });
     }
     const grid = document.getElementById('analogue-grid');
     if (!grid.children.length) {
@@ -1602,9 +1663,10 @@ function openAnalogue(){
             const cell = document.createElement('div');
             cell.className = 'o-grid-cell';
             const img = document.createElement('img');
-            img.src = 'assets/s4-analogue/grid/' + encodeURIComponent(f);
+            const orig = 'assets/s4-analogue/grid/' + encodeURIComponent(f);
+            img.src = toThumb(orig);
             img.alt = f;
-            img.onclick = () => openLb(img.src, '');
+            img.onclick = () => openLb(orig, '');
             cell.appendChild(img);
             grid.appendChild(cell);
           });
@@ -1646,7 +1708,7 @@ function openExhibition(){
     const hero = document.getElementById('exh-hero-img');
     if (!hero.src.includes('assets')) {
       fetch('assets/s7-exhibition/cover/list.json').then(r => r.ok ? r.json() : []).catch(() => [])
-        .then(files => { if (files[0]) hero.src = 'assets/s7-exhibition/cover/' + encodeURIComponent(files[0]); });
+        .then(files => { if (files[0]) hero.src = toThumb('assets/s7-exhibition/cover/' + encodeURIComponent(files[0])); });
     }
     const grid = document.getElementById('exhibition-grid');
     if (!grid.children.length) {
@@ -1656,9 +1718,10 @@ function openExhibition(){
             const cell = document.createElement('div');
             cell.className = 'o-grid-cell';
             const img = document.createElement('img');
-            img.src = 'assets/s7-exhibition/grid/' + encodeURIComponent(f);
+            const orig = 'assets/s7-exhibition/grid/' + encodeURIComponent(f);
+            img.src = toThumb(orig);
             img.alt = f;
-            img.onclick = () => openLb(img.src, '');
+            img.onclick = () => openLb(orig, '');
             cell.appendChild(img);
             grid.appendChild(cell);
           });
@@ -1682,15 +1745,17 @@ function openSeries(title, basePath) {
         const grid = document.getElementById('gseries-grid');
         grid.innerHTML = '';
         if (files.length > 0) {
-          hero.src = basePath + '/' + encodeURIComponent(files[0]);
+          const heroOrig = basePath + '/' + encodeURIComponent(files[0]);
+          hero.src = toThumb(heroOrig);
           hero.style.display = '';
           files.slice(1).forEach(f => {
             const cell = document.createElement('div');
             cell.className = 'o-grid-cell';
             const img = document.createElement('img');
-            img.src = basePath + '/' + encodeURIComponent(f);
+            const orig = basePath + '/' + encodeURIComponent(f);
+            img.src = toThumb(orig);
             img.alt = f;
-            img.onclick = () => openLb(img.src, '');
+            img.onclick = () => openLb(orig, '');
             cell.appendChild(img);
             grid.appendChild(cell);
           });
@@ -1752,9 +1817,37 @@ window.addEventListener('popstate', e => {
     if (document.getElementById('portraiture-overlay').classList.contains('open')) { closePortraiture(); return; }
     if (document.getElementById('amber-overlay').classList.contains('open')) { closeAmber(); return; }
     if (document.getElementById('vermilion-overlay').classList.contains('open')) { closeVermilion(); return; }
+    if (document.getElementById('c-detail-panel').classList.contains('open')) { closeCeramicsDetail(); return; }
     if (document.getElementById('ceramics-overlay').classList.contains('open')) closeCeramics();
   }
 });
+
+// ── CERAMICS DETAIL PANEL ──
+function openCeramicsDetail(item) {
+  const lang = localStorage.getItem('siteLang') || 'en';
+  const title = item['title_' + lang] || item.title || '';
+  const desc = item['desc_' + lang] || item.desc || '';
+  const base = 'assets/s1-ceramics/grid/';
+  document.getElementById('c-detail-nav-title').textContent = title;
+  document.getElementById('c-detail-info-title').textContent = title;
+  document.getElementById('c-detail-info-desc').textContent = desc;
+  const mainImg = document.getElementById('c-detail-main-img');
+  mainImg.src = base + encodeURIComponent(item.main);
+  mainImg.alt = title;
+  const detailsEl = document.getElementById('c-detail-details');
+  detailsEl.innerHTML = '';
+  (item.details || []).forEach(d => {
+    const img = document.createElement('img');
+    img.src = base + encodeURIComponent(d);
+    img.alt = title;
+    detailsEl.appendChild(img);
+  });
+  document.getElementById('c-detail-panel').classList.add('open');
+  document.getElementById('c-detail-panel').scrollTop = 0;
+}
+function closeCeramicsDetail() {
+  document.getElementById('c-detail-panel').classList.remove('open');
+}
 
 // ── LIGHTBOX ──
 function openLb(src, caption){
@@ -2027,7 +2120,7 @@ function initCerHero(){
 fetch('assets/s1-ceramics/cover/list.json')
   .then(r => r.ok ? r.json() : [])
   .then(names => {
-    cerHeroImages = (names || []).map(f => 'assets/s1-ceramics/cover/' + encodeURIComponent(f));
+    cerHeroImages = (names || []).map(f => toThumb('assets/s1-ceramics/cover/' + encodeURIComponent(f)));
     initCerHero();
   })
   .catch(() => { cerHeroImages = []; initCerHero(); });
@@ -2091,7 +2184,7 @@ function createHeroCarousel(layers, slideEl, images) {
     fetch(c.json)
       .then(function(r){ return r.ok ? r.json() : []; })
       .then(function(names){
-        var images = (names||[]).map(function(f){ return c.base + encodeURIComponent(f); });
+        var images = (names||[]).map(function(f){ return toThumb(c.base + encodeURIComponent(f)); });
         var layers = [document.getElementById(c.l0), document.getElementById(c.l1)];
         var slideEl = document.querySelector('.slide[data-index="' + c.idx + '"]');
         createHeroCarousel(layers, slideEl, images).init();
@@ -2104,6 +2197,10 @@ function titleFromFilename(name){
   const base = name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ');
   return base || name;
 }
+function toThumb(path){
+  const dot = path.lastIndexOf('.');
+  return dot === -1 ? path : path.slice(0, dot) + '-thumb' + path.slice(dot);
+}
 
 // ── 加载 Vermilion / Amber 图片并填充 ceramics grid 入口卡片 ──
 function populateVermilionImages(names) {
@@ -2112,7 +2209,7 @@ function populateVermilionImages(names) {
   const heroImg = document.getElementById('v-hero-img');
   if (heroImg) {
     const heroSrc = 'assets/s1-ceramics/vermilion/' + encodeURIComponent(names[0]);
-    heroImg.src = heroSrc;
+    heroImg.src = toThumb(heroSrc);
     heroImg.onclick = () => openLb(heroSrc, 'Vermilion — 遗朱 1');
   }
   // Remaining images → mixed grid
@@ -2123,7 +2220,7 @@ function populateVermilionImages(names) {
     const src = 'assets/s1-ceramics/vermilion/' + encodeURIComponent(name);
     const label = 'Vermilion — 遗朱 ' + (i + 2);
     const img = document.createElement('img');
-    img.src = src;
+    img.src = toThumb(src);
     img.alt = label;
     img.onclick = () => openLb(src, label);
     grid.appendChild(img);
@@ -2136,7 +2233,7 @@ function populateAmberImages(names) {
   const heroImg = document.getElementById('a-hero-img');
   if (heroImg) {
     const heroSrc = 'assets/s1-ceramics/amber/' + encodeURIComponent(names[0]);
-    heroImg.src = heroSrc;
+    heroImg.src = toThumb(heroSrc);
     heroImg.onclick = () => openLb(heroSrc, 'Amber — 琥珀 1');
   }
   // Remaining images → grid
@@ -2147,7 +2244,7 @@ function populateAmberImages(names) {
     const src = 'assets/s1-ceramics/amber/' + encodeURIComponent(name);
     const label = 'Amber — 琥珀 ' + (i + 2);
     const img = document.createElement('img');
-    img.src = src;
+    img.src = toThumb(src);
     img.alt = label;
     img.onclick = () => openLb(src, label);
     grid.appendChild(img);
@@ -2166,7 +2263,7 @@ function populatePortraitureImages(names) {
     cell.className = 'c-grid-cell';
     cell.onclick = () => openLb(src, title);
     cell.innerHTML =
-      '<img src="' + src + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
+      '<img src="' + toThumb(src) + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
       '<div class="c-grid-info"><div class="c-grid-info-title">' + title.replace(/</g, '&lt;') + '</div></div>';
     grid.appendChild(cell);
   });
@@ -2223,13 +2320,13 @@ Promise.all([
     if (vermilionCount > 0) {
       seriesSection.appendChild(createSeriesBlock(
         'Series I', 'Vermilion — 遗朱', openVermilion,
-        'assets/s1-ceramics/series-covers/vermilion.jpg'
+        toThumb('assets/s1-ceramics/series-covers/vermilion.jpg')
       ));
     }
     if (amberCount > 0) {
       seriesSection.appendChild(createSeriesBlock(
         'Series II', 'Amber — 琥珀', openAmber,
-        'assets/s1-ceramics/series-covers/amber.png'
+        toThumb('assets/s1-ceramics/series-covers/amber.png')
       ));
     }
   }
@@ -2238,14 +2335,28 @@ Promise.all([
   const grid = document.getElementById('ceramics-grid');
   if (!grid) return;
   grid.innerHTML = '';
-  list.forEach((name) => {
-    const src = 'assets/s1-ceramics/grid/' + encodeURIComponent(name);
-    const title = titleFromFilename(name);
+  list.forEach((item) => {
+    const lang = localStorage.getItem('siteLang') || 'en';
+    // Support legacy string format
+    if (typeof item === 'string') {
+      const src = 'assets/s1-ceramics/grid/' + encodeURIComponent(item);
+      const title = titleFromFilename(item);
+      const cell = document.createElement('div');
+      cell.className = 'c-grid-cell';
+      cell.onclick = () => openLb(src, title);
+      cell.innerHTML =
+        '<img src="' + src + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
+        '<div class="c-grid-info"><div class="c-grid-info-title">' + title.replace(/</g, '&lt;') + '</div></div>';
+      grid.appendChild(cell);
+      return;
+    }
+    const title = item['title_' + lang] || item.title || '';
+    const src = 'assets/s1-ceramics/grid/' + encodeURIComponent(item.main);
     const cell = document.createElement('div');
     cell.className = 'c-grid-cell';
-    cell.onclick = () => openLb(src, title);
+    cell.onclick = () => openCeramicsDetail(item);
     cell.innerHTML =
-      '<img src="' + src + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
+      '<img src="' + toThumb(src) + '" alt="' + title.replace(/"/g, '&quot;') + '"/>' +
       '<div class="c-grid-info"><div class="c-grid-info-title">' + title.replace(/</g, '&lt;') + '</div></div>';
     grid.appendChild(cell);
   });
