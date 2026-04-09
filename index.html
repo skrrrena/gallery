@@ -203,7 +203,7 @@ body::before{
   grid-column:1;
   align-self:start;
   display:flex;gap:.35rem;align-items:center;justify-content:flex-start;
-  padding:0 0 .5rem;
+  padding:.6rem 0 0;
   opacity:0;
   transition:opacity .25s ease;
   pointer-events:none;
@@ -2433,7 +2433,7 @@ function createHeroCarousel(layers, slideEl, images) {
       // insert as first child of slide-content (grid-column:1/-1 spans full width)
       var content = slideEl.querySelector('.slide-content');
       var titleEl = slideEl.querySelector('.slide-title');
-      if (titleEl) titleEl.insertAdjacentElement('beforebegin', strip);
+      if (titleEl) titleEl.insertAdjacentElement('afterend', strip);
       else if (content) content.appendChild(strip);
       else slideEl.appendChild(strip);
     }
