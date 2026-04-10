@@ -199,11 +199,12 @@ body::before{
 }
 
 /* ── SLIDE THUMB STRIP ── */
+.slide-title-group{
+  display:flex;flex-direction:column;justify-content:flex-end;align-self:end;
+}
 .slide-thumb-strip{
-  grid-column:1;
-  align-self:start;
   display:flex;gap:.35rem;align-items:center;justify-content:flex-start;
-  padding:.6rem 0 0;
+  padding:0 0 .5rem;
   opacity:0;
   transition:opacity .25s ease;
   pointer-events:none;
@@ -2317,11 +2318,17 @@ function initCerHero(){
       strip.appendChild(t);
     });
     strip.addEventListener('mouseleave', () => cerHeroStartTimer());
-    const content = slide1.querySelector('.slide-content');
     const titleEl1 = slide1.querySelector('.slide-title');
-    if(titleEl1) titleEl1.insertAdjacentElement('afterend', strip);
-    else if(content) content.appendChild(strip);
-    else slide1.appendChild(strip);
+    if(titleEl1) {
+      const wrap1 = document.createElement('div');
+      wrap1.className = 'slide-title-group';
+      titleEl1.parentNode.insertBefore(wrap1, titleEl1);
+      wrap1.appendChild(strip);
+      wrap1.appendChild(titleEl1);
+    } else {
+      const content1 = slide1.querySelector('.slide-content');
+      if(content1) content1.appendChild(strip); else slide1.appendChild(strip);
+    }
   }
   // touch swipe (mobile one-finger, or trackpad touch)
   let touchStartX = null;
@@ -2430,12 +2437,17 @@ function createHeroCarousel(layers, slideEl, images) {
         strip.appendChild(t);
       });
       strip.addEventListener('mouseleave', function() { startTimer(); });
-      // insert as first child of slide-content (grid-column:1/-1 spans full width)
-      var content = slideEl.querySelector('.slide-content');
       var titleEl = slideEl.querySelector('.slide-title');
-      if (titleEl) titleEl.insertAdjacentElement('afterend', strip);
-      else if (content) content.appendChild(strip);
-      else slideEl.appendChild(strip);
+      if (titleEl) {
+        var wrap = document.createElement('div');
+        wrap.className = 'slide-title-group';
+        titleEl.parentNode.insertBefore(wrap, titleEl);
+        wrap.appendChild(strip);
+        wrap.appendChild(titleEl);
+      } else {
+        var contentEl = slideEl.querySelector('.slide-content');
+        if (contentEl) contentEl.appendChild(strip); else slideEl.appendChild(strip);
+      }
     }
 
     // touch swipe
