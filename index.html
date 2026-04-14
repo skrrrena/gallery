@@ -2503,7 +2503,11 @@ function titleFromFilename(name){
 }
 function toThumb(path){
   const dot = path.lastIndexOf('.');
-  return dot === -1 ? path : path.slice(0, dot) + '-thumb' + path.slice(dot);
+  if (dot === -1) return path;
+  const ext = path.slice(dot).toLowerCase();
+  // PNG thumbs are stored as JPEGs
+  const thumbExt = (ext === '.png') ? '.jpg' : path.slice(dot);
+  return path.slice(0, dot) + '-thumb' + thumbExt;
 }
 
 // ── 加载 Vermilion / Amber 图片并填充 ceramics grid 入口卡片 ──
