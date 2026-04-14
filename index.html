@@ -98,16 +98,17 @@ a,button,input,textarea,select,label,[onclick]{cursor:none!important}
   opacity:.85;
 }
 .mobile-menu-links a:hover{opacity:1}
-.mobile-menu-lang{
-  display:flex;gap:2rem;align-items:center;
+#nav-mobile-lang{
+  display:none;align-items:center;gap:1rem;
 }
-#mobile-menu .mobile-menu-lang .lang-btn{
-  font-size:clamp(1rem,4vw,1.5rem);
-  letter-spacing:.1em;
+#nav-mobile-lang .lang-btn{
+  font-size:1.1rem;
+  letter-spacing:.03em;
 }
 @media(max-width:700px){
   .nav-right{display:none}
   #hamburger-btn{display:block}
+  #nav-mobile-lang{display:flex}
 }
 
 /* ── GRAIN ── */
@@ -1016,6 +1017,11 @@ input[type=file].admin-file-input{display:none}
       <button class="lang-btn" data-lang="ja">日</button>
     </div>
   </div>
+  <div id="nav-mobile-lang">
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="zh">中</button>
+    <button class="lang-btn" data-lang="ja">日</button>
+  </div>
   <button id="hamburger-btn" onclick="openMobileMenu()" aria-label="Menu">☰</button>
 </nav>
 
@@ -1028,11 +1034,7 @@ input[type=file].admin-file-input{display:none}
     <a href="#slide7" data-i18n="nav.exhibition" onclick="closeMobileMenu()">Exhibition</a>
     <a href="#contact" data-i18n="nav.contact" onclick="closeMobileMenu()">Contact</a>
   </nav>
-  <div class="mobile-menu-lang">
-    <button class="lang-btn" data-lang="en">EN</button>
-    <button class="lang-btn" data-lang="zh">中</button>
-    <button class="lang-btn" data-lang="ja">日</button>
-  </div>
+
 </div>
 
 <!-- DOT NAV -->
