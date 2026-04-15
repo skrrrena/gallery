@@ -104,12 +104,21 @@ a,button,input,textarea,select,label,[onclick]{cursor:none!important}
 }
 .mobile-menu-links a:hover{opacity:1}
 #nav-mobile-lang{
-  display:none;align-items:center;gap:1rem;
+  display:none;align-items:center;gap:.75rem;
 }
 #nav-mobile-lang .lang-btn{
-  font-size:1.1rem;
-  letter-spacing:.03em;
-  padding:0 0 3px;
+  font-family:var(--mono);
+  font-size:.55rem;
+  letter-spacing:.15em;
+  color:var(--dim);
+  padding:0 0 2px;
+  border-bottom:1px solid transparent;
+  transition:color .2s,border-color .2s;
+}
+#nav-mobile-lang .lang-btn:hover{color:var(--bright)}
+#nav-mobile-lang .lang-btn.active{
+  color:var(--bright);
+  border-bottom-color:rgba(237,234,226,.55);
 }
 @media(max-width:700px){
   .nav-right{display:none}
