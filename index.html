@@ -103,6 +103,7 @@ a,button,input,textarea,select,label,[onclick]{cursor:none!important}
   opacity:.85;
 }
 .mobile-menu-links a:hover{opacity:1}
+#nav-mobile-right{display:none}
 #nav-mobile-lang{
   display:none;align-items:center;gap:.75rem;
 }
@@ -122,8 +123,9 @@ a,button,input,textarea,select,label,[onclick]{cursor:none!important}
 }
 @media(max-width:700px){
   .nav-right{display:none}
-  #hamburger-btn{display:block}
+  #nav-mobile-right{display:flex;align-items:center;gap:1rem}
   #nav-mobile-lang{display:flex}
+  #hamburger-btn{display:block}
 }
 
 /* ── GRAIN ── */
@@ -1032,12 +1034,14 @@ input[type=file].admin-file-input{display:none}
       <button class="lang-btn" data-lang="ja">日</button>
     </div>
   </div>
-  <div id="nav-mobile-lang">
-    <button class="lang-btn" data-lang="en">EN</button>
-    <button class="lang-btn" data-lang="zh">中</button>
-    <button class="lang-btn" data-lang="ja">日</button>
+  <div id="nav-mobile-right">
+    <div id="nav-mobile-lang">
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="zh">中</button>
+      <button class="lang-btn" data-lang="ja">日</button>
+    </div>
+    <button id="hamburger-btn" onclick="openMobileMenu()" aria-label="Menu">☰</button>
   </div>
-  <button id="hamburger-btn" onclick="openMobileMenu()" aria-label="Menu">☰</button>
 </nav>
 
 <!-- MOBILE MENU -->
