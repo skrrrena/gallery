@@ -376,6 +376,7 @@ body::before{
 #ceramics-overlay{
   position:fixed;inset:0;z-index:5000;
   background:var(--bg);overflow-y:auto;
+  overscroll-behavior:contain;
   opacity:0;pointer-events:none;
   transition:opacity .5s ease;
 }
@@ -1751,6 +1752,7 @@ function openCeramics(){
   const ov = document.getElementById('ceramics-overlay');
   ov.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
   document.documentElement.style.scrollSnapType = 'none';
   ov.scrollTop = 0;
   history.pushState({view: 'ceramics'}, '');
@@ -1758,6 +1760,7 @@ function openCeramics(){
 function closeCeramics(){
   document.getElementById('ceramics-overlay').classList.remove('open');
   document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
   document.documentElement.style.scrollSnapType = 'y mandatory';
 }
 
@@ -1765,6 +1768,7 @@ function openVermilion(){
   const ov = document.getElementById('vermilion-overlay');
   ov.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
   document.documentElement.style.scrollSnapType = 'none';
   ov.scrollTop = 0;
   history.pushState({view: 'vermilion'}, '');
@@ -1774,8 +1778,10 @@ function closeVermilion(){
   // 如果 ceramics overlay 还开着，恢复为 body hidden（ceramics overlay 仍可滚动）
   if(document.getElementById('ceramics-overlay').classList.contains('open')){
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
   } else {
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     document.documentElement.style.scrollSnapType = 'y mandatory';
   }
 }
@@ -1784,6 +1790,7 @@ function openAmber(){
   const ov = document.getElementById('amber-overlay');
   ov.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
   document.documentElement.style.scrollSnapType = 'none';
   ov.scrollTop = 0;
   history.pushState({view: 'amber'}, '');
@@ -1792,8 +1799,10 @@ function closeAmber(){
   document.getElementById('amber-overlay').classList.remove('open');
   if(document.getElementById('ceramics-overlay').classList.contains('open')){
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
   } else {
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     document.documentElement.style.scrollSnapType = 'y mandatory';
   }
 }
@@ -1803,6 +1812,7 @@ function openPortraiture(){
   ov.classList.add('open');
   ov.scrollTop = 0;
   document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
   document.documentElement.style.scrollSnapType = 'none';
   history.pushState({view: 'portraiture'}, '');
   loadSeriesSection('p-series-section', 'assets/s2-portraiture', [
@@ -1814,6 +1824,7 @@ function openPortraiture(){
 function closePortraiture(){
   document.getElementById('portraiture-overlay').classList.remove('open');
   document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
   document.documentElement.style.scrollSnapType = 'y mandatory';
 }
 
@@ -1823,6 +1834,7 @@ function _openOverlay(id, view, onOpen){
   ov.classList.add('open');
   ov.scrollTop = 0;
   document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
   document.documentElement.style.scrollSnapType = 'none';
   history.pushState({view}, '');
   if(onOpen) onOpen(ov);
@@ -1830,6 +1842,7 @@ function _openOverlay(id, view, onOpen){
 function _closeOverlay(id){
   document.getElementById(id).classList.remove('open');
   document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
   document.documentElement.style.scrollSnapType = 'y mandatory';
 }
 
