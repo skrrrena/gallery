@@ -21,7 +21,7 @@
   --mono:'Space Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;cursor:none!important}
-html{scroll-snap-type:y mandatory;overflow-y:scroll;background:var(--bg);color:var(--text);cursor:none!important}
+html{scroll-snap-type:y mandatory;overflow-y:scroll;overscroll-behavior-y:none;background:var(--bg);color:var(--text);cursor:none!important}
 body{font-family:var(--sans);font-size:.9rem;line-height:1.6;cursor:none!important}
 a,button,input,textarea,select,label,[onclick]{cursor:none!important}
 
@@ -376,7 +376,7 @@ body::before{
 #ceramics-overlay{
   position:fixed;inset:0;z-index:5000;
   background:var(--bg);overflow-y:auto;
-  overscroll-behavior:contain;
+  overscroll-behavior:none;
   opacity:0;pointer-events:none;
   transition:opacity .5s ease;
 }
@@ -468,7 +468,7 @@ body::before{
 #c-detail-panel{
   position:fixed;inset:0;z-index:5500;
   background:var(--bg);overflow-y:auto;
-  overscroll-behavior:contain;
+  overscroll-behavior:none;
   opacity:0;pointer-events:none;
   transform:translateX(100%);
   transition:transform .4s cubic-bezier(.25,.46,.45,.94), opacity .4s ease;
@@ -539,7 +539,7 @@ body::before{
 #vermilion-overlay{
   position:fixed;inset:0;z-index:5100;
   background:var(--bg);overflow-y:auto;
-  overscroll-behavior:contain;
+  overscroll-behavior:none;
   opacity:0;pointer-events:none;
   transition:opacity .5s ease;
 }
@@ -611,7 +611,7 @@ body::before{
 #generic-series-overlay{
   position:fixed;inset:0;z-index:5400;
   background:var(--bg);overflow-y:auto;
-  overscroll-behavior:contain;
+  overscroll-behavior:none;
   opacity:0;pointer-events:none;
   transition:opacity .5s ease;
 }
@@ -628,7 +628,7 @@ body::before{
 #destino-overlay{
   position:fixed;inset:0;z-index:5500;
   background:var(--bg);overflow-y:auto;
-  overscroll-behavior:contain;
+  overscroll-behavior:none;
   opacity:0;pointer-events:none;
   transition:opacity .5s ease;
 }
@@ -713,7 +713,7 @@ body::before{
 #portraiture-overlay{
   position:fixed;inset:0;z-index:5300;
   background:var(--bg);overflow-y:auto;
-  overscroll-behavior:contain;
+  overscroll-behavior:none;
   opacity:0;pointer-events:none;
   transition:opacity .5s ease;
 }
@@ -794,7 +794,7 @@ body::before{
 #amber-overlay{
   position:fixed;inset:0;z-index:5200;
   background:var(--bg);overflow-y:auto;
-  overscroll-behavior:contain;
+  overscroll-behavior:none;
   opacity:0;pointer-events:none;
   transition:opacity .5s ease;
 }
@@ -907,7 +907,7 @@ body:hover #admin-toggle{opacity:.3}
   position:fixed;inset:0;z-index:8000;
   background:rgba(11,11,10,.97);backdrop-filter:blur(12px);
   overflow-y:auto;
-  overscroll-behavior:contain;
+  overscroll-behavior:none;
   opacity:0;pointer-events:none;
   transition:opacity .4s;
   font-family:var(--sans);
