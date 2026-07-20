@@ -392,10 +392,13 @@ body::before{
   font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--bright);
 }
 .back-btn{
-  font-family:var(--mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--dim);background:none;border:none;cursor:none;transition:color .2s;
+  order:-1;
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--text);background:none;cursor:none;
+  border:1px solid rgba(237,234,226,.18);border-radius:999px;padding:.5rem .9rem;
+  transition:color .2s,border-color .2s;
 }
-.back-btn:hover{color:var(--bright)}
+.back-btn:hover{color:var(--bright);border-color:rgba(237,234,226,.4)}
 
 /* hero */
 .c-hero{
@@ -1338,7 +1341,7 @@ input[type=file].admin-file-input{display:none}
 <div id="ceramics-overlay">
   <div class="ceramics-overlay-nav">
     <div class="ceramics-overlay-title" data-i18n="ceramics.title">Ceramics — Between Fire &amp; Form</div>
-    <button class="back-btn" onclick="history.back()" data-i18n="ceramics.back">← Back to Works</button>
+    <button class="back-btn" onclick="history.back()" data-i18n="ceramics.back">← Back</button>
   </div>
 
   <!-- Hero -->
@@ -1428,7 +1431,7 @@ input[type=file].admin-file-input{display:none}
 ══════════════════════════════ -->
 <div id="c-detail-panel">
   <div class="c-detail-nav">
-    <button class="back-btn" onclick="closeCeramicsDetail()">← Grid</button>
+    <button class="back-btn" onclick="closeCeramicsDetail()">← Back</button>
     <div class="c-detail-nav-title" id="c-detail-nav-title"></div>
   </div>
   <div class="c-detail-body">
@@ -2150,16 +2153,17 @@ document.getElementById('img-lightbox').addEventListener('click', e => {
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape'){
     if(document.getElementById('img-lightbox').classList.contains('show')){ closeLb(); return; }
-    if(document.getElementById('generic-series-overlay').classList.contains('open')){ history.back(); return; }
-    if(document.getElementById('exhibition-overlay').classList.contains('open')){ history.back(); return; }
-    if(document.getElementById('destino-overlay').classList.contains('open')){ history.back(); return; }
-    if(document.getElementById('rostrum-overlay').classList.contains('open')){ history.back(); return; }
-    if(document.getElementById('analogue-overlay').classList.contains('open')){ history.back(); return; }
-    if(document.getElementById('polaroid-overlay').classList.contains('open')){ history.back(); return; }
-    if(document.getElementById('portraiture-overlay').classList.contains('open')){ history.back(); return; }
-    if(document.getElementById('amber-overlay').classList.contains('open')){ history.back(); return; }
-    if(document.getElementById('vermilion-overlay').classList.contains('open')){ history.back(); return; }
-    if(document.getElementById('ceramics-overlay').classList.contains('open')){ history.back(); }
+    if(document.getElementById('generic-series-overlay').classList.contains('open')){ closeGenericSeries(); history.back(); return; }
+    if(document.getElementById('exhibition-overlay').classList.contains('open')){ closeExhibition(); history.back(); return; }
+    if(document.getElementById('destino-overlay').classList.contains('open')){ closeDestino(); history.back(); return; }
+    if(document.getElementById('rostrum-overlay').classList.contains('open')){ closeRostrum(); history.back(); return; }
+    if(document.getElementById('analogue-overlay').classList.contains('open')){ closeAnalogue(); history.back(); return; }
+    if(document.getElementById('polaroid-overlay').classList.contains('open')){ closePolaroid(); history.back(); return; }
+    if(document.getElementById('portraiture-overlay').classList.contains('open')){ closePortraiture(); history.back(); return; }
+    if(document.getElementById('amber-overlay').classList.contains('open')){ closeAmber(); history.back(); return; }
+    if(document.getElementById('vermilion-overlay').classList.contains('open')){ closeVermilion(); history.back(); return; }
+    if(document.getElementById('c-detail-panel').classList.contains('open')){ closeCeramicsDetail(); return; }
+    if(document.getElementById('ceramics-overlay').classList.contains('open')){ closeCeramics(); history.back(); }
   }
 });
 
@@ -2727,6 +2731,7 @@ Promise.all([
       grid.appendChild(cell);
       return;
     }
+    if (item.hidden) return;
     const title = item['title_' + lang] || item.title || '';
     const src = 'assets/s1-ceramics/grid/' + encodeURIComponent(item.main);
     const cell = document.createElement('div');

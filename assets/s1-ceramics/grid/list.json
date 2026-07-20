@@ -8,7 +8,11 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["Soleil et Lune_2.JPG", "Soleil et Lune_3.JPG"]
+    "details": [
+      "Soleil et Lune_2.JPG",
+      "Soleil et Lune_3.JPG"
+    ],
+    "hidden": false
   },
   {
     "id": "f1-plate",
@@ -19,7 +23,10 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["F1 Plate_1.JPG"]
+    "details": [
+      "F1 Plate_1.JPG"
+    ],
+    "hidden": false
   },
   {
     "id": "matisse-reimagined",
@@ -30,7 +37,10 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["Matisse reimagined_1.jpg"]
+    "details": [
+      "Matisse reimagined_1.jpg"
+    ],
+    "hidden": false
   },
   {
     "id": "spring-series",
@@ -41,7 +51,12 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["Spring series_1.JPG", "Spring series_2.JPG", "Spring series_3.JPG"]
+    "details": [
+      "Spring series_1.JPG",
+      "Spring series_2.JPG",
+      "Spring series_3.JPG"
+    ],
+    "hidden": false
   },
   {
     "id": "a-corner",
@@ -52,7 +67,10 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["A corner_1.jpg"]
+    "details": [
+      "A corner_1.jpg"
+    ],
+    "hidden": false
   },
   {
     "id": "agateware",
@@ -63,7 +81,11 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["Agateware_1.JPG", "Agateware_2.JPG"]
+    "details": [
+      "Agateware_1.JPG",
+      "Agateware_2.JPG"
+    ],
+    "hidden": false
   },
   {
     "id": "brown-glaze-pair",
@@ -74,7 +96,8 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": []
+    "details": [],
+    "hidden": false
   },
   {
     "id": "clove-compote",
@@ -85,7 +108,11 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["Clove Compote_1.JPG", "Clove Compote_2.JPG"]
+    "details": [
+      "Clove Compote_1.JPG",
+      "Clove Compote_2.JPG"
+    ],
+    "hidden": false
   },
   {
     "id": "color-study-i",
@@ -96,7 +123,8 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": []
+    "details": [],
+    "hidden": false
   },
   {
     "id": "color-study-ii",
@@ -107,7 +135,8 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": []
+    "details": [],
+    "hidden": false
   },
   {
     "id": "img-5160",
@@ -118,7 +147,8 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": []
+    "details": [],
+    "hidden": false
   },
   {
     "id": "improvisation-blue-white",
@@ -129,7 +159,10 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["Improvisation in Blue-and-White Porcelain_1.JPG"]
+    "details": [
+      "Improvisation in Blue-and-White Porcelain_1.JPG"
+    ],
+    "hidden": false
   },
   {
     "id": "lotus-dew",
@@ -140,7 +173,11 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["Lotus Dew_1.JPG", "Lotus Dew_2.JPG"]
+    "details": [
+      "Lotus Dew_1.JPG",
+      "Lotus Dew_2.JPG"
+    ],
+    "hidden": false
   },
   {
     "id": "orchid-study-i",
@@ -151,7 +188,8 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": []
+    "details": [],
+    "hidden": false
   },
   {
     "id": "orchid-study-ii",
@@ -162,7 +200,10 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["Orchid Study II (Blue-and-White Porcelain)_1.JPG"]
+    "details": [
+      "Orchid Study II (Blue-and-White Porcelain)_1.JPG"
+    ],
+    "hidden": false
   },
   {
     "id": "slip-mugs",
@@ -173,7 +214,8 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": []
+    "details": [],
+    "hidden": false
   },
   {
     "id": "soft-form-i",
@@ -184,7 +226,8 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": []
+    "details": [],
+    "hidden": false
   },
   {
     "id": "tiliang",
@@ -195,7 +238,8 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": []
+    "details": [],
+    "hidden": false
   },
   {
     "id": "zisha-pot-study",
@@ -206,7 +250,10 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["Zisha (Purple Clay) Pot study_1.JPG"]
+    "details": [
+      "Zisha (Purple Clay) Pot study_1.JPG"
+    ],
+    "hidden": false
   },
   {
     "id": "process",
@@ -217,6 +264,9 @@
     "desc": "",
     "desc_zh": "",
     "desc_ja": "",
-    "details": ["process_1.JPG"]
+    "details": [
+      "process_1.JPG"
+    ],
+    "hidden": false
   }
 ]
