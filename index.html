@@ -1499,7 +1499,7 @@ input[type=file].admin-file-input{display:none}
   </div>
 
   <hr class="v-divider"/>
-  <!-- Vermilion 图片：由 assets/s1-ceramics/vermilion/list.json 自动生成，运行 node update-vermilion-list.js 更新 -->
+  <!-- Vermilion 图片：由 assets/s1-ceramics/vermilion/list.json 自动生成，运行 python3 update-all-lists.py 更新 -->
   <div class="v-images" id="v-images-grid"></div>
 </div>
 
@@ -1552,7 +1552,7 @@ input[type=file].admin-file-input{display:none}
   </div>
 
   <hr class="v-divider"/>
-  <!-- Amber 图片：由 assets/s1-ceramics/amber/list.json 自动生成，运行 node update-amber-list.js 更新 -->
+  <!-- Amber 图片：由 assets/s1-ceramics/amber/list.json 自动生成，运行 python3 update-all-lists.py 更新 -->
   <div class="a-images" id="a-images-grid"></div>
 </div>
 
@@ -2313,7 +2313,7 @@ fetch('content.json')
   .catch(() => initLanguage());
 
 // ── CERAMIC HERO CAROUSEL (SLIDE 1) ──
-// 轮播图片 = assets/s1-ceramics/cover/ 里的所有图片（由 list.json 提供）。更新图片后运行 node update-cover-list.js 再提交。
+// 轮播图片 = assets/s1-ceramics/cover/ 里的所有图片（由 list.json 提供）。更新图片后运行 python3 update-all-lists.py 再提交。
 let cerHeroImages = [];
 let cerHeroIndex = 0;
 let cerHeroCurrentLayer = 0;
