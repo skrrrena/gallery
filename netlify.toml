@@ -1,0 +1,3 @@
+[build]
+  command = "python3 update-all-lists.py"
+  publish = "."
