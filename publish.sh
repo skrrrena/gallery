@@ -1,20 +1,28 @@
 #!/bin/zsh
-# 一键发布：更新所有图片列表 → commit → push
+# 一键发布：校验图片列表 → commit → push
 #
 # 用法：
 #   ./publish.sh                      → commit message: "update"
 #   ./publish.sh "add new photos"     → 自定义 commit message
 #
-# 添加图片的工作流：
-#   把图片放进对应的 assets/sN-xxx/ 文件夹，然后运行 ./publish.sh
-#   脚本会自动扫描所有文件夹并更新 list.json，不需要手动维护
+# list.json 现在是仓库里的权威内容，不再由这个脚本自动生成/覆盖。
+# 这里只做只读校验（不带 --import，update-all-lists.py 默认不写入任何
+# 文件），提示磁盘和 list.json 之间的差异，方便你发现"忘了导入新图"或
+# "有孤儿文件"之类的情况。如果要真正把新增/删除的文件写进 list.json，
+# 手动运行 python3 update-all-lists.py --import。
 #
 # 前提：已在项目目录下执行过 git remote add origin <your-repo>
 
 MSG=${1:-"update"}
 
-echo "→ 更新所有图片列表..."
-python3 update-all-lists.py
+echo "→ 校验图片列表（只读，不会写入）..."
+if ! python3 update-all-lists.py; then
+  echo ""
+  echo "✗ 磁盘与 list.json 有差异，已中止发布（不会 commit/push）。"
+  echo "  请先运行: python3 update-all-lists.py --import"
+  echo "  确认导入结果无误后，再重新运行 ./publish.sh"
+  exit 1
+fi
 
 echo "→ 暂存所有变更..."
 git add -A
