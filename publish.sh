@@ -24,6 +24,17 @@ if ! python3 update-all-lists.py; then
   exit 1
 fi
 
+echo "→ 检查未跟踪文件..."
+UNTRACKED=$(git status --porcelain | grep '^??' | cut -c4-)
+if [ -n "$UNTRACKED" ]; then
+  echo ""
+  echo "✗ 发现未跟踪文件，已中止发布（不会 add/commit/push）："
+  echo "$UNTRACKED" | sed 's/^/  /'
+  echo ""
+  echo "  确认这些文件该不该提交后，手动 git add 再重新运行 ./publish.sh"
+  exit 1
+fi
+
 echo "→ 暂存所有变更..."
 git add -A
 
