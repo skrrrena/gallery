@@ -944,14 +944,16 @@ body::before{
     <div class="nav-lang">
       <button class="lang-btn active" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="zh">中</button>
+      <!-- 日语文案还没补完（content.json 的 ja 有多处留空），补完后取消注释
       <button class="lang-btn" data-lang="ja">日</button>
+      -->
     </div>
   </div>
   <div id="nav-mobile-right">
     <div id="nav-mobile-lang">
       <button class="lang-btn" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="zh">中</button>
-      <button class="lang-btn" data-lang="ja">日</button>
+      <!-- <button class="lang-btn" data-lang="ja">日</button> -->
     </div>
     <button id="hamburger-btn" onclick="openMobileMenu()" aria-label="Menu">☰</button>
   </div>
@@ -1202,11 +1204,12 @@ body::before{
 ══════════════════════════════ -->
 <section id="contact">
   <div class="contact-heading reveal" data-i18n="contact.heading">Let's make<br/>something together</div>
-  <a id="contact-email-link" href="mailto:hello@example.com" class="contact-email reveal">hello@example.com</a>
+  <a id="contact-email-link" href="mailto:serenazhang1026@gmail.com" class="contact-email reveal">serenazhang1026@gmail.com</a>
   <div class="contact-social reveal">
     <a id="contact-xhs-link" href="https://xhslink.com/m/9KMmbgxryKl" target="_blank" rel="noopener">小红书</a>
-    <a id="contact-ig-link" href="#">Instagram</a>
-    <a href="#">Vimeo</a>
+    <a id="contact-ig-link" href="https://www.instagram.com/skrrrena/" target="_blank" rel="noopener">Instagram</a>
+    <!-- 只有 content.json 的 contact.vimeoUrl 填了才显示 -->
+    <a id="contact-vimeo-link" href="#" target="_blank" rel="noopener" style="display:none">Vimeo</a>
   </div>
 </section>
 
@@ -2103,9 +2106,12 @@ function applyLanguage(lang){
   if(!dict) return;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    const val = dict[key];
+    let val = dict[key];
+    // 该语言留空的条目回退到英文，而不是把标题清成空白
+    if(val === '' && translations.en) val = translations.en[key];
     if(val !== undefined) el.innerHTML = val;
   });
+  document.documentElement.lang = {en: 'en', zh: 'zh-Hans', ja: 'ja'}[lang] || lang;
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
@@ -2131,12 +2137,26 @@ function applyContact(contact){
   }
   const xhsEl = document.getElementById('contact-xhs-link');
   if(xhsEl && contact.xhsUrl) xhsEl.href = contact.xhsUrl;
+  // instagramUrl 可以填完整链接，也可以只填 "@handle"
   const igEl = document.getElementById('contact-ig-link');
-  if(igEl && contact.instagramUrl) igEl.href = contact.instagramUrl;
+  if(igEl && contact.instagramUrl){
+    const ig = contact.instagramUrl.trim();
+    igEl.href = /^https?:\/\//.test(ig)
+      ? ig
+      : 'https://www.instagram.com/' + ig.replace(/^@/, '') + '/';
+  }
+  const vimeoEl = document.getElementById('contact-vimeo-link');
+  if(vimeoEl && contact.vimeoUrl){
+    vimeoEl.href = contact.vimeoUrl;
+    vimeoEl.style.display = '';
+  }
 }
 
 function initLanguage(){
-  const saved = localStorage.getItem('siteLang') || 'en';
+  // 只接受导航里实际有按钮的语言（日语按钮目前隐藏，旧访客存过 'ja' 的回到英文）
+  const available = Array.from(document.querySelectorAll('.lang-btn')).map(b => b.dataset.lang);
+  let saved = localStorage.getItem('siteLang') || 'en';
+  if(!available.includes(saved)) saved = 'en';
   applyLanguage(saved);
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
